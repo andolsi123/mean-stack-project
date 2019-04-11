@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
- constructor() {}
+ dt: any;
+
+ constructor(private http: AppService) {}
+
+ ngOnInit() {
+  this.http.getAllProjects().subscribe(data => {
+    this.dt = data;
+    console.log(data);
+  });
+ }
 
 }
