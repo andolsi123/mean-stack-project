@@ -42,4 +42,18 @@ export class AppService {
     return this.http.get(`http://localhost:3000/projects/oneProject/${id}`).pipe(catchError(this.handleError));
   }
 
+  postCompany(body){
+    body['role'] = 'company';
+    return this.http.post('http://localhost:3000/companies/addCompany', body);
+  }
+
+  postFree(freelancer){
+    freelancer['role'] = 'freelancer';
+    return this.http.post('http://localhost:3000/freelancers/addfree',freelancer);
+  }
+
+  login(body){
+    return this.http.post('http://localhost:3000/users/login', body);
+  }
+
 }

@@ -13,6 +13,10 @@ import { AppliedFreeLancerComponent } from './company/applied-free-lancer/applie
 import { SideBarComponent } from './company/side-bar/side-bar.component';
 import { NavbarComponent } from './company/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LogInComponent } from './landing-page/log-in/log-in.component';
+import { NavbarLandingComponent } from './landing-page/navbar-landing/navbar-landing.component';
+import { SignUpComponent } from './landing-page/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -23,7 +27,11 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     AppliedFreeLancerComponent,
     SideBarComponent,
-    NavbarComponent
+    NavbarComponent,
+    LandingPageComponent,
+    LogInComponent,
+    NavbarLandingComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
