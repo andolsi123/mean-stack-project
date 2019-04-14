@@ -30,6 +30,7 @@
     "botstrap": "^0.20.1",
     "chartist": "^0.11.0",
     "core-js": "^2.5.4",
+    "cors": "^2.8.5",
     "hammerjs": "^2.0.8",
     "jquery": "^3.3.1",
     "moment": "^2.24.0",
