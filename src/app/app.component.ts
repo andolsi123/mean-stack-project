@@ -13,11 +13,6 @@ export class AppComponent implements OnInit {
 
  constructor(private http: AppService) {}
 
- ngOnInit() {
-  this.http.getAllProjects().subscribe(data => {
-    this.dt = data;
-    console.log(data);
-  });
- }
+ ngOnInit() { }
 
 }

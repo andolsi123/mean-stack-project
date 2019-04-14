@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatFormFieldModule, MatButtonModule, MatRippleModule, MatSelectModule, MatTooltipModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 import { CompanyComponent } from './company/company.component';
 import { AddProjectComponent } from './company/add-project/add-project.component';
 import { DashboardComponent } from './company/dashboard/dashboard.component';
@@ -13,7 +17,6 @@ import { AppliedFreeLancerComponent } from './company/applied-free-lancer/applie
 import { SideBarComponent } from './company/side-bar/side-bar.component';
 import { NavbarComponent } from './company/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
-
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatRippleModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule,
+    MatIconModule,
+    CKEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -25,13 +25,11 @@ export class AppService {
   }
 
   postAddProject(body: any): Observable <any> {
-    const header = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
-    return this.http.post('http://localhost:3000/projects/addProject', body, header).pipe(catchError(this.handleError));
+    return this.http.post('http://localhost:3000/projects/addProject', body).pipe(catchError(this.handleError));
   }
 
   postUpdateProject(id: any, body: any): Observable <any> {
-    const header = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
-    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body, header).pipe(catchError(this.handleError));
+    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body).pipe(catchError(this.handleError));
   }
 
   getAllProjects(): Observable <any> {
