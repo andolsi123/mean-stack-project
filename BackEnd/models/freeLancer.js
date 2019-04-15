@@ -12,7 +12,7 @@ var FreeLancerSchema = new mongoose.Schema({
     skils:[{skil:String}],
     languages:[{language:String}],
     portfolio:String,
-    profile_image:String,
+    Image_Profil:String,
     projects:[{type:mongoose.Schema.Types.ObjectId,ref:'project'}]
 });
 

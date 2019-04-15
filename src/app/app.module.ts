@@ -15,8 +15,11 @@ import { NavbarComponent } from './company/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LogInComponent } from './landing-page/log-in/log-in.component';
-import { SignUpComponent } from './landing-page/sign-up/sign-up.component';
 import { NavbarLandingComponent } from './landing-page/navbar-landing/navbar-landing.component';
+import { FooterLandingComponent } from './landing-page/footer-landing/footer-landing.component';
+import { AboutUsComponent } from './landing-page/about-us/about-us.component';
+import { SignUpCompanyComponent } from './landing-page/sign-up-company/sign-up-company.component';
+import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sign-up-freelancer.component';
 
 
 @NgModule({
@@ -30,8 +33,11 @@ import { NavbarLandingComponent } from './landing-page/navbar-landing/navbar-lan
     NavbarComponent,
     LandingPageComponent,
     LogInComponent,
-    SignUpComponent,
-    NavbarLandingComponent
+    NavbarLandingComponent,
+    FooterLandingComponent,
+    AboutUsComponent,
+    SignUpCompanyComponent,
+    SignUpFreelancerComponent
   ],
   imports: [
     BrowserModule,
