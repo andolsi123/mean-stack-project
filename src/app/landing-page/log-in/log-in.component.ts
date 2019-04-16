@@ -25,12 +25,12 @@ export class LogInComponent implements OnInit {
   login(){
     this.appService.login(this.loginForm.value).subscribe((data3: any) => {
       console.log(data3);
-      // if('freelancer'){
-      //   this.router.navigate(['freelancer']);
-      // }
-      // if('company'){
-      //   this.router.navigate(['company']);
-      // }
+      if('freelancer'){
+        this.router.navigate(['freelancer']);
+      }
+      if('company'){
+        this.router.navigate(['company']);
+      }
     });
   }
 }
