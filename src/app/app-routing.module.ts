@@ -7,6 +7,7 @@ import { AddProjectComponent } from './company/add-project/add-project.component
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LogInComponent } from './landing-page/log-in/log-in.component';
 import { SignUpComponent } from './landing-page/sign-up/sign-up.component';
+import { DetailProjectComponent } from './company/detail-project/detail-project.component';
 
 const routes: Routes = [
   {
@@ -25,10 +26,13 @@ const routes: Routes = [
        path: 'addProject',
        component: AddProjectComponent
        },
-      
+       {
+       path: 'detail-project/:id',
+       component: DetailProjectComponent
+     },
     ]
   },
-  { 
+  {
     path: 'landing-page',
     component: LandingPageComponent,
     children: [
@@ -41,7 +45,7 @@ const routes: Routes = [
         component: SignUpComponent
         }
     ]
-  }  
+  }
 ];
 
 @NgModule({

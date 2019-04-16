@@ -21,6 +21,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LogInComponent } from './landing-page/log-in/log-in.component';
 import { NavbarLandingComponent } from './landing-page/navbar-landing/navbar-landing.component';
 import { SignUpComponent } from './landing-page/sign-up/sign-up.component';
+import { DetailProjectComponent } from './company/detail-project/detail-project.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SignUpComponent } from './landing-page/sign-up/sign-up.component';
     LandingPageComponent,
     LogInComponent,
     NavbarLandingComponent,
-    SignUpComponent
+    SignUpComponent,
+    DetailProjectComponent
   ],
   imports: [
     BrowserModule,

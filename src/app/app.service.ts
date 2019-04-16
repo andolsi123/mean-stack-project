@@ -24,23 +24,26 @@ export class AppService {
     return throwError('Something bad happened; please try again later.');
   }
 
-  postAddProject(body: any): Observable <any> {
-    return this.http.post('http://localhost:3000/projects/addProject', body).pipe(catchError(this.handleError));
+  postAddProject(body: any){
+    return this.http.post('http://localhost:3000/projects/addProject', body);
   }
 
-  postUpdateProject(id: any, body: any): Observable <any> {
-    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body).pipe(catchError(this.handleError));
+  postUpdateProject(id: any, body: any) {
+    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body);
   }
 
-  getAllProjects(): Observable <any> {
-    return this.http.get('http://localhost:3000/projects/allProjects').pipe(catchError(this.handleError));
+  getAllProjects() {
+    return this.http.get('http://localhost:3000/projects/allProjects');
+  }
+  postDeleteProject(id: any) {
+    return this.http.post(`http://localhost:3000/projects/DeleteProject/${id}`, null);
+   }
+
+  getOneProject(id: any) {
+    return this.http.get(`http://localhost:3000/projects/oneProject/${id}`);
   }
 
-  getOneProject(id: any): Observable <any> {
-    return this.http.get(`http://localhost:3000/projects/oneProject/${id}`).pipe(catchError(this.handleError));
-  }
-
-  postCompany(body){
+  postCompany(body) {
     body['role'] = 'company';
     return this.http.post('http://localhost:3000/companies/addCompany', body);
   }

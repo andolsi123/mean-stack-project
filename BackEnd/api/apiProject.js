@@ -1,5 +1,5 @@
 var express = require('express');
-var Project = require('../models/project');
+var Project = require('../models/projectShema');
 var router = express.Router();
 
 
@@ -22,7 +22,7 @@ router.post('/updateProject/:projectId', async function(req, res) {
   })
 })
 
-router.get('/allProjects', async function(req, res) {
+router.get('/allProjects/:id', async function(req, res) {
   await Project.find().exec(function(err, projects) {
     if (err) {
       res.send(err);
@@ -39,5 +39,15 @@ router.get('/oneProject/:projectId', async function(req, res) {
     res.send(project);
   })
 })
+
+router.post('/DeleteProject/:projectId', async function(req, res){
+  await Project.findByIdAndRemove({_id: req.params.projectId}, req.body, function(err, project){
+    if(err){
+      res.send(err);
+    }
+    res.send(project);
+  })
+})
+
 
 module.exports = router;
