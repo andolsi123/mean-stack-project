@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8" *ngIf="show_FreeLancer">
+      <div class="card" style="padding: 20px;width: 100%;">
+        <div>
+          <img class="adduser" src="../../assets/img/adduser2.png">
+          <a style="font-weight:bold ; font-size: 30px;color: #1cb3e5">FreeLancer</a>
+          <b>, CREATE YOUR ACCOUNT</b>
+        </div><br><br>
+        <div>
+          <form [formGroup]="freelancerForm">
+            <!-- <div class="form-group">
+              <label class="col-form-label">Firstname</label>
+              <input type="text" class="form-control" formControlName="first_name">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Lastname</label>
+              <input type="text" class="form-control" formControlName="last_name">
+            </div> -->
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="col-form-label">Firstname</label>
+                <input type="text" class="form-control" formControlName="first_name">
+              </div>
+              <div class="form-group col-md-6">
+                <label class="col-form-label">Lastname</label>
+                <input type="text" class="form-control" formControlName="last_name">
+              </div>
+            </div>
+            <!-- <div class="form-group">
+              <label class="col-form-label">Email</label>
+              <input type="text" class="form-control" formControlName="email">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Password</label>
+              <input type="text" class="form-control" formControlName="password">
+            </div> -->
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="col-form-label">Email</label>
+                <input type="text" class="form-control" formControlName="email">
+              </div>
+              <div class="form-group col-md-6">
+                <label class="col-form-label">Password</label>
+                <input type="text" class="form-control" formControlName="password">
+              </div>
+            </div>
+            <div class="form-row">
+              <!-- <div class="form-group col-md-6">
+                <label class="col-form-label">Image Profil</label>
+                 <input type="file" class="form-control" formControlName="Image_Profil">
+              </div> -->
+
+              <div class="col-md-6">
+                <label for="logo">Image Profil</label>
+  
+                <input type="file" name="Image_Profil" (change)="selectedFile($event);readURL($event);">
+                <img class="rounded float-right img-thumbnail"
+                  [src]="imageSrc || 'http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png'" />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col text-center">
+          <button type="button" (click)="signupFree()" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="card card_icon">
+        <img class="card-img-top img_card" src="../../assets/img/poster.png">
+        <div class="card-body">
+          <h4 class="card-title" style="font-weight:bold">Post your projects</h4>
+          <p class="card-text">Post your projects and find the Freelances that suit you.</p>
+        </div>
+      </div>
+
+      <div class="card card_icon">
+        <img class="card-img-top img_card" src="../../assets/img/pro.png">
+        <div class="card-body">
+          <h4 class="card-title" style="font-weight:bold">Apply</h4>
+          <p class="card-text">Apply to offers to increase your chances of success.</p>
+        </div>
+      </div>
+
+      <div class="card card_icon">
+        <img class="card-img-top img_card" src="../../assets/img/signup.png">
+        <div class="card-body">
+          <h4 class="card-title" style="font-weight:bold">Sign up</h4>
+          <p class="card-text">Register to access the features of the site.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

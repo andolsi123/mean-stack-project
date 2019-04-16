@@ -6,10 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatFormFieldModule, MatButtonModule, MatRippleModule, MatSelectModule, MatTooltipModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatIconModule} from '@angular/material/icon';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
 import { CompanyComponent } from './company/company.component';
 import { AddProjectComponent } from './company/add-project/add-project.component';
 import { DashboardComponent } from './company/dashboard/dashboard.component';
@@ -22,6 +18,11 @@ import { LogInComponent } from './landing-page/log-in/log-in.component';
 import { NavbarLandingComponent } from './landing-page/navbar-landing/navbar-landing.component';
 import { SignUpComponent } from './landing-page/sign-up/sign-up.component';
 import { DetailProjectComponent } from './company/detail-project/detail-project.component';
+import { FooterLandingComponent } from './landing-page/footer-landing/footer-landing.component';
+import { AboutUsComponent } from './landing-page/about-us/about-us.component';
+import { SignUpCompanyComponent } from './landing-page/sign-up-company/sign-up-company.component';
+import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sign-up-freelancer.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +37,11 @@ import { DetailProjectComponent } from './company/detail-project/detail-project.
     LogInComponent,
     NavbarLandingComponent,
     SignUpComponent,
-    DetailProjectComponent
+    DetailProjectComponent,
+    FooterLandingComponent,
+    AboutUsComponent,
+    SignUpCompanyComponent,
+    SignUpFreelancerComponent
   ],
   imports: [
     BrowserModule,
@@ -50,10 +55,7 @@ import { DetailProjectComponent } from './company/detail-project/detail-project.
     MatButtonModule,
     MatRippleModule,
     MatSelectModule,
-    MatTooltipModule,
-    MatChipsModule,
-    MatIconModule,
-    CKEditorModule
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

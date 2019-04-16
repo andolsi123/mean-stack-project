@@ -1,0 +1,12 @@
+.logo{
+    width: 50%;
+    height: 150px;
+}
+
+.card-login{
+    width: 50%;
+    height: 500px;
+    margin-top: 5%;
+    margin-left: 25%;
+    padding: 5px;
+}
