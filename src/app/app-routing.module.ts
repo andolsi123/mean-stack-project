@@ -13,35 +13,34 @@ const routes: Routes = [
     path: 'company',
     component: CompanyComponent,
     children: [
-        {
+      {
         path: 'dashboard',
         component: DashboardComponent
-       },
-       {
+      },
+      {
        path: 'AppliedFrelancers',
        component: AppliedFreeLancerComponent
-       },
-       {
+      },
+      {
        path: 'addProject',
        component: AddProjectComponent
-       },
-      
+      },
     ]
   },
-  { 
+  {
     path: 'landing-page',
     component: LandingPageComponent,
     children: [
       {
         path: 'log-in',
         component: LogInComponent
-        },
-        {
+      },
+      {
         path: 'sign-up',
         component: SignUpComponent
-        }
+      }
     ]
-  }  
+  }
 ];
 
 @NgModule({

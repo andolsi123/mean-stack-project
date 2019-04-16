@@ -25,7 +25,7 @@ export class AppService {
   }
 
   postAddProject(body: any): Observable <any> {
-    return this.http.post('http://localhost:3000/projects/addProject', body).pipe(catchError(this.handleError));
+    return this.http.post(`http://localhost:3000/projects/addProject`, body).pipe(catchError(this.handleError));
   }
 
   postUpdateProject(id: any, body: any): Observable <any> {
@@ -40,17 +40,17 @@ export class AppService {
     return this.http.get(`http://localhost:3000/projects/oneProject/${id}`).pipe(catchError(this.handleError));
   }
 
-  postCompany(body){
+  postCompany(body) {
     body['role'] = 'company';
     return this.http.post('http://localhost:3000/companies/addCompany', body);
   }
 
-  postFree(freelancer){
+  postFree(freelancer) {
     freelancer['role'] = 'freelancer';
-    return this.http.post('http://localhost:3000/freelancers/addfree',freelancer);
+    return this.http.post('http://localhost:3000/freelancers/addfree', freelancer);
   }
 
-  login(body){
+  login(body) {
     return this.http.post('http://localhost:3000/users/login', body);
   }
 
