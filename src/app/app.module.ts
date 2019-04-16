@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatFormFieldModule, MatButtonModule, MatRippleModule, MatSelectModule, MatTooltipModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatButtonModule, MatRippleModule, MatSelectModule, MatTooltipModule, MatIconModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CompanyComponent } from './company/company.component';
 import { AddProjectComponent } from './company/add-project/add-project.component';
@@ -20,7 +19,9 @@ import { FooterLandingComponent } from './landing-page/footer-landing/footer-lan
 import { AboutUsComponent } from './landing-page/about-us/about-us.component';
 import { SignUpCompanyComponent } from './landing-page/sign-up-company/sign-up-company.component';
 import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sign-up-freelancer.component';
-
+import {MatChipsModule} from '@angular/material/chips';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { EditeProfilComponent } from './company/edite-profil/edite-profil.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sig
     FooterLandingComponent,
     AboutUsComponent,
     SignUpCompanyComponent,
-    SignUpFreelancerComponent
+    SignUpFreelancerComponent,
+    EditeProfilComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,10 @@ import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sig
     MatButtonModule,
     MatRippleModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule,
+    MatIconModule,
+    CKEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,8 +24,8 @@ export class SignUpCompanyComponent implements OnInit {
     DescriptionCompany: new FormControl('',[Validators.required]),
     facebook: new FormControl('',[Validators.required]),
     webSite: new FormControl('',[Validators.required]),
-    Email: new FormControl('',[Validators.required, Validators.email]),
-    Pword: new FormControl('',[Validators.required, Validators.minLength(8)]),
+    email: new FormControl('',[Validators.required, Validators.email]),
+    password: new FormControl('',[Validators.required, Validators.minLength(8)]),
     logo:new FormControl(''),
   });
 
@@ -50,6 +50,7 @@ export class SignUpCompanyComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
+  
   signupCompany() {
     const dataForm = new FormData();
     dataForm.append('nameCompany', this.companyForm.value.nameCompany);
@@ -59,14 +60,15 @@ export class SignUpCompanyComponent implements OnInit {
     dataForm.append('DescriptionCompany', this.companyForm.value.DescriptionCompany);
     dataForm.append('facebook', this.companyForm.value.facebook);
     dataForm.append('webSite', this.companyForm.value.webSite);
-    dataForm.append('Email', this.companyForm.value.Email);
-    dataForm.append('Pword', this.companyForm.value.Pword);
-    dataForm.append('logo', this.selectedImage, this.selectedImage.name)
+    dataForm.append('email', this.companyForm.value.email);
+    dataForm.append('password', this.companyForm.value.password);
+    dataForm.append('logo', this.selectedImage, this.selectedImage.name);
 
+    console.log(dataForm);
     this.appService.postCompany(dataForm).subscribe((data2: any) => {
     console.log(data2);
     alert('you are added with success');
-    //this.router.navigate(['/company'])
+    this.router.navigate(['company']);
     })
   }
 }
