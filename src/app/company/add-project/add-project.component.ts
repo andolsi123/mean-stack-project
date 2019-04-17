@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
-import {NgForm, FormArray} from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {FormControl, Validators, FormGroup } from '@angular/forms';
+import { AppService } from '../../app.service';
 
 export interface Skills {
   skill: string;
@@ -25,8 +25,6 @@ export class AddProjectComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   skills: Skills[] = [];
-  public model = {editorData: null};
-  minOff: any;
 
   public onReady(editor) {
     editor.ui.getEditableElement().parentElement.insertBefore(
@@ -35,13 +33,14 @@ export class AddProjectComponent implements OnInit {
     );
   }
 
-  constructor() {
+  constructor(private http: AppService) {
     this.addProject = new FormGroup({
       projectName: new FormControl('', Validators.required),
       minOffer: new FormControl('', [Validators.required, Validators.min(1)]),
       maxOffer: new FormControl('', [Validators.required, Validators.min(1)]),
       skillsArray: new FormControl('', Validators.required),
-      duration: new FormControl('', Validators.required)
+      duration: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.reuired)
     });
   }
 
@@ -67,7 +66,16 @@ export class AddProjectComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
+      const data = {
+      titre_project: this.addProject.get('projectName').value,
+      description_project: this.addProject.get('description').value,
+      skills: this.skills,
+      min_offer: this.addProject.get('minOffer').value,
+      max_offer: this.addProject.get('maxOffer').value,
+      statut: 'not started',
+      duration: this.addProject.get('duration').value
+    };
+    this.http.postAddProject(data).subscribe();
   }
 
 }
