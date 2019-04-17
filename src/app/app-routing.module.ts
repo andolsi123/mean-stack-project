@@ -31,7 +31,7 @@ const routes: Routes = [
        {
         path: 'edite-profil',
         component: EditeProfilComponent
-        },
+        }
     ]
   },
   { 
