@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -29,8 +29,7 @@ export class AppService {
   }
 
   postUpdateProject(id: any, body: any): Observable <any> {
-    const header = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
-    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body, header).pipe(catchError(this.handleError));
+    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body).pipe(catchError(this.handleError));
   }
 
   getAllProjects(): Observable <any> {

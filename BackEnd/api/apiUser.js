@@ -13,18 +13,64 @@ router.post('/login', function (req, res) {
         if (!users) {
             res.send('wrong email')
         }
-        if (bcrypt.compareSync(req.body.password, users.password)) {
-            let token = jwt.sign({data: users},"HS384",{ expiresIn: '3600'});
-            res.send({
-                success: true,
-                message: 'Authentication successful!',
-                access_token: token
-            });
-        } else {
-            res.send('wrong password')
+        if (bcrypt.compare(req.body.password, users.password, function (err, isValid) {
+            if (isValid) {
+                if (users.company) {
+                    console.log("company");
+                    User.findOne({
+                        email: email
+                    }).exec(function (err, company) {
+                        const token = jwt.sign({
+                            '_id':users._id,
+                            'email': email,
+                            'role':" company",
+                            'nameCompany': company.nameCompany,
+                            'company': users.company
+                        },
+                        "HS384", {
+                                expiresIn: '1h'
+                            }
+                            );
+                        res.send({
+                            Message: 'Authentication successful!',
+                            token: token   
+                        });
+                    });
+                  
+                }
+                if (users.freelancer) {
+                    console.log("frellancer");
+                    User.findOne({
+                        email: email
+                    }).exec(function (err, freelancer) {
+                        const token = jwt.sign({
+                            '_id': users._id,
+                            'email': users.email,
+                            'role': "freelancer",
+                            'first_name': users.freelancer.first_name,
+                            'last_name': users.freelancer.first_name,
+                            'freelancer': users.freelancer
+                        },
+                        "HS384", {
+                                expiresIn: '1h'
+                            });
+
+                            res.send({
+                                Message: 'Authentication successful!',
+                                token: token
+                            });  
+                    });
+                   
+                }
+               
+            }else{
+                res.send('wrong password'); 
+            }
         }
-    })
-});
+        ));
+    });
+})
+
 /* router.post('/signup', async (req,res) => {
 
 }) */

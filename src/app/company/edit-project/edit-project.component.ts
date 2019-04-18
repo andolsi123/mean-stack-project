@@ -9,12 +9,12 @@ export interface Skills {
 }
 
 @Component({
-  selector: 'app-add-project',
-  templateUrl: './add-project.component.html',
-  styleUrls: ['./add-project.component.css']
+  selector: 'app-edit-project',
+  templateUrl: './edit-project.component.html',
+  styleUrls: ['./edit-project.component.css']
 })
-export class AddProjectComponent implements OnInit {
-
+export class EditProjectComponent implements OnInit {
+  id: any;
   addProject: FormGroup;
   visible = true;
   selectable = true;
@@ -65,6 +65,7 @@ export class AddProjectComponent implements OnInit {
       statut: 'not started',
       duration: this.addProject.get('duration').value
     };
-    this.http.postAddProject(data).subscribe();
+    this.http.postUpdateProject(this.id, data).subscribe();
   }
+
 }

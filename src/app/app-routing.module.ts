@@ -9,6 +9,7 @@ import { LogInComponent } from './landing-page/log-in/log-in.component';
 import { AboutUsComponent } from './landing-page/about-us/about-us.component';
 import { SignUpCompanyComponent } from './landing-page/sign-up-company/sign-up-company.component';
 import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sign-up-freelancer.component';
+import { EditeProfilComponent } from './company/edite-profil/edite-profil.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,11 @@ const routes: Routes = [
       {
        path: 'addProject',
        component: AddProjectComponent
-      }
+       },
+       {
+        path: 'edite-profil',
+        component: EditeProfilComponent
+        }
     ]
   },
   {
