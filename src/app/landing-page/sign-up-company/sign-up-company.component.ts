@@ -68,7 +68,6 @@ export class SignUpCompanyComponent implements OnInit {
     this.appService.postCompany(dataForm).subscribe((data2: any) => {
     console.log(data2);
     alert('you are added with success');
-    this.router.navigate(['company']);
     })
   }
 }

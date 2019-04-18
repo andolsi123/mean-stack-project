@@ -60,7 +60,6 @@ export class SignUpFreelancerComponent implements OnInit {
     this.appService.postFree(dataForm).subscribe((data: any) => {
       console.log(data);
       alert('you are added with success');
-     // this.router.navigate(['freelancer']);
     })
   }
 }

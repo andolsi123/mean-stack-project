@@ -49,8 +49,8 @@
             <div class="col-md-6">
               <label for="logo">Logo</label>
 
-              <input type="file" name="logo" (change)="selectedFile($event);readURL($event);">
-              <img class="rounded float-right img-thumbnail"
+              <input hidden #uploadImage type="file" name="logo" (change)="selectedFile($event);readURL($event);">
+              <img (click)="uploadImage.click()" style="height: 350px;" class="rounded float-right img-thumbnail"
                 [src]="imageSrc || 'http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png'" />
             </div>
 

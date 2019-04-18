@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import jwt_decode  from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,10 @@ import { catchError } from 'rxjs/operators';
 
 export class AppService {
 
-  constructor(private http: HttpClient) { }
+  connectedUser: any;
+  constructor(private http: HttpClient) {
+    this.connectedUser = this.getDecodedToken();
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -53,5 +57,28 @@ export class AppService {
   login(body) {
     return this.http.post('http://localhost:3000/users/login', body);
   }
+
+  UpdateCompanyProfile(id, body) {
+    return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body);
+  }
+
+
+  getToken(): string {
+
+    return localStorage.getItem('token');
+}
+setToken(token: string): void {
+    localStorage.setItem('token', token);
+}
+
+getDecodedToken() {
+  if (localStorage.getItem('token')) {
+      var decoded = jwt_decode(localStorage.getItem('token'));
+      return decoded;
+  } else {
+    return null;
+  }
+}
+
 }
 
