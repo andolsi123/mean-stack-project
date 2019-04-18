@@ -29,7 +29,8 @@ export class AppService {
   }
 
   postUpdateProject(id: any, body: any): Observable <any> {
-    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body).pipe(catchError(this.handleError));
+    const header = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body, header).pipe(catchError(this.handleError));
   }
 
   getAllProjects(): Observable <any> {
@@ -53,5 +54,5 @@ export class AppService {
   login(body) {
     return this.http.post('http://localhost:3000/users/login', body);
   }
-
 }
+

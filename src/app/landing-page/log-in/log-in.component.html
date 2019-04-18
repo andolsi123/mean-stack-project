@@ -1,7 +1,9 @@
-<div class="card">
-  <div class="container" style="width: 50%;height: 300px;margin-top: 10%;">
+<div class="card card-login">
+  <div class="container">
     <div class="row">
       <div class="col text-center">
+        <img src="../../assets/img/logo.jpg" class="logo">
+        <h5>work differently</h5>
         <h2>login</h2>
       </div>
     </div>
@@ -10,16 +12,16 @@
         <div class="form-group col">
           <label for="inputEmail4">Email</label>
           <input type="email" class="form-control" formControlName="email" placeholder="Email" required>
-          <label for="inputPassword4">Mot De Passe</label>
+          <label for="inputPassword4">Password</label>
           <input type="password" class="form-control" formControlName="password" placeholder="Password" required>
         </div>
       </div>
       <div class="row">
         <div class="col text-center">
-          <button class="btn btn-primary " (click)="login()">connexion</button>
+          <button class="btn btn-primary " (click)="login()">Connection</button>
         </div>
       </div>
-      <p class="text-center">Mot De Passe Obluier? <a href="" [routerLink]="['/sign-up']">Register</a> </p>
+      <p class="text-center">Obligate password? <a href="" [routerLink]="['/sign-up']">Register</a> </p>
     </form>
   </div>
 </div>

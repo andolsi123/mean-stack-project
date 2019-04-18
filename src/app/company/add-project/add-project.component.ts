@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
-import {NgForm, FormArray} from '@angular/forms';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {NgForm} from '@angular/forms';
 import {FormControl, Validators, FormGroup } from '@angular/forms';
 import { AppService } from '../../app.service';
 
@@ -18,7 +17,6 @@ export interface Skills {
 export class AddProjectComponent implements OnInit {
 
   addProject: FormGroup;
-  Editor = ClassicEditor;
   config = {uiColor: '#99500'};
   visible = true;
   selectable = true;
@@ -26,15 +24,6 @@ export class AddProjectComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   skills: Skills[] = [];
-  public model = {editorData: null};
-  minOff: any;
-
-  public onReady(editor) {
-    editor.ui.getEditableElement().parentElement.insertBefore(
-        editor.ui.view.toolbar.element,
-        editor.ui.getEditableElement()
-    );
-  }
 
   constructor(private http: AppService) {
     this.addProject = new FormGroup({
@@ -43,7 +32,7 @@ export class AddProjectComponent implements OnInit {
       maxOffer: new FormControl('', [Validators.required, Validators.min(1)]),
       skillsArray: new FormControl('', Validators.required),
       duration: new FormControl('', Validators.required),
-      des: new FormControl('', Validators.required)
+      description: new FormControl('', Validators.required)
     });
   }
 
@@ -70,7 +59,7 @@ export class AddProjectComponent implements OnInit {
   onSubmit(form: NgForm) {
     const data = {
       titre_project: this.addProject.get('projectName').value,
-      description_project: this.addProject.get('des').value,
+      description_project: this.addProject.get('description').value,
       skills: this.skills,
       min_offer: this.addProject.get('minOffer').value,
       max_offer: this.addProject.get('maxOffer').value,

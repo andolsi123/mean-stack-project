@@ -1,0 +1,19 @@
+.card_icon{
+    width:70%;
+    height: 200px;
+    text-align: center;
+    padding: 2px;
+    background-color: transparent;
+    border: none !important;
+}
+
+.img_card{
+    width:40%;
+    height: 80px;
+    margin-left: 32%;
+}
+
+.adduser{
+    width:15%;
+    height: 30px;
+}
