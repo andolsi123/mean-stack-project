@@ -57,7 +57,7 @@
                           <div class="row">
                               <div class="col-md-12">
                                     <label>Descriptions...</label>
-                                    <ckeditor [config]="config" [editor]="Editor" (ready)="onReady($event)" [(ngModel)]="model.editorData"></ckeditor>
+                                    <ckeditor [config]="config" [editor]="Editor" (ready)="onReady($event)" formControlName="description"></ckeditor>
                               </div>
                           </div>
                           <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="!addProject.valid">Submit Project</button>
