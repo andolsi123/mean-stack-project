@@ -19,9 +19,15 @@ import { FooterLandingComponent } from './landing-page/footer-landing/footer-lan
 import { AboutUsComponent } from './landing-page/about-us/about-us.component';
 import { SignUpCompanyComponent } from './landing-page/sign-up-company/sign-up-company.component';
 import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sign-up-freelancer.component';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule} from '@angular/material/chips';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { EditeProfilComponent } from './company/edite-profil/edite-profil.component';
+import { FreelancerComponent } from './freelancer/freelancer.component';
+import { DashboardFreeComponent } from './freelancer/dashboard-free/dashboard-free.component';
+import { EditeProfilFreeComponent } from './freelancer/edite-profil-free/edite-profil-free.component';
+import { NavbarFreeComponent } from './freelancer/navbar-free/navbar-free.component';
+import { SidebarFreeComponent } from './freelancer/sidebar-free/sidebar-free.component';
+import { ProjectListComponent } from './freelancer/project-list/project-list.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +45,13 @@ import { EditeProfilComponent } from './company/edite-profil/edite-profil.compon
     AboutUsComponent,
     SignUpCompanyComponent,
     SignUpFreelancerComponent,
-    EditeProfilComponent
+    EditeProfilComponent,
+    FreelancerComponent,
+    DashboardFreeComponent,
+    EditeProfilFreeComponent,
+    NavbarFreeComponent,
+    SidebarFreeComponent,
+    ProjectListComponent
   ],
   imports: [
     BrowserModule,

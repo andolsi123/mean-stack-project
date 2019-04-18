@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,12 +13,14 @@ export class NavbarComponent implements OnInit {
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
-    constructor(location: Location,  private element: ElementRef,private router: Router,private route: ActivatedRoute) {
+    logo : any;
+    constructor(location: Location,  private element: ElementRef,private router: Router,private route: ActivatedRoute,public appService: AppService) {
       this.location = location;
           this.sidebarVisible = false;
     }
 
     ngOnInit() {
+      this.logo = this.appService.connectedUser.logo;
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
       this.router.events.subscribe((event) => {

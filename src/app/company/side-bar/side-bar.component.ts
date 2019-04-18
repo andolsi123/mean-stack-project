@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppService } from 'src/app/app.service';
 
 declare const $: any;
 
@@ -11,11 +12,14 @@ declare const $: any;
 
 export class SideBarComponent implements OnInit {
   status1 = false;
-   status2= false;
-    status3 = false;
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  status2= false;
+  status3 = false;
+  name : string ;
+  constructor(private route: ActivatedRoute, private router: Router,public appService: AppService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.name = this.appService.connectedUser.nameCompany;
+  }
 
   isMobileMenu() {
       if ($(window).width() > 991) {

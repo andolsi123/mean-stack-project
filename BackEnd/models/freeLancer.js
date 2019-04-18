@@ -4,7 +4,7 @@ var FreeLancerSchema = new mongoose.Schema({
     first_name:String,
     last_name:String,
     phone_Number:String,
-     birthdate:String,
+    birthdate:String,
     rateWork:String,
     facebook:String,
     githup:String,
