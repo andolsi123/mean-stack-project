@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {FormControl, Validators, FormGroup } from '@angular/forms';
+import {FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
 import { AppService } from '../../app.service';
 
 export interface Skills {
@@ -40,7 +40,7 @@ export class AddProjectComponent implements OnInit {
       maxOffer: new FormControl('', [Validators.required, Validators.min(1)]),
       skillsArray: new FormControl('', Validators.required),
       duration: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.reuired)
+      description: new FormControl('', Validators.required)
     });
   }
 

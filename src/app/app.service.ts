@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import jwt_decode  from 'jwt-decode';
+//import jwt_decode  from 'jwt-decode';
+import * as jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AppService {
 
   connectedUser: any;
   constructor(private http: HttpClient) {
-    this.connectedUser = this.getDecodedToken();
+       this.connectedUser = this.getDecodedToken();
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -60,27 +61,34 @@ export class AppService {
     return this.http.post('http://localhost:3000/users/login', body);
   }
 
+  getOneCompany(id){
+    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.get(`http://localhost:3000/companies/getCompany/${id}`,{ headers: header });
+  }
+
   UpdateCompanyProfile(id, body) {
-    return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body);
+    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body ,{ headers: header });
+  }
+  
+  UpdateIlmage(file){
+   
   }
 
 
-  getToken(): string {
-
-    return localStorage.getItem('token');
-}
 setToken(token: string): void {
     localStorage.setItem('token', token);
 }
 
 getDecodedToken() {
   if (localStorage.getItem('token')) {
-      var decoded = jwt_decode(localStorage.getItem('token'));
-      return decoded;
+    var decoded = jwt_decode(localStorage.getItem('token'));
+    return decoded;
   } else {
     return null;
   }
 }
+
 
 }
 
