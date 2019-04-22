@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 //import jwt_decode  from 'jwt-decode';
@@ -30,13 +30,11 @@ export class AppService {
   }
 
   postAddProject(body: any): Observable <any> {
-    const header = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
-    return this.http.post('http://localhost:3000/projects/addProject', body, header).pipe(catchError(this.handleError));
+    return this.http.post(`http://localhost:3000/projects/addProject`, body).pipe(catchError(this.handleError));
   }
 
   postUpdateProject(id: any, body: any): Observable <any> {
-    const header = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
-    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body, header).pipe(catchError(this.handleError));
+    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body).pipe(catchError(this.handleError));
   }
 
   getAllProjects(): Observable <any> {
@@ -47,17 +45,17 @@ export class AppService {
     return this.http.get(`http://localhost:3000/projects/oneProject/${id}`).pipe(catchError(this.handleError));
   }
 
-  postCompany(body){
+  postCompany(body) {
     body['role'] = 'company';
     return this.http.post('http://localhost:3000/companies/addCompany', body);
   }
 
-  postFree(freelancer){
+  postFree(freelancer) {
     freelancer['role'] = 'freelancer';
-    return this.http.post('http://localhost:3000/freelancers/addfree',freelancer);
+    return this.http.post('http://localhost:3000/freelancers/addfree', freelancer);
   }
 
-  login(body){
+  login(body) {
     return this.http.post('http://localhost:3000/users/login', body);
   }
 

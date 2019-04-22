@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// tslint:disable-next-line:max-line-length
 import { MatInputModule, MatFormFieldModule, MatButtonModule, MatRippleModule, MatSelectModule, MatTooltipModule, MatIconModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CompanyComponent } from './company/company.component';
@@ -73,4 +74,5 @@ import { ProjectListComponent } from './freelancer/project-list/project-list.com
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

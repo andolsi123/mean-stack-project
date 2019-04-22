@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
 import { AppService } from '../../app.service';
 
@@ -10,12 +9,12 @@ export interface Skills {
 }
 
 @Component({
-  selector: 'app-add-project',
-  templateUrl: './add-project.component.html',
-  styleUrls: ['./add-project.component.css']
+  selector: 'app-edit-project',
+  templateUrl: './edit-project.component.html',
+  styleUrls: ['./edit-project.component.css']
 })
-export class AddProjectComponent implements OnInit {
-
+export class EditProjectComponent implements OnInit {
+  id: any;
   addProject: FormGroup;
   visible = true;
   selectable = true;
@@ -31,7 +30,7 @@ export class AddProjectComponent implements OnInit {
       maxOffer: new FormControl('', [Validators.required, Validators.min(1)]),
       skillsArray: new FormControl('', Validators.required),
       duration: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
+      description: new FormControl('description...', Validators.required)
     });
   }
 
@@ -66,6 +65,7 @@ export class AddProjectComponent implements OnInit {
       statut: 'not started',
       duration: this.addProject.get('duration').value
     };
-    this.http.postAddProject(data).subscribe();
+    this.http.postUpdateProject(this.id, data).subscribe();
   }
+
 }

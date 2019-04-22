@@ -12,7 +12,7 @@ declare const $: any;
 
 export class SideBarComponent implements OnInit {
   status1 = false;
-  status2= false;
+  status2 = false;
   status3 = false;
   name : string ;
   id_company : any;
@@ -34,18 +34,15 @@ export class SideBarComponent implements OnInit {
           return false;
       }
       return true;
-  };
- showAdd() {
+  }
+  showAdd() {
   this.router.navigate(['addProject'], {relativeTo: this.route});
-  this.status1 = true;
  }
  showDash() {
   this.router.navigate(['dashboard'], {relativeTo: this.route});
-  this.status2 = true;
  }
  showApllFree() {
   this.router.navigate(['AppliedFrelancers'], {relativeTo: this.route});
-  this.status3 = true;
  }
 }
 
