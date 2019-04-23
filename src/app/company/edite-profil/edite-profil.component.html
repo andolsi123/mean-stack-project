@@ -32,35 +32,32 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="facebook">Facebook</label>
               <input type="text" class="form-control" formControlName="facebook">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="Website">Website</label>
               <input type="text" class="form-control" formControlName="webSite">
             </div>
-          </div>
-          <div class="form-group">
-            <label for="Description-Company" class="col-form-label">Description Company</label>
-            <textarea type="text" class="form-control" formControlName="DescriptionCompany"></textarea> </div>
-          <div class="form-row">
-            <div class="col-md-6">
-              <label for="logo">Logo</label>
-
-              <input type="file" name="logo" (change)="selectedFile($event);readURL($event);">
-              <img src="http://localhost:3000/user/image/{{connectCompany.logo}}" style="width: 20%;height: 50;">
-            </div>
-
-            <div class="form-group col-md-6">
-              <label for="phonenumber" class="col-form-label">Phonenumber</label>
+            <div class="form-group col-md-4">
+              <label for="phonenumber">Phonenumber</label>
               <input type="text" class="form-control" formControlName="phoneNumber">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="logo">Logo</label>
+              <input hidden #uploadImage type="file" name="logo" (change)="selectedFile($event);readURL($event);">
+              <img (click)="uploadImage.click()" src="http://localhost:3000/user/image/{{company.logo}}" style="width: 90%;height: 400;">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="Description-Company" class="col-form-label">Description Company</label>
+              <textarea type="text" class="form-control" formControlName="DescriptionCompany"></textarea>
             </div>
           </div>
           <button type="button" (click)="EditCompany()" class="btn btn-primary">Save</button>
         </form>
-        <div class="col text-center">
-        </div>
       </div>
     </div>
   </div>

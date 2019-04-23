@@ -25,15 +25,14 @@ export class LogInComponent implements OnInit {
 
   login(){
     this.appService.login(this.loginForm.value).subscribe((data3: any) => {
-      localStorage.setItem('token', data3.token);
-      this.appService.connectedUser = this.appService.getDecodedToken();
-      console.log(this.appService.connectedUser);
-      if('freelancer'){
+      localStorage.setItem('token', data3.access_token);
+      this.appService.connectedUser = this.appService.getDecodedToken();   
+      if(this.appService.connectedUser.data.role == 'freelancer'){
         this.router.navigate(['freelancer']);
       }
-      if('company'){
+      if(this.appService.connectedUser.data.role =='company'){
         this.router.navigate(['company']);
       }
-    });
+     });
   }
 }

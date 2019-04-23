@@ -17,6 +17,7 @@ export class SignUpCompanyComponent implements OnInit {
   constructor(private appService: AppService,private router: Router, private route: ActivatedRoute) {
     
     this.companyForm = new FormGroup({
+
     nameCompany: new FormControl('',[Validators.required]),
     address: new FormControl('',[Validators.required]),
     foundyear: new FormControl('',[Validators.required]),
@@ -36,7 +37,7 @@ export class SignUpCompanyComponent implements OnInit {
   }
 
   selectedFile(event) {
-    console.log(event.target.files[0])
+   // console.log(event.target.files[0])
     this.selectedImage = event.target.files[0]
   }
 
@@ -63,10 +64,9 @@ export class SignUpCompanyComponent implements OnInit {
     dataForm.append('email', this.companyForm.value.email);
     dataForm.append('password', this.companyForm.value.password);
     dataForm.append('logo', this.selectedImage, this.selectedImage.name);
+    dataForm.append('role', 'company');
 
-    console.log(dataForm);
     this.appService.postCompany(dataForm).subscribe((data2: any) => {
-    console.log(data2);
     alert('you are added with success');
     })
   }

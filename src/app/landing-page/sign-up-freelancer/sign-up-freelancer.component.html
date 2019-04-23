@@ -33,10 +33,14 @@
               <div class="col-md-6">
                 <label for="logo">Image Profil</label>
   
-                <input type="file" name="Image_Profil" (change)="selectedFile($event);readURL($event);">
+                <!-- <input type="file" name="Image_Profil" (change)="selectedFile($event);readURL($event);">
                 <img class="rounded float-right img-thumbnail"
+                  [src]="imageSrc || 'http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png'" /> -->
+              
+                  <input hidden #uploadImage type="file" name="Image_Profil" (change)="selectedFile($event);readURL($event);">
+                  <img (click)="uploadImage.click()" style="height: 350px;" class="rounded float-right img-thumbnail"
                   [src]="imageSrc || 'http://www.stleos.uq.edu.au/wp-content/uploads/2016/08/image-placeholder-350x350.png'" />
-              </div>
+                </div>
             </div>
           </form>
         </div>

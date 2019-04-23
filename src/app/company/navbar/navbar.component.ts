@@ -10,17 +10,25 @@ import { AppService } from 'src/app/app.service';
 })
 export class NavbarComponent implements OnInit {
     location: Location;
-      mobile_menu_visible: any = 0;
+     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
     logo : any;
+    id_company : any;
+    company :any 
     constructor(location: Location,  private element: ElementRef,private router: Router,private route: ActivatedRoute,public appService: AppService) {
       this.location = location;
           this.sidebarVisible = false;
     }
 
     ngOnInit() {
-      this.logo = this.appService.connectedUser.logo;
+        // get logo company conneted
+        this.id_company = this.appService.connectedUser.data.company;
+        this.appService.getOneCompany(this.id_company).subscribe((comp: any) => {
+        this.company = comp;
+        this.logo = this.company.logo;
+        });
+        
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
       this.router.events.subscribe((event) => {
@@ -110,6 +118,7 @@ export class NavbarComponent implements OnInit {
 
     LogOut(){
         this.router.navigate(['landing-page/log-in']);
+        localStorage.removeItem('token');
     }
    
     showEdit(){

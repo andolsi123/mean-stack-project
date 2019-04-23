@@ -56,7 +56,7 @@ export class SignUpFreelancerComponent implements OnInit {
     dataForm.append('email', this.freelancerForm.value.email);
     dataForm.append('password', this.freelancerForm.value.password);
     dataForm.append('Image_Profil', this.selectedImage, this.selectedImage.name)
-
+    dataForm.append('role', 'freelancer');
     this.appService.postFree(dataForm).subscribe((data: any) => {
       console.log(data);
       alert('you are added with success');

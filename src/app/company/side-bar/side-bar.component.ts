@@ -14,11 +14,19 @@ export class SideBarComponent implements OnInit {
   status1 = false;
   status2 = false;
   status3 = false;
-  name: string ;
+  name : string ;
+  id_company : any;
+  company :any
+  
   constructor(private route: ActivatedRoute, private router: Router,public appService: AppService) { }
 
-  ngOnInit() {
-    this.name = this.appService.connectedUser.nameCompany;
+  ngOnInit() { 
+    //get name company connected
+    this.id_company = this.appService.connectedUser.data.company;
+    this.appService.getOneCompany(this.id_company).subscribe((comp: any) => {
+      this.company = comp;
+      this.name = this.company.nameCompany;
+    });
   }
 
   isMobileMenu() {
@@ -37,3 +45,5 @@ export class SideBarComponent implements OnInit {
   this.router.navigate(['AppliedFrelancers'], {relativeTo: this.route});
  }
 }
+
+
