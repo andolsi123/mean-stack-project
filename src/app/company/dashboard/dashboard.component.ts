@@ -16,7 +16,8 @@ q: any;
    }
 
   ngOnInit() {
-    this.appService.getAllProjects().subscribe((data: any) => this.projects = data);
+    // to do:  add id user here
+    this.appService.getAllProjects(5).subscribe((data: any) => this.projects = data);
   }
   detlet(id) {
     this.appService.postDeleteProject(id).subscribe((data)  => this.projects = data);
