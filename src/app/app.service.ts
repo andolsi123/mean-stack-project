@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 //import jwt_decode  from 'jwt-decode';
@@ -68,9 +68,9 @@ export class AppService {
     let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body ,{ headers: header });
   }
-  
+
   UpdateIlmage(file){
-   
+
   }
 
 
