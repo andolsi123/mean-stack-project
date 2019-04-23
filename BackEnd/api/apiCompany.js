@@ -17,7 +17,7 @@ var storage = multer.diskStorage({
   });
 
   var upload = multer({ storage: storage });
-  
+
 router.post('/addCompany',upload.single('logo'), function (req, res) {
     motpass = req.body.password;
     var hash = bcrypt.hashSync(motpass, saltRounds);
@@ -36,13 +36,13 @@ router.post('/addCompany',upload.single('logo'), function (req, res) {
                 res.send(err2);
             }
             res.send(user);
-        }) 
+        })
     })
 });
 
 router.get('/getCompany/:id',passport.authenticate('bearer', { session: false }), function (req, res) {
     var id = req.params.id;
-    Company.findById(id).populate('Todo').exec((err, companies) => {
+    Company.findById(id).populate('company').exec((err, companies) => {
         if (err) {
             res.send(err);
         }

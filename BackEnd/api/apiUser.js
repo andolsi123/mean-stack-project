@@ -20,8 +20,6 @@ router.post('/login', function (req, res) {
             if (isValid) {
                 if (users.company) {
                     Company.findOne({ _id: users.company }).then(company => {
-                        console.log(company.logo);
-
                         const token = jwt.sign({
                             'company': company._id,
                             'role': "company",
@@ -48,7 +46,6 @@ router.post('/login', function (req, res) {
                 }
                 if (users.freelancer) {
                     freelancer.findOne({ _id: users.freelancer }).then(freelancer => {
-                   //     console.log(freelancer)
                         const token = jwt.sign({
                             '_id.freelancer': freelancer._id,
                             'role': "freelancer",
@@ -70,7 +67,6 @@ router.post('/login', function (req, res) {
                             JWT_SIGN_SECRET, {
                                 expiresIn: '1h'
                             });
-
                         res.send({
                             Message: 'Authentication successful!',
                             token: token
@@ -86,9 +82,5 @@ router.post('/login', function (req, res) {
         ));
     });
 })
-
-/* router.post('/signup', async (req,res) => {
-
-}) */
 
 module.exports = router;

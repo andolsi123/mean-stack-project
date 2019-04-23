@@ -42,7 +42,7 @@ router.post('/addfree',upload.single('Image_Profil'), function (req, res) {
 
  router.get('/getCompany/:id',passport.authenticate('bearer', { session: false }), function (req, res) {
   var id = req.params.id;
-  free.findById(id).populate('freelancers').exec((err, freelancers) => {
+  Freelancer.findById(id).populate('freelancers').exec((err, freelancers) => {
       if (err) {
           res.send(err);
       }
@@ -52,7 +52,7 @@ router.post('/addfree',upload.single('Image_Profil'), function (req, res) {
 
 router.post('/updateFree/:id',passport.authenticate('bearer', { session: false }), function (req, res) {
   var id = req.params.id;
-  free.findByIdAndUpdate({_id : id},{$set: req.body}).exec((err, freelancers) =>{
+  Freelancer.findByIdAndUpdate({_id : id},{$set: req.body}).exec((err, freelancers) =>{
       if (err) {
           res.send(err);
       }
