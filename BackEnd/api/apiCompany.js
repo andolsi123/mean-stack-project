@@ -6,10 +6,7 @@ var User = require('../models/user');
 var passport = require('passport');
 const multer = require("multer");
 
-router.post('/addCompany', function (req, res) {
-    // motpass = req.body.Pword;
-    // var hash = bcrypt.hashSync(motpass, 10);
-    // req.body.password = hash;
+
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -21,8 +18,7 @@ var storage = multer.diskStorage({
   });
 
   var upload = multer({ storage: storage });
-});
-router.post('/addCompany',upload.single('logo'), function (req, res) {
+  router.post('/addCompany',upload.single('logo'), function (req, res) {
     motpass = req.body.Pword;
     var hash = bcrypt.hashSync(motpass, saltRounds);
     req.body.password = hash;
@@ -33,15 +29,6 @@ router.post('/addCompany',upload.single('logo'), function (req, res) {
         if (err) {
             res.send(err);
         }
-        // var user = new User(req.body);
-        // user.company = company._id;
-        // user.save(function (err2, user) {
-        //     if (err2) {
-        //         res.send(err2);
-        //     }
-        //     res.send(user);
-        // })
-        res.send(user);
        var user = new User(req.body);
         user.company = company._id;
         user.save(function (err2, user) {
@@ -52,7 +39,6 @@ router.post('/addCompany',upload.single('logo'), function (req, res) {
         })
     })
 });
-
 
 router.post('/update/:id'/*,passport.authenticate('bearer', { session: false })*/, function (req, res) {
     var id = req.params.id;

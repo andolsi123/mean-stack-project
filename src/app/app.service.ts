@@ -32,8 +32,8 @@ export class AppService {
     return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body);
   }
 
-  getAllProjects() {
-    return this.http.get('http://localhost:3000/projects/allProjects');
+  getAllProjects(id:any) {
+    return this.http.get(`http://localhost:3000/projects/allProjects/${id}`);
   }
   postDeleteProject(id: any) {
     return this.http.post(`http://localhost:3000/projects/DeleteProject/${id}`, null);

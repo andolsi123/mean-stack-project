@@ -1,3 +1,56 @@
-<p>
-  detail-project works!
-</p>
+<div class="card">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <a>Title:</a>
+      </div>
+      <div class="col-sm-6">
+        {{projects.titre_project}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <a>Description:</a>
+      </div>
+      <div class="col-sm-6">
+        {{projects.description_project}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <a>Duration:</a>
+      </div>
+      <div class="col-sm-6">
+        {{projects.durations}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <a>statut:</a>
+      </div>
+      <div class="col-sm-6">
+        {{projects.statut}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <a>Max_offer:</a>
+      </div>
+      <div class="col-sm-6">
+        {{projects.max_offer}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <a>Min_offer:</a>
+      </div>
+      <div class="col-sm-6">
+       {{projects.min_offer}}
+      </div>
+  </div>
+    <div *ngFor="let skill of projects.skills" class="row">
+     <div class="col-sm-6"> <a>skills:</a></div>
+      <div class="col-sm-6"> {{skill.skill}}</div>
+    </div>
+  </div>
+</div>

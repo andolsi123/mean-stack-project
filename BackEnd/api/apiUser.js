@@ -18,8 +18,12 @@ router.post('/login', function (req, res) {
             res.send({
                 success: true,
                 message: 'Authentication successful!',
-                access_token: token
+                access_token: token,
             });
+
+
+
+
         } else {
             res.send('wrong password')
         }

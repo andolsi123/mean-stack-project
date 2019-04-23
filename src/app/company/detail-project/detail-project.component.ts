@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router, ActivatedRoute  } from '@angular/router'
 import { AppService } from 'src/app/app.service';
 
 @Component({
@@ -7,11 +8,20 @@ import { AppService } from 'src/app/app.service';
   styleUrls: ['./detail-project.component.css']
 })
 export class DetailProjectComponent implements OnInit {
-  id: number;
-  constructor(private appService: AppService) { }
+  res: any;
+  projects: any;
+  skills: any;
+
+
+  constructor(private appService: AppService, private route: ActivatedRoute ) {
+       this.res = this.route.snapshot.params.id
+
+   }
 
   ngOnInit() {
-    this.appService.getOneProject(this.id).subscribe(res => console.log(res));
+   console.log('tttt');
+   console.log(this.res);
+    this.appService.getOneProject(this.res).subscribe((data) => console.log(this.projects = data));
   }
 
 }

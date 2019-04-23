@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,19 +8,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+projects: any;
+q: any;
 
-  constructor(private appService: AppService, private route: Router) { }
+  constructor(private appService: AppService, private route: Router) {
+    this.projects = [];
+   }
 
   ngOnInit() {
-    this.appService.getAllProjects().subscribe(res => console.log(res));
+    this.appService.getAllProjects().subscribe((data: any) => this.projects = data);
   }
   detlet(id) {
-    this.appService.postDeleteProject(id).subscribe(res => console.log(res));
+    this.appService.postDeleteProject(id).subscribe((data)  => this.projects = data);
   }
   update() {}
   detail(id) {
-    console.log('rr');
-    this.route.navigate(['detail-project', id]);
-    console.log('tt');
+    this.route.navigate(['/company/detail-project', id]);
   }
+
 }
