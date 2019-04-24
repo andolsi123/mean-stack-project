@@ -1,5 +1,5 @@
 var express = require('express');
-var Project = require('../models/projectShema');
+var Project = require('../models/project');
 var router = express.Router();
 
 
