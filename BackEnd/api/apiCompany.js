@@ -59,7 +59,7 @@ router.get('/getCompany/:id', passport.authenticate('bearer', { session: false }
 router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('bearer', { session: false }), function (req, res) {
 
     var id = req.params.id
-    req.body.logo = req.file.filename;  
+    req.body.logo = req.file.filename;
     Company.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, company) {
         if (err) {
             res.send(err)

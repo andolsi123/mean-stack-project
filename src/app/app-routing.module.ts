@@ -65,7 +65,7 @@ const routes: Routes = [
           }
     ]
   } ,
-  { 
+  {
     path: 'freelancer',
     component: FreelancerComponent,
     children: [
@@ -74,15 +74,19 @@ const routes: Routes = [
         component: DashboardFreeComponent
         },
         {
+          path: '',
+          component: DashboardFreeComponent
+        },
+        {
         path: 'edite-profil-free',
         component: EditeProfilFreeComponent
         },
         {
           path: 'project-list',
           component: ProjectListComponent
-          }
+        }
     ]
-  } 
+  }
 ];
 
 @NgModule({
