@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-//import jwt_decode  from 'jwt-decode';
-import * as jwt_decode from "jwt-decode";
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -46,12 +45,10 @@ export class AppService {
   }
 
   postCompany(body) {
-    body['role'] = 'company';
     return this.http.post('http://localhost:3000/companies/addCompany', body);
   }
 
   postFree(freelancer) {
-    freelancer['role'] = 'freelancer';
     return this.http.post('http://localhost:3000/freelancers/addfree', freelancer);
   }
 
@@ -59,33 +56,28 @@ export class AppService {
     return this.http.post('http://localhost:3000/users/login', body);
   }
 
-  getOneCompany(id){
-    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get(`http://localhost:3000/companies/getCompany/${id}`,{ headers: header });
+  getOneCompany(id) {
+    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.get(`http://localhost:3000/companies/getCompany/${id}`, { headers: header });
   }
 
   UpdateCompanyProfile(id, body) {
-    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body ,{ headers: header });
+    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body , { headers: header });
   }
 
-  UpdateIlmage(file){
-
+  setToken(token: string): void {
+  localStorage.setItem('token', token);
   }
 
-
-setToken(token: string): void {
-    localStorage.setItem('token', token);
-}
-
-getDecodedToken() {
-  if (localStorage.getItem('token')) {
-    var decoded = jwt_decode(localStorage.getItem('token'));
-    return decoded;
-  } else {
-    return null;
+  getDecodedToken() {
+    if (localStorage.getItem('token')) {
+      const decoded = jwt_decode(localStorage.getItem('token'));
+      return decoded;
+    } else {
+      return null;
+    }
   }
-}
 
 
 }

@@ -29,6 +29,7 @@ import { EditeProfilFreeComponent } from './freelancer/edite-profil-free/edite-p
 import { NavbarFreeComponent } from './freelancer/navbar-free/navbar-free.component';
 import { SidebarFreeComponent } from './freelancer/sidebar-free/sidebar-free.component';
 import { ProjectListComponent } from './freelancer/project-list/project-list.component';
+import { DetailsProjectComponent } from './freelancer/details-project/details-project.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ProjectListComponent } from './freelancer/project-list/project-list.com
     EditeProfilFreeComponent,
     NavbarFreeComponent,
     SidebarFreeComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    DetailsProjectComponent
   ],
   imports: [
     BrowserModule,

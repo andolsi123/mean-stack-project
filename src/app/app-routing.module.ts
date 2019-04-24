@@ -14,6 +14,7 @@ import { FreelancerComponent } from './freelancer/freelancer.component';
 import { DashboardFreeComponent } from './freelancer/dashboard-free/dashboard-free.component';
 import { EditeProfilFreeComponent } from './freelancer/edite-profil-free/edite-profil-free.component';
 import { ProjectListComponent } from './freelancer/project-list/project-list.component';
+import { DetailsProjectComponent } from './freelancer/details-project/details-project.component';
 
 const routes: Routes = [
   {
@@ -57,7 +58,7 @@ const routes: Routes = [
         {
           path: 'about-us',
           component: AboutUsComponent
-          }
+        }
     ]
   } ,
   {
@@ -79,6 +80,10 @@ const routes: Routes = [
         {
           path: 'project-list',
           component: ProjectListComponent
+        },
+        {
+          path: ':id',
+          component: DetailsProjectComponent
         }
     ]
   }
