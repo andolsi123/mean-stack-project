@@ -14,6 +14,7 @@ import { FreelancerComponent } from './freelancer/freelancer.component';
 import { DashboardFreeComponent } from './freelancer/dashboard-free/dashboard-free.component';
 import { EditeProfilFreeComponent } from './freelancer/edite-profil-free/edite-profil-free.component';
 import { ProjectListComponent } from './freelancer/project-list/project-list.component';
+import { ProfilComponent } from './company/profil/profil.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
        {
         path: 'edite-profil',
         component: EditeProfilComponent
+        },
+        {
+          path: 'profil',
+          component: ProfilComponent
         }
     ]
   },

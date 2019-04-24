@@ -8,3 +8,6 @@
     color: black;
     text-align: center !important;
 }
+:-ms-input-placeholder{
+    color:white;
+}

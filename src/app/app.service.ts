@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-//import jwt_decode  from 'jwt-decode';
 import * as jwt_decode from "jwt-decode";
 
 @Injectable({
@@ -13,7 +12,7 @@ export class AppService {
 
   connectedUser: any;
   constructor(private http: HttpClient) {
-       this.connectedUser = this.getDecodedToken();
+    this.connectedUser = this.getDecodedToken();
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -29,29 +28,27 @@ export class AppService {
     return throwError('Something bad happened; please try again later.');
   }
 
-  postAddProject(body: any): Observable <any> {
+  postAddProject(body: any): Observable<any> {
     return this.http.post(`http://localhost:3000/projects/addProject`, body).pipe(catchError(this.handleError));
   }
 
-  postUpdateProject(id: any, body: any): Observable <any> {
+  postUpdateProject(id: any, body: any): Observable<any> {
     return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body).pipe(catchError(this.handleError));
   }
 
-  getAllProjects(): Observable <any> {
+  getAllProjects(): Observable<any> {
     return this.http.get('http://localhost:3000/projects/allProjects').pipe(catchError(this.handleError));
   }
 
-  getOneProject(id: any): Observable <any> {
+  getOneProject(id: any): Observable<any> {
     return this.http.get(`http://localhost:3000/projects/oneProject/${id}`).pipe(catchError(this.handleError));
   }
 
   postCompany(body) {
-    body['role'] = 'company';
     return this.http.post('http://localhost:3000/companies/addCompany', body);
   }
 
   postFree(freelancer) {
-    freelancer['role'] = 'freelancer';
     return this.http.post('http://localhost:3000/freelancers/addfree', freelancer);
   }
 
@@ -59,33 +56,33 @@ export class AppService {
     return this.http.post('http://localhost:3000/users/login', body);
   }
 
-  getOneCompany(id){
+  getOneCompany(id) {
     let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get(`http://localhost:3000/companies/getCompany/${id}`,{ headers: header });
+    return this.http.get(`http://localhost:3000/companies/getCompany/${id}`, { headers: header });
   }
 
   UpdateCompanyProfile(id, body) {
     let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body ,{ headers: header });
+    return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body, { headers: header });
   }
-  
-  UpdateIlmage(file){
-   
+
+  UpdateIlmage(file) {
+
   }
 
 
-setToken(token: string): void {
+  setToken(token: string): void {
     localStorage.setItem('token', token);
-}
-
-getDecodedToken() {
-  if (localStorage.getItem('token')) {
-    var decoded = jwt_decode(localStorage.getItem('token'));
-    return decoded;
-  } else {
-    return null;
   }
-}
+
+  getDecodedToken() {
+    if (localStorage.getItem('token')) {
+      var decoded = jwt_decode(localStorage.getItem('token'));
+      return decoded;
+    } else {
+      return null;
+    }
+  }
 
 
 }
