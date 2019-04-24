@@ -3,6 +3,7 @@ import { AppService } from 'src/app/app.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl , Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
@@ -10,7 +11,7 @@ import { FormGroup, FormControl , Validators } from '@angular/forms';
 })
 export class LogInComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(private appService: AppService,private router: Router) {
+  constructor(public appService: AppService,private router: Router) {
   
   this.loginForm = new FormGroup({
     email: new FormControl(''),
@@ -24,7 +25,14 @@ export class LogInComponent implements OnInit {
 
   login(){
     this.appService.login(this.loginForm.value).subscribe((data3: any) => {
-      console.log(data3);
-    })
+      localStorage.setItem('token', data3.access_token);
+      this.appService.connectedUser = this.appService.getDecodedToken();   
+      if(this.appService.connectedUser.data.role == 'freelancer'){
+        this.router.navigate(['freelancer']);
+      }
+      if(this.appService.connectedUser.data.role =='company'){
+        this.router.navigate(['company']);
+      }
+     });
   }
 }

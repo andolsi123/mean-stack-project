@@ -4,6 +4,7 @@ var User = require('../models/user');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const multer = require("multer");
+var passport = require('passport');
 
 
 var storage = multer.diskStorage({
@@ -38,5 +39,25 @@ router.post('/addfree',upload.single('Image_Profil'), function (req, res) {
         })
     })
  });
+
+ router.get('/getCompany/:id',passport.authenticate('bearer', { session: false }), function (req, res) {
+  var id = req.params.id;
+  Freelancer.findById(id).populate('freelancers').exec((err, freelancers) => {
+      if (err) {
+          res.send(err);
+      }
+      res.send(freelancers);
+  });
+});
+
+router.post('/updateFree/:id',passport.authenticate('bearer', { session: false }), function (req, res) {
+  var id = req.params.id;
+  Freelancer.findByIdAndUpdate({_id : id},{$set: req.body}).exec((err, freelancers) =>{
+      if (err) {
+          res.send(err);
+      }
+      res.send(freelancers);
+  })
+});
 
 module.exports = router;

@@ -1,11 +1,11 @@
 <div class="logo">
-    <a class="simple-text">
-        <div class="logo-img">
-            <img src="/assets/img/new_logo.png"/>
+    <a >
+        <div >
+          <h2 class="text-center">{{ name }}</h2>
+          <img src="../../assets/img/logo.jpg" class="logo">
         </div>
-        Account
     </a>
-</div>
+</div><br>
 <div class="sidebar-wrapper">
   <div *ngIf="isMobileMenu()">
     <form class="navbar-form">
@@ -19,26 +19,26 @@
         </div>
       </span>
     </form>
-   
+
   </div>
     <ul class="nav">
     <li routerLinkActive="active" class="nav-item" (click)="showDash()" [ngClass]="status1 ? 'active' : ''" >
-            <a class="nav-link" routerLink="company/dashboard">
+            <a class="nav-link">
                 <i class="material-icons">dashboard</i>
                 <p>Dashboard</p>
             </a>
-    </li>   
+    </li>
     <li routerLinkActive="active" class="nav-item" (click)="showApllFree()" [ngClass]="status2 ? 'active' : ''">
-            <a class="nav-link" routerLink="company/AppliedFrelancers">
+            <a class="nav-link">
                 <i class="material-icons">library_books</i>
                 <p>Applied Freelancers</p>
             </a>
-    </li>   
+    </li>
      <li routerLinkActive="active" class="nav-item" (click)="showAdd()" [ngClass]="status3 ? 'active' : ''">
-            <a class="nav-link" routerLink="company/addProject">
+            <a class="nav-link">
                 <i class="material-icons">content_paste</i>
                 <p>Add a new project</p>
             </a>
-    </li>    
+    </li>
     </ul>
 </div>
