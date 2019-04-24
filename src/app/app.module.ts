@@ -30,6 +30,7 @@ import { NavbarFreeComponent } from './freelancer/navbar-free/navbar-free.compon
 import { SidebarFreeComponent } from './freelancer/sidebar-free/sidebar-free.component';
 import { ProjectListComponent } from './freelancer/project-list/project-list.component';
 import { DetailsProjectComponent } from './freelancer/details-project/details-project.component';
+import { ProfilComponent } from './company/profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { DetailsProjectComponent } from './freelancer/details-project/details-pr
     NavbarFreeComponent,
     SidebarFreeComponent,
     ProjectListComponent,
-    DetailsProjectComponent
+    DetailsProjectComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,

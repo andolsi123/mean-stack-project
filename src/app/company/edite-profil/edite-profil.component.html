@@ -56,7 +56,8 @@
               <textarea type="text" class="form-control" formControlName="DescriptionCompany"></textarea>
             </div>
           </div>
-          <button type="button" (click)="EditCompany()" class="btn btn-primary">Save</button>
+          <button type="button" (click)="EditCompany()" style="margin-left:30%;width:19%" class="btn btn-primary">Save</button>
+          <button type="button" [routerLink]="['/company/dashboard']" style="width:19%"class="btn btn-primary" aria-label="Close">Cancel</button>
         </form>
       </div>
     </div>

@@ -1,0 +1,24 @@
+<div class="modal fade" id="profil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="card" style="width:400px;margin-left: 9%;border: none;">
+        <div class="modal-body text-center">
+          <i><img src="http://localhost:3000/user/image/{{logo}}" class="logo" width="100"
+            alt="Cinque Terre" ></i>
+          <div class="card-body">
+            <h2 class="card-title">{{ nameCompany }}</h2>
+            <p class="card-text"><strong>Phone Number : </strong>{{ phoneNumber }}</p>
+            <!-- <p class="card-text"><strong>Found year : </strong> {{ foundyear }}</p> -->
+            <p class="card-text"><strong>Address : </strong>{{ address }}</p>
+            <p class="card-text"><strong>Email : </strong>{{ email }}</p>
+            <p class="card-text"><strong>Facebook : </strong>{{ facebook }}</p>
+            <p class="card-text"><strong>Web Site : </strong>{{ webSite }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

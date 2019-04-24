@@ -12,7 +12,7 @@ export class AppService {
 
   connectedUser: any;
   constructor(private http: HttpClient) {
-       this.connectedUser = this.getDecodedToken();
+    this.connectedUser = this.getDecodedToken();
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -28,19 +28,19 @@ export class AppService {
     return throwError('Something bad happened; please try again later.');
   }
 
-  postAddProject(body: any): Observable <any> {
+  postAddProject(body: any): Observable<any> {
     return this.http.post(`http://localhost:3000/projects/addProject`, body).pipe(catchError(this.handleError));
   }
 
-  postUpdateProject(id: any, body: any): Observable <any> {
+  postUpdateProject(id: any, body: any): Observable<any> {
     return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body).pipe(catchError(this.handleError));
   }
 
-  getAllProjects(): Observable <any> {
+  getAllProjects(): Observable<any> {
     return this.http.get('http://localhost:3000/projects/allProjects').pipe(catchError(this.handleError));
   }
 
-  getOneProject(id: any): Observable <any> {
+  getOneProject(id: any): Observable<any> {
     return this.http.get(`http://localhost:3000/projects/oneProject/${id}`).pipe(catchError(this.handleError));
   }
 
@@ -69,6 +69,8 @@ export class AppService {
   setToken(token: string): void {
   localStorage.setItem('token', token);
   }
+
+  UpdateIlmage(file) { }
 
   getDecodedToken() {
     if (localStorage.getItem('token')) {

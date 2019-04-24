@@ -125,4 +125,8 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['/company/edite-profil']);
       }
 
+    showProfil(){
+        this.router.navigate(['/company/profil']);
+    }
+
 }
