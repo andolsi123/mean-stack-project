@@ -66,15 +66,6 @@ export class AppService {
     return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body, { headers: header });
   }
 
-<<<<<<< HEAD
-  UpdateIlmage(file) {
-=======
-  UpdateIlmage(file){
->>>>>>> 0041a3634244fc3232a08a95ceea7a612f1c7145
-
-  }
-
-
   setToken(token: string): void {
     localStorage.setItem('token', token);
   }
