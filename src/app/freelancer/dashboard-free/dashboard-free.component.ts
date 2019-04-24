@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-dashboard-free',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-free.component.css']
 })
 export class DashboardFreeComponent implements OnInit {
+  allProjects: any;
 
-  constructor() { }
+  constructor(private http: AppService) { }
 
   ngOnInit() {
+    this.http.getAllProjects().subscribe(data => {
+      this.allProjects = data;
+    });
   }
 
 }
