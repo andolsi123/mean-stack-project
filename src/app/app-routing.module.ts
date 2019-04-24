@@ -38,6 +38,10 @@ const routes: Routes = [
        path: 'detail-project/:id',
        component: DetailProjectComponent
      },
+     {
+       path: 'edit-project',
+       component: EditeProfilComponent
+     }
     ]
   },
   {
