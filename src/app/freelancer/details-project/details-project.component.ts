@@ -18,6 +18,7 @@ export class DetailsProjectComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.http.getOneProject(params.id).subscribe(data => {
         this.project = data;
+        console.log(this.project);
       });
     });
   }

@@ -70,7 +70,6 @@ export class AppService {
   localStorage.setItem('token', token);
   }
 
-  UpdateIlmage(file) { }
 
   getDecodedToken() {
     if (localStorage.getItem('token')) {

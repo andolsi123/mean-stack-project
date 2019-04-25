@@ -66,6 +66,8 @@ export class AddProjectComponent implements OnInit {
       statut: 'not started',
       duration: this.addProject.get('duration').value
     };
-    this.http.postAddProject(data).subscribe();
+    this.http.postAddProject(data).subscribe(res => {
+      console.log(res);
+    });
   }
 }
