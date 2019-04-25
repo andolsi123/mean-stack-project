@@ -1,3 +1,26 @@
-<div>
-dashboard!
-</div>
+<div class="container">
+  <div class="row b">
+    <div class="input-group no-border col-6 ">
+      <input type="search" value="" class="form-control" [(ngModel)]="q" placeholder="  Search...">
+    </div>
+  </div>
+
+      <div class="row bg">
+
+        <div *ngFor="let p of projects | filterProjects:q">
+
+          {{p.titre_project}}<br>
+          {{p.statut}}
+         <a class="btn" (click)="detail(p._id)"> <i class="fa fa-info-circle"></i></a>
+         <a class="btn" (click)="update()"> <i class="fas fa-pen"></i></a>
+         <a class="btn" (click)="detlet(p._id)"> <i class="fas fa-trash-alt"></i></a>
+
+        </div>
+      </div>
+      </div>
+
+
+
+
+
+

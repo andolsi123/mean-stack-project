@@ -16,10 +16,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LogInComponent } from './landing-page/log-in/log-in.component';
 import { NavbarLandingComponent } from './landing-page/navbar-landing/navbar-landing.component';
+import { DetailProjectComponent } from './company/detail-project/detail-project.component';
 import { FooterLandingComponent } from './landing-page/footer-landing/footer-landing.component';
 import { AboutUsComponent } from './landing-page/about-us/about-us.component';
 import { SignUpCompanyComponent } from './landing-page/sign-up-company/sign-up-company.component';
 import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sign-up-freelancer.component';
+import { FilterProjectsPipe } from './filter-projects.pipe';
+
 import { MatChipsModule} from '@angular/material/chips';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { EditeProfilComponent } from './company/edite-profil/edite-profil.component';
@@ -44,10 +47,12 @@ import { ProfilComponent } from './company/profil/profil.component';
     LandingPageComponent,
     LogInComponent,
     NavbarLandingComponent,
+    DetailProjectComponent,
     FooterLandingComponent,
     AboutUsComponent,
     SignUpCompanyComponent,
     SignUpFreelancerComponent,
+    FilterProjectsPipe
     EditeProfilComponent,
     FreelancerComponent,
     DashboardFreeComponent,

@@ -28,20 +28,31 @@ export class AppService {
     return throwError('Something bad happened; please try again later.');
   }
 
-  postAddProject(body: any): Observable<any> {
-    return this.http.post(`http://localhost:3000/projects/addProject`, body).pipe(catchError(this.handleError));
+  postAddProject(body: any, id: any): Observable<any> {
+    return this.http.post(`http://localhost:3000/projects/addProject/${id}`, body).pipe(catchError(this.handleError));
   }
 
-  postUpdateProject(id: any, body: any): Observable<any> {
-    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body).pipe(catchError(this.handleError));
+  postUpdateProject(id: any, body: any) {
+    return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body);
+  }
+
+  postAppliedFreelancers(projectId, freelancerId) {
+    return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}`, {});
+  }
+
+  postAcceptedFreelancer(projectId, freelancerId) {
+    return this.http.post(`http://localhost:3000/projects/acceptedFreelancer/${projectId}/${freelancerId}`, {});
   }
 
   getAllProjects(): Observable<any> {
     return this.http.get('http://localhost:3000/projects/allProjects').pipe(catchError(this.handleError));
   }
+  postDeleteProject(id: any) {
+    return this.http.post(`http://localhost:3000/projects/DeleteProject/${id}`, null);
+   }
 
-  getOneProject(id: any): Observable<any> {
-    return this.http.get(`http://localhost:3000/projects/oneProject/${id}`).pipe(catchError(this.handleError));
+  getOneProject(id: any) {
+    return this.http.get(`http://localhost:3000/projects/oneProject/${id}`);
   }
 
   postCompany(body) {
@@ -57,23 +68,24 @@ export class AppService {
   }
 
   getOneCompany(id) {
-    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get(`http://localhost:3000/companies/getCompany/${id}`, { headers: header });
   }
 
   UpdateCompanyProfile(id, body) {
-    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body , { headers: header });
+    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body, { headers: header });
   }
+
+
 
   setToken(token: string): void {
-  localStorage.setItem('token', token);
+    localStorage.setItem('token', token);
   }
-
 
   getDecodedToken() {
     if (localStorage.getItem('token')) {
-      const decoded = jwt_decode(localStorage.getItem('token'));
+      var decoded = jwt_decode(localStorage.getItem('token'));
       return decoded;
     } else {
       return null;
@@ -82,4 +94,3 @@ export class AppService {
 
 
 }
-

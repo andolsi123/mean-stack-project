@@ -15,7 +15,7 @@ export interface Skills {
   styleUrls: ['./add-project.component.css']
 })
 export class AddProjectComponent implements OnInit {
-
+  connected: any;
   addProject: FormGroup;
   visible = true;
   selectable = true;
@@ -25,6 +25,7 @@ export class AddProjectComponent implements OnInit {
   skills: Skills[] = [];
 
   constructor(private http: AppService) {
+    this.connected = this.http.connectedUser.data.company;
     this.addProject = new FormGroup({
       projectName: new FormControl('', Validators.required),
       minOffer: new FormControl('', [Validators.required, Validators.min(1)]),
@@ -35,7 +36,7 @@ export class AddProjectComponent implements OnInit {
     });
   }
 
-  ngOnInit() {  }
+  ngOnInit() { }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -64,10 +65,12 @@ export class AddProjectComponent implements OnInit {
       min_offer: this.addProject.get('minOffer').value,
       max_offer: this.addProject.get('maxOffer').value,
       statut: 'not started',
+      company: '',
+      accepted_freelancer: '',
       duration: this.addProject.get('duration').value
     };
-    this.http.postAddProject(data).subscribe(res => {
-      console.log(res);
+    this.http.postAddProject(data, this.connected).subscribe(data => {
+      console.log(data);
     });
   }
 }
