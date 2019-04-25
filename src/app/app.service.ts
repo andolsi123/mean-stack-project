@@ -28,12 +28,20 @@ export class AppService {
     return throwError('Something bad happened; please try again later.');
   }
 
-  postAddProject(body: any): Observable<any> {
-    return this.http.post(`http://localhost:3000/projects/addProject`, body).pipe(catchError(this.handleError));
+  postAddProject(body: any, id: any): Observable<any> {
+    return this.http.post(`http://localhost:3000/projects/addProject/${id}`, body).pipe(catchError(this.handleError));
   }
 
   postUpdateProject(id: any, body: any): Observable<any> {
     return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body).pipe(catchError(this.handleError));
+  }
+
+  postAppliedFreelancers(projectId, freelancerId) {
+    return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}`, {});
+  }
+
+  postAcceptedFreelancer(projectId, freelancerId) {
+    return this.http.post(`http://localhost:3000/projects/acceptedFreelancer/${projectId}/${freelancerId}`, {});
   }
 
   getAllProjects(): Observable<any> {
@@ -83,4 +91,3 @@ export class AppService {
 
 
 }
-
