@@ -8,11 +8,14 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  id_CompanyConnect: any;
 projects: any;
 q: any;
 
   constructor(private appService: AppService, private route: Router) {
     this.projects = [];
+    this.id_CompanyConnect = this.appService.connectedUser.date.company;
+    console.log(this.id_CompanyConnect);
    }
 
   ngOnInit() {

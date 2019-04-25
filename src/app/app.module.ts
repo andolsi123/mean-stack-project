@@ -52,7 +52,7 @@ import { ProfilComponent } from './company/profil/profil.component';
     AboutUsComponent,
     SignUpCompanyComponent,
     SignUpFreelancerComponent,
-    FilterProjectsPipe
+    FilterProjectsPipe,
     EditeProfilComponent,
     FreelancerComponent,
     DashboardFreeComponent,

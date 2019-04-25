@@ -37,7 +37,7 @@ export class AppService {
   }
 
   getAllProjects() {
-    return this.http.get(`http://localhost:3000/projects/allProjects`);
+    return this.http.get(`http://localhost:3000/projects/allProjects/5cc194cd183ee5378cda89e4`);
   }
   postDeleteProject(id: any) {
     return this.http.post(`http://localhost:3000/projects/DeleteProject/${id}`, null);
