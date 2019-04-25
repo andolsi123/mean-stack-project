@@ -32,7 +32,7 @@ router.get('/allProjects/:id', async function(req, res) {
 })
 
 router.get('/oneProject/:projectId', async function(req, res) {
-  await Project.findById(req.params.projectId).populate('company').populate('accepted_freelancer').populate('pplied_freelancers').exec(function(err, project){
+  await Project.findById(req.params.projectId).populate('company').populate('accepted_freelancer').populate('pplied_freelancers').exec(function(err, project) {
     if (err) {
       res.send(err);
     }
