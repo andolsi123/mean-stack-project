@@ -68,4 +68,14 @@ router.get('/oneProject/:projectId', async function(req, res) {
   })
 })
 
+router.post('/DeleteProject/:projectId', async function(req, res){
+  await Project.findByIdAndRemove({_id: req.params.projectId}, req.body, function(err, project){
+    if(err){
+      res.send(err);
+    }
+    res.send(project);
+  })
+})
+
+
 module.exports = router;

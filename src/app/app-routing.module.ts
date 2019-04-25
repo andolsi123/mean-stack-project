@@ -6,6 +6,7 @@ import { AppliedFreeLancerComponent } from './company/applied-free-lancer/applie
 import { AddProjectComponent } from './company/add-project/add-project.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LogInComponent } from './landing-page/log-in/log-in.component';
+import { DetailProjectComponent } from './company/detail-project/detail-project.component';
 import { AboutUsComponent } from './landing-page/about-us/about-us.component';
 import { SignUpCompanyComponent } from './landing-page/sign-up-company/sign-up-company.component';
 import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sign-up-freelancer.component';
@@ -35,7 +36,14 @@ const routes: Routes = [
        component: AddProjectComponent
        },
        {
-        path: 'edite-profil',
+       path: 'detail-project/:id',
+       component: DetailProjectComponent
+     },
+     {
+       path: 'edit-project',
+       component: EditeProfilComponent
+     },
+        {path: 'edite-profil',
         component: EditeProfilComponent
         },
         {
