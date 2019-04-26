@@ -9,6 +9,8 @@ import { AppService } from '../../app.service';
 export class DashboardFreeComponent implements OnInit {
   allProjects: any;
 
+  
+
   constructor(private http: AppService) { }
 
   ngOnInit() {
