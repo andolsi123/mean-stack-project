@@ -41,7 +41,7 @@ router.post('/addfree', upload.single('Image_Profil'), function (req, res) {
  });
 
 router.post('/addProjectApplied/:freelancerId/:projectId', async function(req, res) {
-  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$push: {projects: {project: req.params.projectId} }}, function(err, freelancer) {
+  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$push: {projects: {project: req.params.projectId, statut: 'Pending'} }}, function(err, freelancer) {
     if (err) {
       res.send(err);
     }
