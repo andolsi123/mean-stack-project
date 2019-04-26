@@ -18,6 +18,7 @@ import { ProjectListComponent } from './freelancer/project-list/project-list.com
 import { DetailsProjectComponent } from './freelancer/details-project/details-project.component';
 import { ProfilComponent } from './company/profil/profil.component';
 import { AuthguardGuard } from './authguard.guard';
+import { EditProjectComponent } from './company/edit-project/edit-project.component';
 
 const routes: Routes = [
   {
@@ -50,8 +51,12 @@ const routes: Routes = [
         {
           path: 'profil',
           component: ProfilComponent
-        }
-    ],
+        },
+      {
+        path: 'edit-project/:id',
+        component: EditProjectComponent
+      }
+    ]
   },
   {
     path: 'landing-page',

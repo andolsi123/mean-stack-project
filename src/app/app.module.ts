@@ -22,7 +22,6 @@ import { AboutUsComponent } from './landing-page/about-us/about-us.component';
 import { SignUpCompanyComponent } from './landing-page/sign-up-company/sign-up-company.component';
 import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sign-up-freelancer.component';
 import { FilterProjectsPipe } from './filter-projects.pipe';
-
 import { MatChipsModule} from '@angular/material/chips';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { EditeProfilComponent } from './company/edite-profil/edite-profil.component';
@@ -34,6 +33,7 @@ import { SidebarFreeComponent } from './freelancer/sidebar-free/sidebar-free.com
 import { ProjectListComponent } from './freelancer/project-list/project-list.component';
 import { DetailsProjectComponent } from './freelancer/details-project/details-project.component';
 import { ProfilComponent } from './company/profil/profil.component';
+import { EditProjectComponent } from './company/edit-project/edit-project.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,8 @@ import { ProfilComponent } from './company/profil/profil.component';
     SidebarFreeComponent,
     ProjectListComponent,
     DetailsProjectComponent,
-    ProfilComponent
+    ProfilComponent,
+    EditProjectComponent
   ],
   imports: [
     BrowserModule,

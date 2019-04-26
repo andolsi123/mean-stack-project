@@ -65,10 +65,10 @@ export class AddProjectComponent implements OnInit {
       min_offer: this.addProject.get('minOffer').value,
       max_offer: this.addProject.get('maxOffer').value,
       statut: 'not started',
-      company: '',
+      company: this.connected,
       duration: this.addProject.get('duration').value
     };
-    this.http.postAddProject(data, this.connected).subscribe(data => {
+    this.http.postAddProject(data).subscribe(data => {
       console.log(data);
     });
   }

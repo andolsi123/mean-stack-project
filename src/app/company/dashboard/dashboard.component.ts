@@ -16,13 +16,14 @@ q: any;
    }
 
   ngOnInit() {
-    // to do:  add id user here
     this.appService.getAllProjects().subscribe((data: any) => this.projects = data);
   }
   detlet(id) {
     this.appService.postDeleteProject(id).subscribe((data)  => this.projects = data);
   }
-  update() {}
+  update(id) {
+    this.route.navigate(['/company/edit-project', id]);
+  }
   detail(id) {
     this.route.navigate(['/company/detail-project', id]);
   }
