@@ -11,7 +11,9 @@ var projectSchema = new mongoose.Schema({
   accepted_freelancer: {type: mongoose.Schema.Types.ObjectId, ref: 'freelancer'},
   statut: {type:String, enum:['started','finished','not started'], default:'not started'},
   duration: Number,
-  like: {type: Number, default: 0}
+  like: {type: Number, default: 0},
+  freelancers_likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'freelancer'}],
+  comments : [{comment: String, commenter: String}]
 });
 
 module.exports = mongoose.model('projects', projectSchema);

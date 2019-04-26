@@ -18,8 +18,7 @@ var FreeLancerSchema = new mongoose.Schema({
         project: {type: mongoose.Schema.Types.ObjectId, ref: 'projects'},
         statut: {type: String, enum :['Accepted, Pending , Refused'], default: 'Pending'}
       }
-    ],
-    liked_projects: [{type: mongoose.Schema.Types.ObjectId, ref: 'project'}]
+    ]
 });
 
 

@@ -2,6 +2,7 @@ var express = require('express');
 var Project = require('../models/project');
 var Company =  require('../models/company');
 var Freelancer = require('../models/freeLancer');
+//var ObjectID = require('mongoose').ObjectID;
 var router = express.Router();
 var objectId = require('mongoose').objectId;
 
@@ -42,6 +43,19 @@ router.post('/updateProject/:projectId', async function(req, res) {
   })
 })
 
+router.get('/allProjectsCompany/:id', async function(req, res){
+    var id = req.params.id;
+    console.log(id);
+  await Project.find({company:id}).exec(function(err, projects){
+    if(err){
+      res.send(err);
+    }
+    console.log(projects)
+    res.send(projects);
+
+  })
+})
+
 router.get('/allProjects', async function(req, res) {
   await Project.find().populate('company').populate('accepted_freelancer').populate('applied_freelancers').exec(function(err, projects) {
     if (err) {
@@ -69,25 +83,54 @@ router.post('/DeleteProject/:projectId', async function(req, res){
   })
 })
 
-router.post('/addRemoveLike/:projectId/:freelancerId', async function(req, res) {
-  await Project.findById(req.params.projectId, function(err, project) {
+router.post('/addRemoveLike/:projectId/:freelancerId', function(req, res) {
+   Project.findById(req.params.projectId,  function(err, project) {
     if (err) {
       res.send(err);
     }
-    Freelancer.findOne({liked_projects: req.params.projectId}, function(err, lk) {
-      if (err) {
-        res.send(err);
+    let verif = false;
+    for (freelancer of project.freelancers_likes) {
+      if (freelancer == req.params.freelancerId) {
+        verif = true;
+
       }
-      if (!lk) {
-        lk.update({_id: req.params.freelancerId}, {$push: {liked_projects: req.params.projectId}}, done);
-        project.like =+ 1;
-        project.save();
-      }
-      project.like =- 1;
-      project.save();
-      lk.update({_id: req.params.freelancerId}, {$pull: {liked_projects: req.params.projectId}}, done);
-    })
-    res.send({like: project.like});
+    }
+    if(verif === true) {
+      project.like -= 1;
+      Project.findByIdAndUpdate({_id: req.params.projectId}, {$pull: {freelancers_likes: req.params.freelancerId}}, function(errr, upd) {
+        if (errr) {
+          res.send(errr);
+        }
+        res.send(upd);
+      });
+    } else {
+      project.like += 1;
+      Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {freelancers_likes: req.params.freelancerId}}, function(errrr, dlt) {
+        if (errrr) {
+          res.send(errrr);
+        }
+        res.send(dlt);
+      })
+    }
+  })
+})
+
+router.post('/addComment/:projectId', function(req, res) {
+  Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {comments: req.body}}, function(err, comment) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(comment);
+    console.log(req.body);
+  })
+})
+
+router.post('/deleteComment/:projectId/:commentId', function(req, res) {
+  Project.findByIdAndUpdate({_id: req.params.projectId}, {$pull: {comments: {_id: req.params.commentId}}}, function(err, comment) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(comment);
   })
 })
 
