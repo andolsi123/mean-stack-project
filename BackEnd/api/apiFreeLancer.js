@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const multer = require("multer");
 var passport = require('passport');
+var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
+var ObjectID = mongoose.Types.ObjectId;
 
 
 var storage = multer.diskStorage({
@@ -19,7 +22,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-router.post('/addfree',upload.single('Image_Profil'), function (req, res) {
+router.post('/addfree', upload.single('Image_Profil'), function (req, res) {
     motpass = req.body.password;
     var hash = bcrypt.hashSync(motpass, saltRounds);
     req.body.password = hash;
@@ -29,7 +32,7 @@ router.post('/addfree',upload.single('Image_Profil'), function (req, res) {
         if (err) {
             res.send(err);
         }
-       var user = new User(req.body);
+        var user = new User(req.body);
         user.freelancer = freelancer._id;
         user.save(function (err, user) {
             if (err) {
@@ -40,5 +43,23 @@ router.post('/addfree',upload.single('Image_Profil'), function (req, res) {
     })
  });
 
+router.post('/addProjectApplied/:freelancerId/:projectId', async function(req, res) {
+  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$push: {projects: {project: req.params.projectId, statut: 'Pending'} }}, function(err, freelancer) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(freelancer);
+  })
+})
+
+ router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+  var id = ObjectID(req.params.id);
+  Freelancer.findById(id).exec((err, freelancer) => {
+      if (err) {
+          res.send(err);
+      }
+      res.send(freelancer);
+  });
+});
 
 module.exports = router;

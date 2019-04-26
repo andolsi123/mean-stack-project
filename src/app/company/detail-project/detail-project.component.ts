@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute  } from '@angular/router'
+import { ActivatedRoute  } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 
 @Component({
@@ -14,13 +14,10 @@ export class DetailProjectComponent implements OnInit {
 
 
   constructor(private appService: AppService, private route: ActivatedRoute ) {
-       this.res = this.route.snapshot.params.id
-
+    this.res = this.route.snapshot.params.id;
    }
 
   ngOnInit() {
-   console.log('tttt');
-   console.log(this.res);
     this.appService.getOneProject(this.res).subscribe((data) => console.log(this.projects = data));
   }
 

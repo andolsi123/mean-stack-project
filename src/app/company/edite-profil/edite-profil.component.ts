@@ -18,7 +18,7 @@ export class EditeProfilComponent implements OnInit {
 
   constructor(public appService: AppService) {
     this.id_company = this.appService.connectedUser.data.company;
-      this.editProfileCompany = new FormGroup({
+    this.editProfileCompany = new FormGroup({
         nameCompany: new FormControl(''),
         foundyear: new FormControl(''),
         address: new FormControl(''),
@@ -85,8 +85,6 @@ export class EditeProfilComponent implements OnInit {
     dataForm.append('webSite', this.editProfileCompany.value.webSite);
     dataForm.append('email', this.editProfileCompany.value.email);
    // dataForm.append('logo', this.selectedImage, this.selectedImage.name);
-
-     
 
     this.appService.UpdateCompanyProfile(this.id_company, dataForm).subscribe((data1: any) => {
       localStorage.setItem('token', data1.access_token);
