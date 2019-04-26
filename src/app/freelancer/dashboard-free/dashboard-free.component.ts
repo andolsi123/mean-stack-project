@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../app.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-free',
@@ -8,15 +9,19 @@ import { AppService } from '../../app.service';
 })
 export class DashboardFreeComponent implements OnInit {
   allProjects: any;
-
   
 
-  constructor(private http: AppService) { }
+  constructor(private http: AppService,private router: Router, private route: ActivatedRoute ) {}
 
   ngOnInit() {
     this.http.getAllProjects().subscribe(data => {
       this.allProjects = data;
+      console.log(data);
     });
+  }
+
+  pathlogin() {
+    this.router.navigate(['dashboard-free'],{relativeTo: this.route});
   }
 
 }

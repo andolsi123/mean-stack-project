@@ -17,11 +17,12 @@ import { EditeProfilFreeComponent } from './freelancer/edite-profil-free/edite-p
 import { ProjectListComponent } from './freelancer/project-list/project-list.component';
 import { DetailsProjectComponent } from './freelancer/details-project/details-project.component';
 import { ProfilComponent } from './company/profil/profil.component';
+import { AuthguardGuard } from './authguard.guard';
 
 const routes: Routes = [
   {
     path: 'company',
-    component: CompanyComponent,
+    component: CompanyComponent,canActivate: [AuthguardGuard],
     children: [
       {
         path: 'dashboard',
@@ -50,7 +51,7 @@ const routes: Routes = [
           path: 'profil',
           component: ProfilComponent
         }
-    ]
+    ],
   },
   {
     path: 'landing-page',
@@ -76,7 +77,7 @@ const routes: Routes = [
   } ,
   {
     path: 'freelancer',
-    component: FreelancerComponent,
+    component: FreelancerComponent,canActivate: [AuthguardGuard],
     children: [
       {
         path: 'dashboard-free',

@@ -33,7 +33,7 @@ router.post('acceptedFreelancer/:projectId/:freelancerId', async function(req, r
   var project = new Project();
   var freelancer = new Freelancer();
   freelancer['_id'] = req.params.freelancerId;
-  await project.findByIdAndUpdate({_id: req.params.projectId}, {accepted_freelancer: freelancer}, function(err, project) {
+  await project.findByIdAndUpdate({_id: req.params.projectId}, {$set: {accepted_freelancer: freelancer}}, function(err, project) {
     if (err) {
       res.send(err);
     }

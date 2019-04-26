@@ -77,7 +77,16 @@ export class AppService {
     return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body, { headers: header });
   }
 
+  applyProject(idF, idP) {
+    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.post(`http://localhost:3000/projects/acceptedFreelancer/${idP},${idF}`, { headers: header });
+  }
 
+
+  getOneFreelancer(id) {
+    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.get(`http://localhost:3000/freelancers/getFreelancer/${id}`, { headers: header });
+  }
 
   setToken(token: string): void {
     localStorage.setItem('token', token);

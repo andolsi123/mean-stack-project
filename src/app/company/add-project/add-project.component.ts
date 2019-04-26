@@ -66,7 +66,6 @@ export class AddProjectComponent implements OnInit {
       max_offer: this.addProject.get('maxOffer').value,
       statut: 'not started',
       company: '',
-      accepted_freelancer: '',
       duration: this.addProject.get('duration').value
     };
     this.http.postAddProject(data, this.connected).subscribe(data => {

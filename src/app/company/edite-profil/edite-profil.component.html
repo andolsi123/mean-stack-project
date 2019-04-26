@@ -49,15 +49,18 @@
             <div class="form-group col-md-6">
               <label for="logo">Logo</label>
               <input hidden #uploadImage type="file" name="logo" (change)="selectedFile($event);readURL($event);">
-              <img (click)="uploadImage.click()" src="http://localhost:3000/user/image/{{company.logo}}" style="width: 90%;height: 400;">
+              <img (click)="uploadImage.click()" src="http://localhost:3000/users/image/{{company.logo}}"
+                style="width: 90%;height: 400;">
             </div>
             <div class="form-group col-md-6">
               <label for="Description-Company" class="col-form-label">Description Company</label>
               <textarea type="text" class="form-control" formControlName="DescriptionCompany"></textarea>
             </div>
           </div>
-          <button type="button" (click)="EditCompany()" style="margin-left:30%;width:19%" class="btn btn-primary">Save</button>
-          <button type="button" [routerLink]="['/company/dashboard']" style="width:19%"class="btn btn-primary" aria-label="Close">Cancel</button>
+          <button type="button" (click)="EditCompany()" style="margin-left:30%;width:19%"
+            class="btn btn-primary">Save</button>
+          <button type="button" [routerLink]="['/company/dashboard']" style="width:19%" class="btn btn-primary"
+            aria-label="Close">Cancel</button>
         </form>
       </div>
     </div>
