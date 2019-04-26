@@ -28,8 +28,8 @@ export class AppService {
     return throwError('Something bad happened; please try again later.');
   }
 
-  postAddProject(body: any, id: any): Observable<any> {
-    return this.http.post(`http://localhost:3000/projects/addProject/${id}`, body).pipe(catchError(this.handleError));
+  postAddProject(body: any): Observable<any> {
+    return this.http.post(`http://localhost:3000/projects/addProject`, body).pipe(catchError(this.handleError));
   }
 
   postUpdateProject(id: any, body: any) {
@@ -38,6 +38,10 @@ export class AppService {
 
   postAppliedFreelancers(projectId, freelancerId) {
     return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}`, {});
+  }
+
+  postAffectedProject(freelancerId, projectId) {
+    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`, {});
   }
 
   postAcceptedFreelancer(projectId, freelancerId) {
@@ -77,8 +81,6 @@ export class AppService {
     return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body, { headers: header });
   }
 
-
-
   setToken(token: string): void {
     localStorage.setItem('token', token);
   }
@@ -91,6 +93,5 @@ export class AppService {
       return null;
     }
   }
-
 
 }

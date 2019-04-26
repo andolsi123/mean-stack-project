@@ -3,6 +3,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
 import {FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
 import { AppService } from '../../app.service';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Skills {
   skill: string;
@@ -13,6 +14,7 @@ export interface Skills {
   templateUrl: './edit-project.component.html',
   styleUrls: ['./edit-project.component.css']
 })
+
 export class EditProjectComponent implements OnInit {
   id: any;
   addProject: FormGroup;
@@ -23,14 +25,17 @@ export class EditProjectComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   skills: Skills[] = [];
 
-  constructor(private http: AppService) {
-    this.addProject = new FormGroup({
-      projectName: new FormControl('', Validators.required),
-      minOffer: new FormControl('', [Validators.required, Validators.min(1)]),
-      maxOffer: new FormControl('', [Validators.required, Validators.min(1)]),
-      skillsArray: new FormControl('', Validators.required),
-      duration: new FormControl('', Validators.required),
-      description: new FormControl('description...', Validators.required)
+  constructor(private http: AppService, private route: ActivatedRoute) {
+    this.id = this.route.snapshot.params.id;
+    this.http.getOneProject(this.route.snapshot.params.id).subscribe((data: any) => {
+      this.addProject = new FormGroup({
+        projectName: new FormControl(data.titre_project, Validators.required),
+        minOffer: new FormControl(data.min_offer, Validators.required),
+        maxOffer: new FormControl(data.max_offer, Validators.required),
+        skillsArray: new FormControl('', Validators.required),
+        duration: new FormControl(data.duration, Validators.required),
+        description: new FormControl(data.description_project, Validators.required)
+      });
     });
   }
 
@@ -65,7 +70,9 @@ export class EditProjectComponent implements OnInit {
       statut: 'not started',
       duration: this.addProject.get('duration').value
     };
-    this.http.postUpdateProject(this.id, data).subscribe();
+    this.http.postUpdateProject(this.id, data).subscribe(data => {
+      console.log(data);
+    });
   }
 
 }

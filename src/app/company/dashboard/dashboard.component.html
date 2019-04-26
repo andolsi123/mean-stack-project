@@ -6,21 +6,12 @@
   </div>
 
       <div class="row bg">
-
         <div *ngFor="let p of projects | filterProjects:q">
-
           {{p.titre_project}}<br>
           {{p.statut}}
          <a class="btn" (click)="detail(p._id)"> <i class="fa fa-info-circle"></i></a>
-         <a class="btn" (click)="update()"> <i class="fas fa-pen"></i></a>
+         <a class="btn" (click)="update(p._id)"> <i class="fas fa-pen"></i></a>
          <a class="btn" (click)="detlet(p._id)"> <i class="fas fa-trash-alt"></i></a>
-
         </div>
       </div>
       </div>
-
-
-
-
-
-
