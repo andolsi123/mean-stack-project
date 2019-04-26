@@ -1,17 +1,22 @@
 <div class="container">
-  <div class="row b">
-    <div class="input-group no-border col-6 ">
+  <div class="row">
+    <div class="input-group no-border col-6 recherch">
       <input type="search" value="" class="form-control" [(ngModel)]="q" placeholder="  Search...">
     </div>
   </div>
 
-      <div class="row bg">
-        <div *ngFor="let p of projects | filterProjects:q">
-          {{p.titre_project}}<br>
-          {{p.statut}}
-         <a class="btn" (click)="detail(p._id)"> <i class="fa fa-info-circle"></i></a>
-         <a class="btn" (click)="update(p._id)"> <i class="fas fa-pen"></i></a>
-         <a class="btn" (click)="detlet(p._id)"> <i class="fas fa-trash-alt"></i></a>
-        </div>
-      </div>
-      </div>
+  <div class="row ">
+    <div *ngFor="let p of projects | filterProjects:q" class="card" style="width: 18rem;" >
+        <div class="card-body">
+            <h5 class="card-title">{{p.titre_project}}</h5>
+
+            <p class="card-text">{{p.statut}}</p>
+
+      <a class="btn btn-primary" (click)="detail(p._id)"> <i class="fa fa-info-circle" style="color:white"></i></a>
+      <a class="btn btn-primary" (click)="update(p._id)"> <i class="fas fa-pen" style="color:white"></i></a>
+      <a class="btn btn-primary" (click)="detlet(p._id)"> <i class="fas fa-trash-alt" style="color:white"></i></a>
+    </div>
+    </div>
+  </div>
+
+

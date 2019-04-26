@@ -19,10 +19,6 @@ export class NavbarLandingComponent implements OnInit {
     this.router.navigate(['log-in'],{relativeTo: this.route});
   }
 
-  pathsignupFree(){
-    this.router.navigate(['sign-up-freelancer'],{relativeTo: this.route});
-  }
-
   pathsignupCompany(){
     this.router.navigate(['sign-up-company'],{relativeTo: this.route});
   }

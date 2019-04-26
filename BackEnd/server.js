@@ -23,9 +23,7 @@ app.use('/companies',companyCrud);
 app.use('/freelancers',freelancerCrud);
 app.use('/users',userCrud);
 
-app.get('/user/image/:name', async (req, res) => {
-  res.sendFile('C:\\Users\\user16\\Desktop\\mean-stack-project-master\\BackEnd\\uploads\\'+ req.params.name)
-});
+
 
 
 app.listen(3000, function() {console.log('listening to 3000')});

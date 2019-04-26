@@ -2,6 +2,7 @@ var express = require('express');
 var Project = require('../models/project');
 var Company =  require('../models/company');
 var Freelancer = require('../models/freeLancer');
+//var ObjectID = require('mongoose').ObjectID;
 var router = express.Router();
 var objectId = require('mongoose').objectId;
 
@@ -39,6 +40,19 @@ router.post('/updateProject/:projectId', async function(req, res) {
       res.send(err);
     }
     res.send(project);
+  })
+})
+
+router.get('/allProjectsCompany/:id', async function(req, res){
+    var id = req.params.id;
+    console.log(id);
+  await Project.find({company:id}).exec(function(err, projects){
+    if(err){
+      res.send(err);
+    }
+    console.log(projects)
+    res.send(projects);
+
   })
 })
 

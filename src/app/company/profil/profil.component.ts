@@ -35,7 +35,6 @@ export class ProfilComponent implements OnInit {
       this.foundyear = this.company.foundyear;
       this.address = this.company.address;
       this.email = this.appService.connectedUser.data.email;
-      //this.password = this.company.password;
       this.facebook = this.company.facebook;
       this.webSite = this.company.webSite;
       this.phoneNumber = this.company.phoneNumber;

@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const multer = require("multer");
 var passport = require('passport');
+var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
+var ObjectID = mongoose.Types.ObjectId;
 
 
 var storage = multer.diskStorage({
@@ -48,5 +51,15 @@ router.post('/addProjectApplied/:freelancerId/:projectId', async function(req, r
     res.send(freelancer);
   })
 })
+
+ router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+  var id = ObjectID(req.params.id);
+  Freelancer.findById(id).exec((err, freelancer) => {
+      if (err) {
+          res.send(err);
+      }
+      res.send(freelancer);
+  });
+});
 
 module.exports = router;

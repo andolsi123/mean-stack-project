@@ -17,12 +17,13 @@ import { EditeProfilFreeComponent } from './freelancer/edite-profil-free/edite-p
 import { ProjectListComponent } from './freelancer/project-list/project-list.component';
 import { DetailsProjectComponent } from './freelancer/details-project/details-project.component';
 import { ProfilComponent } from './company/profil/profil.component';
+import { AuthguardGuard } from './authguard.guard';
 import { EditProjectComponent } from './company/edit-project/edit-project.component';
 
 const routes: Routes = [
   {
     path: 'company',
-    component: CompanyComponent,
+    component: CompanyComponent,canActivate: [AuthguardGuard],
     children: [
       {
         path: 'dashboard',
@@ -41,9 +42,16 @@ const routes: Routes = [
        component: DetailProjectComponent
      },
      {
-        path: 'profil',
-        component: ProfilComponent
-      },
+       path: 'edit-project',
+       component: EditeProfilComponent
+     },
+        {path: 'edite-profil',
+        component: EditeProfilComponent
+        },
+        {
+          path: 'profil',
+          component: ProfilComponent
+        },
       {
         path: 'edit-project/:id',
         component: EditProjectComponent
@@ -74,7 +82,7 @@ const routes: Routes = [
   } ,
   {
     path: 'freelancer',
-    component: FreelancerComponent,
+    component: FreelancerComponent,canActivate: [AuthguardGuard],
     children: [
       {
         path: 'dashboard-free',
