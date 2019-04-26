@@ -24,7 +24,7 @@ import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sig
 import { FilterProjectsPipe } from './filter-projects.pipe';
 
 import { MatChipsModule} from '@angular/material/chips';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CKEditorModule } from 'ng2-ckeditor';
 import { EditeProfilComponent } from './company/edite-profil/edite-profil.component';
 import { FreelancerComponent } from './freelancer/freelancer.component';
 import { DashboardFreeComponent } from './freelancer/dashboard-free/dashboard-free.component';

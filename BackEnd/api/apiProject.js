@@ -1,11 +1,40 @@
 var express = require('express');
 var Project = require('../models/project');
+var Company =  require('../models/company');
+var Freelancer = require('../models/freeLancer');
+//var ObjectID = require('mongoose').ObjectID;
 var router = express.Router();
 
 
-router.post('/addProject', async function(req, res) {
+router.post('/addProject/:companyId', async function(req, res) {
   var project = new Project(req.body);
+  var company = new Company();
+  company['_id'] = req.params.companyId;
+  project.company = company;
   await project.save(function(err, project) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(project);
+  })
+})
+
+router.post('appliedFreelancers/:projectId/:freelancerId', async function(req, res) {
+  var freelancer = new Freelancer();
+  freelancer['_id'] = req.params.freelancerId;
+  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: freelancer}}, function(err, project) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(project);
+  })
+})
+
+router.post('acceptedFreelancer/:projectId/:freelancerId', async function(req, res) {
+  var project = new Project();
+  var freelancer = new Freelancer();
+  freelancer['_id'] = req.params.freelancerId;
+  await project.findByIdAndUpdate({_id: req.params.projectId}, {accepted_freelancer: freelancer}, function(err, project) {
     if (err) {
       res.send(err);
     }
@@ -22,8 +51,21 @@ router.post('/updateProject/:projectId', async function(req, res) {
   })
 })
 
-router.get('/allProjects/:id', async function(req, res) {
-  await Project.find().exec(function(err, projects) {
+router.get('/allProjectsCompany/:id', async function(req, res){
+    var id = req.params.id;
+    console.log(id);
+  await Project.find({company:id}).exec(function(err, projects){
+    if(err){
+      res.send(err);
+    }
+    console.log(projects)
+    res.send(projects);
+
+  })
+})
+
+router.get('/allProjects', async function(req, res) {
+  await Project.find().populate('company').populate('accepted_freelancer').populate('applied_freelancers').exec(function(err, projects) {
     if (err) {
       res.send(err);
     }
@@ -32,7 +74,7 @@ router.get('/allProjects/:id', async function(req, res) {
 })
 
 router.get('/oneProject/:projectId', async function(req, res) {
-  await Project.findById(req.params.projectId).populate('company').populate('accepted_freelancer').populate('pplied_freelancers').exec(function(err, project) {
+  await Project.findById({_id: req.params.projectId}).populate('company').populate('accepted_freelancer').populate('applied_freelancers').exec(function(err, project) {
     if (err) {
       res.send(err);
     }

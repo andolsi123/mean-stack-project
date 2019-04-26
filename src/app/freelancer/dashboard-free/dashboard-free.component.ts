@@ -9,12 +9,14 @@ import { AppService } from '../../app.service';
 export class DashboardFreeComponent implements OnInit {
   allProjects: any;
 
+
+
   constructor(private http: AppService) { }
 
   ngOnInit() {
-    this.http.getAllProjects().subscribe(data => {
-      this.allProjects = data;
-    });
+    //this.http.getAllProjects().subscribe(data => {
+     // this.allProjects = data;
+   // });
   }
 
 }

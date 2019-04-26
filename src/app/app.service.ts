@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import * as jwt_decode from "jwt-decode";
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -28,17 +28,31 @@ export class AppService {
     return throwError('Something bad happened; please try again later.');
   }
 
-  postAddProject(body: any){
-    return this.http.post('http://localhost:3000/projects/addProject', body);
+  postAddProject(body: any, id: any): Observable<any> {
+    return this.http.post(`http://localhost:3000/projects/addProject/${id}`, body).pipe(catchError(this.handleError));
   }
 
   postUpdateProject(id: any, body: any) {
     return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body);
   }
 
-  getAllProjects() {
-    return this.http.get(`http://localhost:3000/projects/allProjects/5cc194cd183ee5378cda89e4`);
+  getAllProjects(id:any) {
+    return this.http.get(`http://localhost:3000/projects/allProjects/${id}`, {});
   }
+
+  getAllProjectsCompany(id: any) {
+    return this.http.get(`http://localhost:3000/projects/allProjectsCompany/${id}`, {});
+  }
+
+  postAppliedFreelancers(projectId, freelancerId) {
+    return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}`, {});
+  }
+
+  postAcceptedFreelancer(projectId, freelancerId) {
+    return this.http.post(`http://localhost:3000/projects/acceptedFreelancer/${projectId}/${freelancerId}`, {});
+  }
+
+
   postDeleteProject(id: any) {
     return this.http.post(`http://localhost:3000/projects/DeleteProject/${id}`, null);
    }
@@ -77,7 +91,7 @@ export class AppService {
 
   getDecodedToken() {
     if (localStorage.getItem('token')) {
-      var decoded = jwt_decode(localStorage.getItem('token'));
+      let decoded = jwt_decode(localStorage.getItem('token'));
       return decoded;
     } else {
       return null;
@@ -86,4 +100,3 @@ export class AppService {
 
 
 }
-
