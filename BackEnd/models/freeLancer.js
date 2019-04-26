@@ -15,11 +15,10 @@ var FreeLancerSchema = new mongoose.Schema({
     Image_Profil:String,
     projects: [
       {
-        project: {type: mongoose.Schema.Types.ObjectId, ref: 'project'},
+        project: {type: mongoose.Schema.Types.ObjectId, ref: 'projects'},
         statut: {type: String, enum :['Accepted, Pending , Refused'], default: 'Pending'}
       }
-    ],
-    liked_projects: [{type: mongoose.Schema.Types.ObjectId, ref: 'project'}]
+    ]
 });
 
 
