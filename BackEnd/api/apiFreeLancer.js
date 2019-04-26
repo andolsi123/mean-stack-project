@@ -44,7 +44,7 @@ router.post('/addfree', upload.single('Image_Profil'), function (req, res) {
  });
 
 router.post('/addProjectApplied/:freelancerId/:projectId', async function(req, res) {
-  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$push: {projects: {project: req.params.projectId, statut: 'Pending'} }}, function(err, freelancer) {
+  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$push: {projects: {project: req.params.projectId}}}, function(err, freelancer) {
     if (err) {
       res.send(err);
     }
@@ -52,9 +52,9 @@ router.post('/addProjectApplied/:freelancerId/:projectId', async function(req, r
   })
 })
 
- router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+ router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: false }), async function (req, res) {
   var id = ObjectID(req.params.id);
-  Freelancer.findById(id).exec((err, freelancer) => {
+  await Freelancer.findById(id).populate('projects.project').exec((err, freelancer) => {
       if (err) {
           res.send(err);
       }
