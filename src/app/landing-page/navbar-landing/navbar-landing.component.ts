@@ -23,7 +23,15 @@ export class NavbarLandingComponent implements OnInit {
     this.router.navigate(['sign-up-company'],{relativeTo: this.route});
   }
 
+  pathsignupFree(){
+    this.router.navigate(['sign-up-freelancer'],{relativeTo: this.route});
+  }
+
   pathAbout(){
     this.router.navigate(['about-us'],{relativeTo: this.route});
+  }
+
+  pathhome(){
+    this.router.navigate(['home'],{relativeTo: this.route});
   }
 }

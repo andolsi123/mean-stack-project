@@ -52,9 +52,9 @@ router.post('/addProjectApplied/:freelancerId/:projectId', function(req, res) {
   })
 })
 
- router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+ router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: false }), async function (req, res) {
   var id = ObjectID(req.params.id);
-  Freelancer.findById(id).exec((err, freelancer) => {
+  await Freelancer.findById(id).populate('projects.project').exec((err, freelancer) => {
       if (err) {
         res.send(err);
       }

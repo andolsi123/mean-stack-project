@@ -34,6 +34,8 @@ import { ProjectListComponent } from './freelancer/project-list/project-list.com
 import { DetailsProjectComponent } from './freelancer/details-project/details-project.component';
 import { ProfilComponent } from './company/profil/profil.component';
 import { EditProjectComponent } from './company/edit-project/edit-project.component';
+import { HomeComponent } from './landing-page/home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { EditProjectComponent } from './company/edit-project/edit-project.compon
     ProjectListComponent,
     DetailsProjectComponent,
     ProfilComponent,
-    EditProjectComponent
+    EditProjectComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
