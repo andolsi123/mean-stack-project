@@ -1,10 +1,6 @@
 var express = require('express');
 var Project = require('../models/project');
-var Company =  require('../models/company');
-var Freelancer = require('../models/freeLancer');
-//var ObjectID = require('mongoose').ObjectID;
 var router = express.Router();
-var objectId = require('mongoose').objectId;
 
 router.post('/addProject', async function(req, res) {
   var project = new Project(req.body);
@@ -131,6 +127,15 @@ router.post('/deleteComment/:projectId/:commentId', function(req, res) {
       res.send(err);
     }
     res.send(comment);
+  })
+})
+
+router.post('/updateComment/:projectId/:commentId', function(req, res) {
+  Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: {comments: req.body}}, function(err, project) {
+    if (err)  {
+      res.send(err);
+    }
+    res.send(project);
   })
 })
 

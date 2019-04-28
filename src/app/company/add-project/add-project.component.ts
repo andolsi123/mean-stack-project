@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
 import { AppService } from '../../app.service';
 

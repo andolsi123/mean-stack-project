@@ -13,12 +13,14 @@ var FreeLancerSchema = new mongoose.Schema({
     languages:[{language:String}],
     portfolio:String,
     Image_Profil:String,
-    projects: [
-      {
+    projects: [{
         project: {type: mongoose.Schema.Types.ObjectId, ref: 'projects'},
-        statut: {type: String, enum :['Accepted, Pending , Refused'], default: 'Pending'}
-      }
-    ]
+        statut: {type: String, enum :['Accepted', 'Pending' , 'Refused'], default: 'Pending'}
+      }],
+    rating: [{
+      company: {type: mongoose.Schema.Types.ObjectId, ref:'company'},
+      rates: {type: Number}
+    }]
 });
 
 
