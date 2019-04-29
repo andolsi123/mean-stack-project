@@ -18,6 +18,7 @@ export class ProjectListComponent implements OnInit {
     this.appService.getOneFreelancer(this.id_freelancer).subscribe((free: any) => {
       this.projects = free.projects ;
       console.log(this.projects);
+      
   });
 }
 }
