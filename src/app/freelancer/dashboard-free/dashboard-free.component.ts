@@ -11,13 +11,14 @@ export class DashboardFreeComponent implements OnInit {
   allProjects: any;
 
 
+
   constructor(private http: AppService,private router: Router, private route: ActivatedRoute ) {}
 
   ngOnInit() {
-   // this.http.getAllProjects().subscribe(data => {
-    //  this.allProjects = data;
-     // console.log(data);
-   // });
+    this.http.getAllProjects().subscribe(data => {
+      this.allProjects = data;
+      console.log(data);
+    });
   }
 
   pathlogin() {

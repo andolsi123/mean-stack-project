@@ -36,8 +36,8 @@ export class AppService {
     return this.http.post(`http://localhost:3000/projects/updateProject/${id}`, body);
   }
 
-  getAllProjects(id:any) {
-    return this.http.get(`http://localhost:3000/projects/allProjects/${id}`, {});
+  getAllProjects() {
+    return this.http.get(`http://localhost:3000/projects/allProjects`);
   }
 
   getAllProjectsCompany(id: any) {
@@ -85,11 +85,6 @@ export class AppService {
   UpdateCompanyProfile(id, body) {
     let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body, { headers: header });
-  }
-
-  applyProject(idF, idP) {
-    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.post(`http://localhost:3000/projects/acceptedFreelancer/${idP},${idF}`, { headers: header });
   }
 
 

@@ -25,15 +25,12 @@ export class DetailsProjectComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.http.getOneProject(params.id).subscribe(data => {
         this.project = data;
-        console.log(this.project);
 
 
         this.id_company = this.project.company._id;
         console.log(this.id_company)
         this.http.getOneCompany(this.id_company).subscribe(date2 => {
-          this.company = date2;
-          console.log(this.company);
-          console.log(this.id_freelancer);      
+          this.company = date2;    
         });
 
       });
@@ -42,7 +39,7 @@ export class DetailsProjectComponent implements OnInit {
 
 
   affectProject(){
-    this.http.applyProject(this.project._id, this.id_freelancer).subscribe(data3 => {
+    this.http.postAffectedProject( this.id_freelancer, this.project._id).subscribe(data3 => {
       console.log(data3);
     });
   }

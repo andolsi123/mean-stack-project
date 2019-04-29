@@ -19,6 +19,7 @@ import { DetailsProjectComponent } from './freelancer/details-project/details-pr
 import { ProfilComponent } from './company/profil/profil.component';
 import { AuthguardGuard } from './authguard.guard';
 import { EditProjectComponent } from './company/edit-project/edit-project.component';
+import { HomeComponent } from './landing-page/home/home.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,14 @@ const routes: Routes = [
         {
           path: 'about-us',
           component: AboutUsComponent
+        },
+        {
+          path: 'home',
+          component: HomeComponent
+        },
+        {
+          path: '',
+          component: HomeComponent
         }
     ]
   } ,

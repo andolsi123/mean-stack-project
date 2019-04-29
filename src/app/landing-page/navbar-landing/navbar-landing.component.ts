@@ -30,4 +30,8 @@ export class NavbarLandingComponent implements OnInit {
   pathAbout(){
     this.router.navigate(['about-us'],{relativeTo: this.route});
   }
+
+  pathhome(){
+    this.router.navigate(['home'],{relativeTo: this.route});
+  }
 }

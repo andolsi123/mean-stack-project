@@ -12,8 +12,8 @@
       <div>
         <a style="font-weight:bold ; font-size: 20px;"> Statut : </a> {{project.statut}}
       </div>
-      <div>
-        <a style="font-weight:bold ; font-size: 20px;"> skills :</a> {{project.skills}}
+      <div *ngFor="let ski of project.skills">
+        <a style="font-weight:bold ; font-size: 20px;"> skills :</a> {{ski.skill}}
       </div>
       <div>
         <a style="font-weight:bold ; font-size: 20px;"> Duration :</a> {{project.duration}}
