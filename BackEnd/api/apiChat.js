@@ -2,19 +2,26 @@ var Chat = require('../models/chat');
 var router = require('express').Router();
 
 router.post('/addMsg/:id', function(req, res) {
-  const io = req.app.get('io');
-  const chat = new Msg(req.body);
-  chat.findByIdAndUpdate({_id: req.params.id}, {$push: {chat: req.body.chat}}, function(err, msg) {
+  console.log(req.body.chat);
+  Chat.findById({_id: req.params.id}, function(err, privateChat) {
     if (err) {
       res.send(err);
     }
-    io.emit('newMessageAdded');
-    res.send(msg);
+    privateChat.chat.push(req.body.chat);
+    Chat.findByIdAndUpdate({_id: req.params.id}, {$set: {chat: privateChat.chat}}, function(err2, msg) {
+      if (err2) {
+        res.send(err2);
+      }
+      const io = req.app.get('io');
+      io.emit('newMessageAdded');
+    });
+
+
   })
 })
 
 router.get('/getChatCompany/:companyChatterId', function(req, res) {
-  Chat.findOne({chatterCompany: companyChatterId}, (err, chat) => {
+  Chat.findOne({_id: req.params.companyChatterId}, (err, chat) => {
     if (err) {
       res.send(err);
     }
@@ -23,7 +30,7 @@ router.get('/getChatCompany/:companyChatterId', function(req, res) {
 })
 
 router.get('/getChatFreelancer/:freelancerChatterId', function(req, res) {
-  Chat.findOne({chatterFreelancer: freelancerChatterId}, (err, chat) => {
+  Chat.findOne({chatterFreelancer: req.params.freelancerChatterId}, (err, chat) => {
     if (err) {
       res.send(err);
     }

@@ -10,29 +10,29 @@ import { Socket } from 'ngx-socket-io';
 export class ChatComponent implements OnInit {
 
   messages: any;
-  message: any;
-  id: any;
-
+  message= "";
+  id = '5cc82007edcb654bb8336b16';
+  idCompany;
+  
   constructor(private socket: Socket, private appService: AppService) {
-    this.id = this.appService.connectedUser.data.company;
+    this.idCompany = this.appService.connectedUser;
   }
 
   ngOnInit() {
     this.getChat();
     this.socket.on('newMessageAdded', () => {
-      this.addChat();
+      this.getChat();
     });
   }
 
   addChat() {
-    this.appService.postAddChat({chat: this.message}, this.id).subscribe(data => {
-      console.log(data);
-    });
+    this.appService.postAddChat({chat: this.message}, this.id).subscribe();
   }
-
+ 
   getChat() {
     this.appService.getChatByCompany(this.id).subscribe(data => {
       this.messages = data;
+      console.log(data);
     });
   }
 

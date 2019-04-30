@@ -17,6 +17,6 @@ export class EditeProfilFreeComponent implements OnInit {
     this.appService.getOneFreelancer(this.id_freelancer).subscribe((free: any) => {
       this.freelancer = free;
       console.log(this.freelancer);
-  }
-
+  });
+ }
 }

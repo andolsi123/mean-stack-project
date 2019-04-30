@@ -36,6 +36,11 @@ import { ProfilComponent } from './company/profil/profil.component';
 import { EditProjectComponent } from './company/edit-project/edit-project.component';
 import { HomeComponent } from './landing-page/home/home.component';
 import { ChatComponent } from './company/chat/chat.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
 
 
 @NgModule({
@@ -84,7 +89,8 @@ import { ChatComponent } from './company/chat/chat.component';
     MatTooltipModule,
     MatChipsModule,
     MatIconModule,
-    CKEditorModule
+    CKEditorModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]
