@@ -28,6 +28,10 @@ const routes: Routes = [
     component: CompanyComponent, canActivate: [AuthguardGuard],
     children: [
       {
+        path: '',
+        component: DashboardComponent
+      },
+      {
         path: 'dashboard',
         component: DashboardComponent
       },

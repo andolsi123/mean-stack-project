@@ -2,7 +2,6 @@ var Chat = require('../models/chat');
 var router = require('express').Router();
 
 router.post('/addMsg/:id', function(req, res) {
-  console.log(req.body.chat);
   Chat.findById({_id: req.params.id}, function(err, privateChat) {
     if (err) {
       res.send(err);
