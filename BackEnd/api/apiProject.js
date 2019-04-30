@@ -114,7 +114,6 @@ router.post('/addComment/:projectId', function(req, res) {
       res.send(err);
     }
     res.send(comment);
-    console.log(req.body);
   })
 })
 
