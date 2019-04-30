@@ -105,6 +105,9 @@ export class AppService {
     return this.http.get(`http://localhost:3000/freelancers/getFreelancer/${id}`, { headers: header });
   }
 
+  postAddComment(id,body){
+    return this.http.post(`http://localhost:3000/projects/addComment/${id}`,body);
+  }
   setToken(token: string): void {
     localStorage.setItem('token', token);
   }
