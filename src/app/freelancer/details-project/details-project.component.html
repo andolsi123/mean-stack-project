@@ -55,5 +55,22 @@
     </div>
   </div>
     <!-- </div> -->
+  </div><br><br><br>
+  <div>
+    <a style="font-weight:bold ; font-size: 20px;"> Commentaire : </a>
+    <textarea style=" margin-left: 20% ;width: 80%;" [(ngModel)]="commentaire"></textarea>
+    <div style="margin-left: 90%;">
+        <button type="button" (click)="addComment()">+</button>&nbsp;&nbsp;&nbsp;
+        <button type="button" (click)="CancelComment()">*</button>
+    </div>
+  </div>
+  <div *ngFor="let comment of comments">
+      <img src="http://localhost:3000/users/image/{{comment.photo_commenter}}" class="rounded-circle z-depth-0"
+      alt="avatar image" height="50">
+    <a style="font-weight:bold ; font-size: 20px;">{{comment.commenter}} : </a>{{comment.comment}}
+    <div *ngIf= "comment.id_commenter == id_freelancer" >
+        <button type="button" (click)="delProject()">del</button>&nbsp;&nbsp;&nbsp;
+        <button type="button" (click)="editProject()">edi</button>
+    </div>
   </div>
 </div>

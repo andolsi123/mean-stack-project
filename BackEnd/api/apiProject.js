@@ -108,18 +108,18 @@ router.post('/addRemoveLike/:projectId/:freelancerId', function(req, res) {
   })
 })
 
-router.post('/addComment/:projectId', function(req, res) {
-  Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {comments: req.body}}, function(err, comment) {
+router.post('/addComment/:projectId', async function(req, res) {
+  var body = req.body;
+  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {comments: body}}, function(err, comment) {
     if (err) {
       res.send(err);
     }
     res.send(comment);
-    console.log(req.body);
   })
 })
 
-router.post('/deleteComment/:projectId/:commentId', function(req, res) {
-  Project.findByIdAndUpdate({_id: req.params.projectId}, {$pull: {comments: {_id: req.params.commentId}}}, function(err, comment) {
+router.post('/deleteComment/:projectId/:commentId', async function(req, res) {
+  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$pull: {comments: {_id: req.params.commentId}}}, function(err, comment) {
     if (err) {
       res.send(err);
     }
