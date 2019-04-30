@@ -10,8 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NavbarFreeComponent implements OnInit {
   id_freelancer : any;
   freelancer : any;
-  constructor(private appService: AppService,private router: Router, private route: ActivatedRoute) { 
-    
+  constructor(private appService: AppService, private router: Router, private route: ActivatedRoute){
+
   }
 
   ngOnInit() {

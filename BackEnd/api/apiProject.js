@@ -40,15 +40,12 @@ router.post('/updateProject/:projectId', async function(req, res) {
 })
 
 router.get('/allProjectsCompany/:id', async function(req, res){
-    var id = req.params.id;
-    console.log(id);
+  var id = req.params.id;
   await Project.find({company:id}).exec(function(err, projects){
     if(err){
       res.send(err);
     }
-    console.log(projects)
     res.send(projects);
-
   })
 })
 

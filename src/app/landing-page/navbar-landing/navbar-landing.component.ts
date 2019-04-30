@@ -10,13 +10,13 @@ export class NavbarLandingComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute ) { }
 
- 
+
 
   ngOnInit() {
   }
 
   pathlogin() {
-    this.router.navigate(['log-in'],{relativeTo: this.route});
+    this.router.navigate(['log-in'], {relativeTo: this.route});
   }
 
   pathsignupCompany(){
