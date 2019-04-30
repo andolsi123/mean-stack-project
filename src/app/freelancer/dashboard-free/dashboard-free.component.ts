@@ -12,7 +12,7 @@ export class DashboardFreeComponent implements OnInit {
 
 
 
-  constructor(private http: AppService,private router: Router, private route: ActivatedRoute ) {}
+  constructor(private http: AppService, private router: Router, private route: ActivatedRoute ) {}
 
   ngOnInit() {
     this.http.getAllProjects().subscribe(data => {
@@ -22,7 +22,7 @@ export class DashboardFreeComponent implements OnInit {
   }
 
   pathlogin() {
-    this.router.navigate(['dashboard-free'],{relativeTo: this.route});
+    this.router.navigate(['dashboard-free'], {relativeTo: this.route});
   }
 
 }

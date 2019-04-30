@@ -20,11 +20,12 @@ import { ProfilComponent } from './company/profil/profil.component';
 import { AuthguardGuard } from './authguard.guard';
 import { EditProjectComponent } from './company/edit-project/edit-project.component';
 import { HomeComponent } from './landing-page/home/home.component';
+import { ChatComponent } from './company/chat/chat.component';
 
 const routes: Routes = [
   {
     path: 'company',
-    component: CompanyComponent,canActivate: [AuthguardGuard],
+    component: CompanyComponent, canActivate: [AuthguardGuard],
     children: [
       {
         path: 'dashboard',
@@ -56,6 +57,10 @@ const routes: Routes = [
       {
         path: 'edit-project/:id',
         component: EditProjectComponent
+      },
+      {
+        path: 'chatting',
+        component: ChatComponent
       }
     ]
   },
@@ -91,7 +96,7 @@ const routes: Routes = [
   } ,
   {
     path: 'freelancer',
-    component: FreelancerComponent,canActivate: [AuthguardGuard],
+    component: FreelancerComponent, canActivate: [AuthguardGuard],
     children: [
       {
         path: 'dashboard-free',
