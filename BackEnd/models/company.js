@@ -9,7 +9,9 @@ var CompanySchema = new mongoose.Schema({
     facebook:String,
     webSite:String,
     linkedin:String,
-    logo:String
+    logo:String,
+    notifications: [{type: String}],
+    notificationsNumber: {type: Number, default: 0}
 });
 
 

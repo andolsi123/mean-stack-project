@@ -49,18 +49,19 @@ const routes: Routes = [
        {
        path: 'detail-project/:id',
        component: DetailProjectComponent
-     },
-     {
+      },
+      {
        path: 'edit-project',
        component: EditeProfilComponent
-     },
-        {path: 'edite-profil',
-        component: EditeProfilComponent
-        },
-        {
-          path: 'profil',
-          component: ProfilComponent
-        },
+      },
+      {
+       path: 'edite-profil',
+       component: EditeProfilComponent
+      },
+      {
+        path: 'profil',
+        component: ProfilComponent
+      },
       {
         path: 'edit-project/:id',
         component: EditProjectComponent

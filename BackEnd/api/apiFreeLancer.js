@@ -41,32 +41,32 @@ router.post('/addfree', upload.single('Image_Profil'), function (req, res) {
     req.body.Image_Profil = req.file.filename;
     var free = new Freelancer(req.body);
     free.save(function (err, freelancer) {
+      if (err) {
+        res.send(err);
+      }
+      var user = new User(req.body);
+      user.freelancer = freelancer._id;
+      user.save(async function (err, user) {
         if (err) {
           res.send(err);
         }
-        var user = new User(req.body);
-        user.freelancer = freelancer._id;
-        user.save(async function (err, user) {
-            if (err) {
-              res.send(err);
-            }
-            var mail = {
-              from: "ayoub <andolsiayoub@gmail.com>",
-              to: user.email,
-              subject: "Send Email Using Node.js",
-              text: `Welcome ${free.first_name} ${free.last_name} to our WEB APP hope you enjoy your time here !!`,
-              html: `<b>Welcome <strong>${free.first_name} ${free.last_name}</strong> to our WEB APP hope you enjoy your time here !!</b>`
-            }
-            await transporter.sendMail(mail, function(error, response) {
-              if (error) {
-                console.log("email error: " + error);
-              } else {
-                console.log("Message sent: " + response.message);
-              }
-              transporter.close();
-            })
-            res.send(user);
+        var mail = {
+          from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
+          to: user.email,
+          subject: "Your account has been created succefully !!",
+          text: `Welcome ${free.first_name} ${free.last_name} to our WEB APP hope you enjoy your time here !!`,
+          html: `<b>Welcome <strong>${free.first_name} ${free.last_name}</strong> to our WEB APP hope you enjoy your time here !!</b>`
+        }
+        await transporter.sendMail(mail, function(error, response) {
+          if (error) {
+            console.log("email error: " + error);
+          } else {
+            console.log("Message sent: " + response.message);
+          }
+          transporter.close();
         })
+        res.send(user);
+      })
     })
  });
 

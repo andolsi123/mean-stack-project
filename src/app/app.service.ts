@@ -60,8 +60,9 @@ export class AppService {
     return this.http.get(`http://localhost:3000/projects/allProjectsCompany/${id}`);
   }
 
-  postAppliedFreelancers(projectId, freelancerId) {
-    return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}`, {});
+  postAppliedFreelancers(projectId, freelancerId, companyId, body) {
+    // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name}
+    return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}/${companyId}`, body);
   }
 
   postAffectedProject(freelancerId, projectId) {
@@ -114,6 +115,10 @@ export class AppService {
 
   postAddComment(id, body) {
     return this.http.post(`http://localhost:3000/projects/addComment/${id}`, body);
+  }
+
+  notificationRemove(companyId) {
+    return this.http.post(`http://localhost:3000/projects/removeNotifications/${companyId}`, {});
   }
 
   setToken(token: string): void {

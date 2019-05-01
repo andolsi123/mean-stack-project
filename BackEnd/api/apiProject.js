@@ -3,6 +3,7 @@ var Project = require('../models/project');
 var router = express.Router();
 var mailer = require("nodemailer");
 var User = require('../models/user');
+var Company = require('../models/company');
 
 var transporter = mailer.createTransport({
   service: 'gmail',
@@ -15,7 +16,7 @@ var transporter = mailer.createTransport({
   tls: {
     rejectUnauthorized: false
   }
-});
+})
 
 router.post('/addProject', async function(req, res) {
   var project = new Project(req.body);
@@ -27,11 +28,38 @@ router.post('/addProject', async function(req, res) {
   })
 })
 
-router.post('/appliedFreelancers/:projectId/:freelancerId', async function(req, res) {
-  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: req.params.freelancerId}}, function(err, project) {
+router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async function(req, res) {
+  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: req.params.freelancerId}}, async function(err, project) {
     if (err) {
       res.send(err);
     }
+    var mail = {
+        from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
+        to: req.body.companyEmail,
+        subject: `A freelancer has submitted to one of your project`,
+        text: `You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information`,
+        html: `<b>You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information</b>`
+      };
+      await transporter.sendMail(mail, function(error, response) {
+        if (error) {
+          console.log("email error: " + error);
+        } else {
+          console.log("Message sent: " + response.message);
+        }
+        transporter.close();
+      })
+    Company.findByIdAndUpdate({_id: req.params.companyId}, {$push: {notifications: req.body.notifications}}, function(err2, com) {
+      if (err2) {
+        res.send(err2);
+      }
+    })
+    Company.findById({_id: req.params.companyId}, function(err3, com2) {
+      if (err3) {
+        res.send(err3);
+      }
+      com2.notificationsNumber++;
+      com2.save();
+    })
     res.send(project);
   })
 })
@@ -43,9 +71,9 @@ router.post('/acceptedFreelancer/:projectId/:freelancerId', async function(req, 
     }
     User.findOne({freelancer: req.params.freelancerId}, async function(err, freelancer) {
       var mail = {
-        from: "ayoub <andolsiayoub@gmail.com>",
+        from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
         to: freelancer.email,
-        subject: `Congratulations your submission to the project ${project.titre_project} has been accepted`,
+        subject: `Congratulations your submission to the project <strong>\"${project.titre_project}\"</strong> has been accepted`,
         text: `Do your best you have ${project.duration} days to finish the project.`,
         html: `<b>Do your best you have ${project.duration} days to finish the project.</b>`
       }
@@ -117,7 +145,6 @@ router.post('/addRemoveLike/:projectId/:freelancerId', function(req, res) {
     for (freelancer of project.freelancers_likes) {
       if (freelancer == req.params.freelancerId) {
         verif = true;
-
       }
     }
     if(verif === true) {
