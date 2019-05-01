@@ -21,6 +21,9 @@ import { AuthguardGuard } from './authguard.guard';
 import { EditProjectComponent } from './company/edit-project/edit-project.component';
 import { HomeComponent } from './landing-page/home/home.component';
 import { ChatComponent } from './company/chat/chat.component';
+import { ChatDetailsComponent } from './company/chat-details/chat-details.component';
+import { ChatsComponent } from './freelancer/chats/chats.component';
+import { DetailsChatComponent } from './freelancer/details-chat/details-chat.component';
 
 const routes: Routes = [
   {
@@ -61,6 +64,10 @@ const routes: Routes = [
       {
         path: 'chatting',
         component: ChatComponent
+      },
+      {
+        path: 'chatting/:id',
+        component: ChatDetailsComponent
       }
     ]
   },
@@ -117,6 +124,14 @@ const routes: Routes = [
         {
           path: ':id',
           component: DetailsProjectComponent
+        },
+        {
+          path: 'chats',
+          component: ChatsComponent
+        },
+        {
+          path: 'chats/:id',
+          component: DetailsChatComponent
         }
     ]
   }

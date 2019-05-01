@@ -37,10 +37,12 @@ import { EditProjectComponent } from './company/edit-project/edit-project.compon
 import { HomeComponent } from './landing-page/home/home.component';
 import { ChatComponent } from './company/chat/chat.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { ChatDetailsComponent } from './company/chat-details/chat-details.component';
+import { ChatsComponent } from './freelancer/chats/chats.component';
+import { DetailsChatComponent } from './freelancer/details-chat/details-chat.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
-
 
 
 @NgModule({
@@ -72,7 +74,10 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ProfilComponent,
     EditProjectComponent,
     HomeComponent,
-    ChatComponent
+    ChatComponent,
+    ChatDetailsComponent,
+    ChatsComponent,
+    DetailsChatComponent
   ],
   imports: [
     BrowserModule,
