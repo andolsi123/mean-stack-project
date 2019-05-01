@@ -121,6 +121,10 @@ export class AppService {
     return this.http.post(`http://localhost:3000/projects/removeNotifications/${companyId}`, {});
   }
 
+  postLikeProject(idP , idF) {
+    return this.http.post(`http://localhost:3000/projects/addRemoveLike/${idP}/${idF}`, {});
+  }
+
   setToken(token: string): void {
     localStorage.setItem('token', token);
   }
