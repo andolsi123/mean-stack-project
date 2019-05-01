@@ -111,6 +111,12 @@ export class AppService {
   postAddComment(id, body){
     return this.http.post(`http://localhost:3000/projects/addComment/${id}`, body);
   }
+
+  postLikeProject(idP ,idF){
+    return this.http.post(`http://localhost:3000/projects/addRemoveLike/${idP}/${idF}`,{});
+  }
+
+  
   setToken(token: string): void {
     localStorage.setItem('token', token);
   }

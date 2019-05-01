@@ -60,8 +60,12 @@
     <a class="comment"> Commentaire : </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <textarea style="width: 80%" [(ngModel)]="commentaire"></textarea>
     <div style="margin-left: 90%;">
-      <button type="button" (click)="addComment()">+</button>&nbsp;&nbsp;&nbsp;
-      <button type="button" (click)="CancelComment()">*</button>
+      <!-- <button type="button" (click)="addComment()">+</button>&nbsp;&nbsp;&nbsp; -->
+      <span class="btn btn-primary" (click)="addComment()"><i class="fas fa-comment"
+        style="color:white;font-size: 20px;"></i></span>
+      <!-- <button type="button" (click)="CancelComment()">*</button> -->
+      <span class="btn btn-primary" (click)="CancelComment()"><i class="fas fa-comment-slash"
+        style="color:white;font-size: 18px;"></i></span>
     </div>
   </div><br><br>
   <div *ngFor="let comment of comments">
@@ -69,7 +73,8 @@
       alt="avatar image" height="50">&nbsp;&nbsp;
     <a style="font-weight:bold ; font-size: 20px;">{{comment.commenter}} : </a>&nbsp;&nbsp;{{comment.comment}}
     <span *ngIf="comment.id_commenter == id_freelancer">
-      <button style="margin-left: 10%" type="button" (click)="delComment(comment._id)">del</button>
+      <a class="btn btn-primary" (click)="delComment(comment._id)" style="margin-left: 10%"> <i class="fas fa-trash-alt"
+          style="color:white;font-size: 20px;"></i></a>
       <!-- <button type="button" (click)="editComment()">edi</button> -->
     </span><br><br>
   </div>
