@@ -1,0 +1,9 @@
+<div class="container">
+  <ul id="messages">
+    <li *ngFor="let message of messages.chat">{{message.sender}} {{message.message}} {{message.date}}</li>
+  </ul>
+  <div class="form">
+  <input id="m" autocomplete="off" [(ngModel)]="message"Details/>
+  <button (click)="addChat()">Send</button>
+  </div>
+  </div>

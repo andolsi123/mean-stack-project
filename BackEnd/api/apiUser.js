@@ -24,10 +24,6 @@ router.post('/login', function (req, res) {
                 message: 'Authentication successful!',
                 access_token: token,
             });
-
-
-
-
         } else {
             res.send('wrong password')
         }

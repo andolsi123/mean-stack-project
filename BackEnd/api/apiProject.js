@@ -1,6 +1,21 @@
 var express = require('express');
 var Project = require('../models/project');
 var router = express.Router();
+var mailer = require("nodemailer");
+var User = require('../models/user');
+
+var transporter = mailer.createTransport({
+  service: 'gmail',
+  port: 25,
+  secure: false,
+  auth: {
+      user: "andolsiayoub@gmail.com",
+      pass: "wxcv1234"
+  },
+  tls: {
+    rejectUnauthorized: false
+  }
+});
 
 router.post('/addProject', async function(req, res) {
   var project = new Project(req.body);
@@ -26,6 +41,23 @@ router.post('/acceptedFreelancer/:projectId/:freelancerId', async function(req, 
     if (err) {
       res.send(err);
     }
+    User.findOne({freelancer: req.params.freelancerId}, async function(err, freelancer) {
+      var mail = {
+        from: "ayoub <andolsiayoub@gmail.com>",
+        to: freelancer.email,
+        subject: `Congratulations your submission to the project ${project.titre_project} has been accepted`,
+        text: `Do your best you have ${project.duration} days to finish the project.`,
+        html: `<b>Do your best you have ${project.duration} days to finish the project.</b>`
+      }
+      await transporter.sendMail(mail, function(error, response) {
+        if (error) {
+          console.log("email error: " + error);
+        } else {
+          console.log("Message sent: " + response.message);
+        }
+        transporter.close();
+      })
+    })
     res.send(project);
   })
 })

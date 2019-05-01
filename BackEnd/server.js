@@ -25,6 +25,6 @@ app.use(cors());
 app.use('/companies', companyCrud);
 app.use('/freelancers', freelancerCrud);
 app.use('/users', userCrud);
-app.use('/chat', chatCrud);
+app.use('/chats', chatCrud);
 
 http.listen(3000, function() {console.log('listening to 3000')});

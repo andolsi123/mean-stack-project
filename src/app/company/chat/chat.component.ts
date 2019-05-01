@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { Socket } from 'ngx-socket-io';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -9,31 +9,18 @@ import { Socket } from 'ngx-socket-io';
 })
 export class ChatComponent implements OnInit {
 
-  messages: any;
-  message= "";
-  id = '5cc82007edcb654bb8336b16';
-  idCompany;
-  
-  constructor(private socket: Socket, private appService: AppService) {
-    this.idCompany = this.appService.connectedUser;
-  }
+  chats;
 
-  ngOnInit() {
-    this.getChat();
-    this.socket.on('newMessageAdded', () => {
-      this.getChat();
+  constructor(private appService: AppService, private route: Router) {
+    this.appService.getChatByCompany(this.appService.connectedUser.data.company).subscribe(dt => {
+      this.chats = dt;
     });
   }
 
-  addChat() {
-    this.appService.postAddChat({chat: this.message}, this.id).subscribe();
+  chatDetails(id) {
+    this.route.navigate(['/company/chatting', id]);
   }
- 
-  getChat() {
-    this.appService.getChatByCompany(this.id).subscribe(data => {
-      this.messages = data;
-      console.log(data);
-    });
-  }
+
+  ngOnInit() { }
 
 }

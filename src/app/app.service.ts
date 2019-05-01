@@ -40,6 +40,10 @@ export class AppService {
   return this.http.get(`http://localhost:3000/chat/getChatFreelancer/${id}`);
  }
 
+ getChatById(id) {
+   return this.http.get(`http://localhost:3000/chat/getChatById/${id}`);
+ }
+
   postAddProject(body: any): Observable<any> {
     return this.http.post(`http://localhost:3000/projects/addProject`, body).pipe(catchError(this.handleError));
   }
@@ -53,7 +57,7 @@ export class AppService {
   }
 
   getAllProjectsCompany(id: any) {
-    return this.http.get(`http://localhost:3000/projects/allProjectsCompany/${id}`, {});
+    return this.http.get(`http://localhost:3000/projects/allProjectsCompany/${id}`);
   }
 
   postAppliedFreelancers(projectId, freelancerId) {
@@ -104,11 +108,11 @@ export class AppService {
     return this.http.get(`http://localhost:3000/freelancers/getFreelancer/${id}`, { headers: header });
   }
 
-  postDeleteComment(idP: any, idC: any){
-    return this.http.post(`http://localhost:3000/projects/deleteComment/${idP}/${idC}`,{});
+  postDeleteComment(idP: any, idC: any) {
+    return this.http.post(`http://localhost:3000/projects/deleteComment/${idP}/${idC}`, {});
   }
 
-  postAddComment(id, body){
+  postAddComment(id, body) {
     return this.http.post(`http://localhost:3000/projects/addComment/${id}`, body);
   }
 
