@@ -142,7 +142,7 @@ router.post('/addRemoveLike/:projectId/:freelancerId', function(req, res) {
 
 router.post('/addComment/:projectId', async function(req, res) {
   var body = req.body;
-  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {comments: body}}, function(err, comment) {
+  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: {comments: body}}, function(err, comment) {
     if (err) {
       res.send(err);
     }

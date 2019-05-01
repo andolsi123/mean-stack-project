@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     logo : any;
     id_company : any;
     company :any ;
-    
+     x =5;
     constructor(location: Location,  private element: ElementRef,private router: Router,private route: ActivatedRoute,public appService: AppService) {
       this.location = location;
           this.sidebarVisible = false;
