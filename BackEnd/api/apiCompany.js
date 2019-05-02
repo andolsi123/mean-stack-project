@@ -108,4 +108,15 @@ router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('
     });
 });
 
+
+router.get('/allCompanies', async function(req, res) {
+  await Company.find().exec(function(err, company) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(company);
+  });
+});
+
+
 module.exports = router;

@@ -114,7 +114,7 @@ router.post('/addRemoveLike/:projectId/:freelancerId', function(req, res) {
       res.send(err);
     }
     let verif = false;
-    for (freelancer of project.freelancers_likes) {
+    for (let freelancer of project.freelancers_likes) {
       if (freelancer == req.params.freelancerId) {
         verif = true;
 
