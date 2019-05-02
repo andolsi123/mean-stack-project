@@ -71,4 +71,35 @@ router.post('/addChangeRating/:freelancerId', function(req, res) {
   })
 })
 
+
+router.post('/updateFreelancerProfil/:id', upload.single('Image_Profil'),  function (req, res) {
+
+  var id = req.params.id
+  req.body.Image_Profil = req.file.filename;
+  Company.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, freelancer) {
+      if (err) {
+          res.send(err)
+
+      }
+      else {
+          User.findOneAndUpdate({ "freelancer": company._id }, { $set: req.body }).exec(function (err, user) {
+              if (err) {
+                  res.send(err);
+              }
+              User.findById(user._id).exec(function (err, user2) {
+                  const token = jwt.sign({ data: user2 },
+                      JWT_SIGN_SECRET, {
+                          expiresIn: '1h'
+                      });
+                  res.send({
+                      Message: 'Update token ',
+                      access_token: token,
+                  })
+
+              })
+          });
+      }
+  });
+})
+
 module.exports = router;
