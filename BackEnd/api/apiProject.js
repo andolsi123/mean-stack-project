@@ -34,29 +34,33 @@ router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async fun
       res.send(err);
     }
     var mail = {
-        from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
-        to: req.body.companyEmail,
-        subject: `A freelancer has submitted to one of your project`,
-        text: `You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information`,
-        html: `<b>You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information</b>`
-      };
-      await transporter.sendMail(mail, function(error, response) {
-        if (error) {
-          console.log("email error: " + error);
-        } else {
-          console.log("Message sent: " + response.message);
-        }
-        transporter.close();
-      })
+      from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
+      to: req.body.companyEmail,
+      subject: `A freelancer has submitted to one of your project`,
+      text: `You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information`,
+      html: `<b>You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information</b>`
+    };
+    await transporter.sendMail(mail, function(error, response) {
+      if (error) {
+        console.log("email error: " + error);
+      } else {
+        console.log("Message sent: " + response.message);
+      }
+      transporter.close();
+    })
     Company.findByIdAndUpdate({_id: req.params.companyId}, {$push: {notifications: req.body.notifications}}, function(err2, com) {
       if (err2) {
         res.send(err2);
       }
+      const io = req.app.get('io');
+      io.emit('newNotificationAdded');
     })
     Company.findById({_id: req.params.companyId}, function(err3, com2) {
       if (err3) {
         res.send(err3);
       }
+      const io = req.app.get('io');
+      io.emit('newNotificationAdded');
       com2.notificationsNumber++;
       com2.save();
     })
@@ -136,34 +140,39 @@ router.post('/DeleteProject/:projectId', async function(req, res){
   })
 })
 
-router.post('/addRemoveLike/:projectId/:freelancerId', function(req, res) {
-   Project.findById(req.params.projectId,  function(err, project) {
+router.post('/addRemoveLike/:projectId/:freelancerId', async function(req, res) {
+  await Project.findById(req.params.projectId, function(err, project) {
     if (err) {
       res.send(err);
     }
-    let verif = false;
-    for (freelancer of project.freelancers_likes) {
-      if (freelancer == req.params.freelancerId) {
-        verif = true;
-      }
-    }
-    if(verif === true) {
-      project.like -= 1;
-      Project.findByIdAndUpdate({_id: req.params.projectId}, {$pull: {freelancers_likes: req.params.freelancerId}}, function(errr, upd) {
-        if (errr) {
-          res.send(errr);
-        }
-        res.send(upd);
-      });
-    } else {
+    var likes = project.like;
+    if (project.freelancers_likes.length == 0) {
       project.like += 1;
-      Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {freelancers_likes: req.params.freelancerId}}, function(errrr, dlt) {
-        if (errrr) {
-          res.send(errrr);
+      project.save(function(error) {if (error) {console.log(error);}});
+      Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {freelancers_likes: req.params.freelancerId}}, function(errrrr, dlt) {
+        if (errrrr) {
+          console.log(errrrr);
         }
-        res.send(dlt);
       })
     }
+    for (let freelancer of project.freelancers_likes) {
+      if (freelancer == req.params.freelancerId) {
+        likes = likes - 1;
+        Project.findByIdAndUpdate({_id: req.params.projectId}, {$pull: {freelancers_likes: req.params.freelancerId}, like: likes}, function(errr, upd) {
+          if (errr) {
+            console.log(errr);
+          }
+        })
+      } else {
+        likes++;
+        Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {freelancers_likes: req.params.freelancerId}, like: likes}, function(errrr, dlt) {
+          if (errrr) {
+            console.log(errrr);
+          }
+        })
+      }
+    }
+    res.send(project);
   })
 })
 
