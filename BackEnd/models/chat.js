@@ -8,6 +8,6 @@ var ChatSchema = new mongoose.Schema({
     sender: String,
     date: {type: Date, default: Date.now()}
   }]
-});
+})
 
 module.exports = mongoose.model('chat', ChatSchema);

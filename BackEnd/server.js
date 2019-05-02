@@ -7,7 +7,6 @@ var userCrud = require('./api/apiUser');
 var chatCrud = require('./api/apiChat');
 var passport = require('./passport/passport');
 var cors = require('cors');
-
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);

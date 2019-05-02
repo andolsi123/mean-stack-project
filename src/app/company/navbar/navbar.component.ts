@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/app.service';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-navbar',
@@ -10,34 +11,45 @@ import { AppService } from 'src/app/app.service';
 })
 export class NavbarComponent implements OnInit {
     location: Location;
-     mobile_menu_visible: any = 0;
+    // tslint:disable-next-line:variable-name
+    mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
-    logo : any;
-    id_company : any;
-    company :any ;
-     x =5;
-    constructor(location: Location,  private element: ElementRef,private router: Router,private route: ActivatedRoute,public appService: AppService) {
+    logo: any;
+    // tslint:disable-next-line:variable-name
+    id_company: any;
+    company: any;
+    notificationNumber = 0;
+    notifications;
+    // tslint:disable-next-line:max-line-length
+    constructor(private socket: Socket, location: Location, private element: ElementRef, private router: Router, private route: ActivatedRoute, public appService: AppService) {
       this.location = location;
-          this.sidebarVisible = false;
+      this.sidebarVisible = false;
+    }
+    notificationsRemove() {
+      this.appService.notificationRemove(this.id_company).subscribe(dt => dt);
     }
 
     ngOnInit() {
-        // get logo company conneted
-        this.id_company = this.appService.connectedUser.data.company;
+      this.socket.on('newNotificationAdded', () => {
         this.appService.getOneCompany(this.id_company).subscribe((comp: any) => {
-        this.company = comp;
-        this.logo = this.company.logo;
-        });
-        
+          this.company = comp;
+          });
+      });
+      this.id_company = this.appService.connectedUser.data.company;
+      this.appService.getOneCompany(this.id_company).subscribe((comp: any) => {
+      this.company = comp;
+      this.logo = this.company.logo;
+      });
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
       this.router.events.subscribe((event) => {
         this.sidebarClose();
-         var $layer: any = document.getElementsByClassName('close-layer')[0];
-         if ($layer) {
-           $layer.remove();
-           this.mobile_menu_visible = 0;
+        // tslint:disable-next-line:prefer-const
+        var $layer: any = document.getElementsByClassName('close-layer')[0];
+        if ($layer) {
+          $layer.remove();
+          this.mobile_menu_visible = 0;
          }
      });
     }
@@ -52,13 +64,13 @@ export class NavbarComponent implements OnInit {
         body.classList.add('nav-open');
 
         this.sidebarVisible = true;
-    };
+    }
     sidebarClose() {
         const body = document.getElementsByTagName('body')[0];
         this.toggleButton.classList.remove('toggled');
         this.sidebarVisible = false;
         body.classList.remove('nav-open');
-    };
+    }
     sidebarToggle() {
         // const toggleButton = this.toggleButton;
         // const body = document.getElementsByTagName('body')[0];
@@ -117,16 +129,16 @@ export class NavbarComponent implements OnInit {
         }
     };
 
-    LogOut(){
+    LogOut() {
         this.router.navigate(['landing-page/log-in']);
         localStorage.removeItem('token');
     }
-   
-    showEdit(){
+
+    showEdit() {
         this.router.navigate(['/company/edite-profil']);
       }
 
-    showProfil(){
+    showProfil() {
         this.router.navigate(['/company/profil']);
     }
 
