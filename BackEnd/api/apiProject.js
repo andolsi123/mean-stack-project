@@ -1,8 +1,8 @@
 var express = require('express');
-var Project = require('../models/project');
 var router = express.Router();
 var mailer = require("nodemailer");
 var User = require('../models/user');
+var Project = require('../models/project');
 var Company = require('../models/company');
 
 var transporter = mailer.createTransport({
@@ -29,41 +29,54 @@ router.post('/addProject', async function(req, res) {
 })
 
 router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async function(req, res) {
-  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: req.params.freelancerId}}, async function(err, project) {
+  await Project.findById({_id: req.params.projectId}, async function(err, project) {
     if (err) {
       res.send(err);
     }
-    var mail = {
-      from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
-      to: req.body.companyEmail,
-      subject: `A freelancer has submitted to one of your project`,
-      text: `You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information`,
-      html: `<b>You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information</b>`
-    };
-    await transporter.sendMail(mail, function(error, response) {
-      if (error) {
-        console.log("email error: " + error);
-      } else {
-        console.log("Message sent: " + response.message);
+    var verif = false;
+    for (let freelancer of project.applied_freelancers) {
+      if (freelancer == req.params.freelancerId) {
+        verif = true;        
       }
-      transporter.close();
-    })
-    Company.findByIdAndUpdate({_id: req.params.companyId}, {$push: {notifications: req.body.notifications}}, function(err2, com) {
-      if (err2) {
-        res.send(err2);
-      }
-      const io = req.app.get('io');
-      io.emit('newNotificationAdded');
-    })
-    Company.findById({_id: req.params.companyId}, function(err3, com2) {
-      if (err3) {
-        res.send(err3);
-      }
-      const io = req.app.get('io');
-      io.emit('newNotificationAdded');
-      com2.notificationsNumber++;
-      com2.save();
-    })
+    }
+    if (verif == false) {
+      var mail = {
+        from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
+        to: req.body.companyEmail,
+        subject: `A freelancer has submitted to one of your project`,
+        text: `You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information`,
+        html: `<b>You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information</b>`
+      };
+      await transporter.sendMail(mail, function(error, response) {
+        if (error) {
+          console.log("email error: " + error);
+        } else {
+          console.log("Message sent: " + response.message);
+        }
+        transporter.close();
+      })
+      Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: req.params.freelancerId}}, function(error2, prjct) {
+        if (error2) {
+          console.log(error2);
+        }
+      })
+      Company.findByIdAndUpdate({_id: req.params.companyId}, {$push: {notifications: req.body.notifications}}, function(err2, com) {
+        if (err2) {
+          res.send(err2);
+        }
+        const io = req.app.get('io');
+        io.emit('newNotificationAdded');
+      })
+      Company.findById({_id: req.params.companyId}, function(err3, com2) {
+        if (err3) {
+          res.send(err3);
+        }
+        const io = req.app.get('io');
+        io.emit('newNotificationAdded');
+        com2.notificationsNumber++;
+        com2.save(function(error) {console.log(error);});
+      })
+    }
     res.send(project);
   })
 })

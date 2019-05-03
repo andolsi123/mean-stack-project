@@ -45,7 +45,6 @@ export class NavbarComponent implements OnInit {
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
       this.router.events.subscribe((event) => {
         this.sidebarClose();
-        // tslint:disable-next-line:prefer-const
         var $layer: any = document.getElementsByClassName('close-layer')[0];
         if ($layer) {
           $layer.remove();
@@ -57,7 +56,7 @@ export class NavbarComponent implements OnInit {
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const body = document.getElementsByTagName('body')[0];
-        setTimeout(function() {
+        setTimeout(() => {
             toggleButton.classList.add('toggled');
         }, 500);
 
@@ -89,13 +88,13 @@ export class NavbarComponent implements OnInit {
             if ($layer) {
                 $layer.remove();
             }
-            setTimeout(function() {
+            setTimeout(() => {
                 $toggle.classList.remove('toggled');
             }, 400);
 
             this.mobile_menu_visible = 0;
         } else {
-            setTimeout(function() {
+            setTimeout(() => {
                 $toggle.classList.add('toggled');
             }, 430);
 
@@ -109,7 +108,7 @@ export class NavbarComponent implements OnInit {
                 document.getElementsByClassName('wrapper-full-page')[0].appendChild($layer);
             }
 
-            setTimeout(function() {
+            setTimeout(() => {
                 $layer.classList.add('visible');
             }, 100);
 
@@ -117,7 +116,7 @@ export class NavbarComponent implements OnInit {
               body.classList.remove('nav-open');
               this.mobile_menu_visible = 0;
               $layer.classList.remove('visible');
-              setTimeout(function() {
+              setTimeout(() => {
                   $layer.remove();
                   $toggle.classList.remove('toggled');
               }, 400);
@@ -127,7 +126,7 @@ export class NavbarComponent implements OnInit {
             this.mobile_menu_visible = 1;
 
         }
-    };
+    }
 
     LogOut() {
         this.router.navigate(['landing-page/log-in']);

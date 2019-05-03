@@ -25,13 +25,13 @@ router.post('/login', function (req, res) {
         access_token: token,
       })
     } else {
-      res.send('wrong password')
+      res.send('wrong password');
     }
   })
 })
 
 router.get('/image/:name', async (req, res) => {
-  res.sendFile('C:\\Users\\user16\\Desktop\\mean-stack-project-master\\BackEnd\\uploads\\'+ req.params.name)
+  res.sendFile('C:\\Users\\user16\\Desktop\\mean-stack-project-master\\BackEnd\\uploads\\'+ req.params.name);
 })
 
 module.exports = router;

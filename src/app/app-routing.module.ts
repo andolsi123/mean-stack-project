@@ -80,18 +80,18 @@ const routes: Routes = [
     path: 'landing-page',
     component: LandingPageComponent,
     children: [
-      {
-        path: 'log-in',
-        component: LogInComponent
+        {
+          path: 'log-in',
+          component: LogInComponent
         },
         {
-        path: 'sign-up-company',
-        component: SignUpCompanyComponent
+          path: 'sign-up-company',
+          component: SignUpCompanyComponent
         },
         {
           path: 'sign-up-freelancer',
           component: SignUpFreelancerComponent
-          },
+        },
         {
           path: 'about-us',
           component: AboutUsComponent
@@ -110,9 +110,9 @@ const routes: Routes = [
     path: 'freelancer',
     component: FreelancerComponent, canActivate: [AuthguardGuard],
     children: [
-      {
-        path: 'dashboard-free',
-        component: DashboardFreeComponent
+        {
+          path: 'dashboard-free',
+          component: DashboardFreeComponent
         },
         {
           path: '',
