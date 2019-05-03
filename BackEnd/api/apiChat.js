@@ -23,7 +23,7 @@ router.post('/addMsg/:id', function(req, res) {
       }
       const io = req.app.get('io');
       io.emit('newMessageAdded');
-    });
+    })
   })
 })
 

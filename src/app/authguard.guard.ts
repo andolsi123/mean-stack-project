@@ -5,16 +5,15 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthguardGuard implements CanActivate {
-  constructor(private router: Router){}
-  canActivate(next: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(localStorage.getItem('token'))
-    {
+  constructor(private router: Router) {}
+  // tslint:disable-next-line: max-line-length
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (localStorage.getItem('token')) {
       return true;
-    }
-    else {
+    } else {
       this.router.navigate(['landing-page/log-in']);
     }
   }
-  
 }
