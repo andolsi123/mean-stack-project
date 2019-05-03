@@ -8,27 +8,29 @@
 }
 
 .bloc2{
-    background-color: rgb(212, 209, 209);
-    height: 500px;
+    background-color: rgb(250, 246, 246);
+    height: 350px;
     width: 100%;
 }
 
 .bloc3{
     background-color: white;
-    height: 500px;
+    height: 550px;
     width: 100%;
 }
 
 .bloc4{
-    background-color: rgb(145, 206, 235);
-    height: 420px;
+    /* background-color: rgb(145, 206, 235); */
+    background-color: white;
+    height: 450px;
     width: 100%;
 }
 
 .bloc5{
     background-color: white;
-    height: 500px;
+    height: 400px;
     width: 100%;
+    text-align: center;
 }
 .bloc6{
     background-color: #2196f3;
@@ -46,7 +48,7 @@
   }
 
   .image_bok{
-    margin-top: 3%;
+    margin-top: 0%;
     margin-left: 15% !important;
     width: 80%;
   }
@@ -54,7 +56,7 @@
   .logo{
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 
   .text {
@@ -88,6 +90,7 @@
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    /* background-color: rgba(0, 140, 186, .2); */
-    background-color: #008CBA;
+    /* background-color: rgba(100, 98, 221, 0.7); */
+    background-color:hsl(207, 90%, 54%,07);
+    /* background-color: #008CBA; */
   }

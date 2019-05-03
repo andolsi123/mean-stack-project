@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
 
   detlet(id) {
     this.appService.postDeleteProject(id).subscribe((data)  => this.projects = data);
+    this.ngOnInit();
   }
 
   update(id) {

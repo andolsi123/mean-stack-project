@@ -1,85 +1,122 @@
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-md-4" *ngFor="let project of allProjects">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <i><img src="http://localhost:3000/users/image/{{project.company.logo}}" style="margin-left:33%;" width="100"
-              alt="Cinque Terre"></i>
-          <h6 style="font-weight:bold ; font-size: 20px;color: #1cb3e5;text-align: center">
-            {{project.titre_project}}</h6>
-          <p class="card-text">
-            {{project.description_project}}</p>
-          <p class="text-muted">
-            {{project.duration}}DAYS</p>
-           <button type="button" class="btn btn-primary" style="margin-left: 70% !important;"
-            routerLink="/freelancer/{{project._id}}">details</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="container-fluid bloc1">
   <div class="container text-center" style="color: white;">
-    <h1 class="pt-5">Our site putting in contact the Freelancer and Company.</h1>
+    <h1 class="pt-5">Site the Freelancer</h1>
+    <h2 class="pt-5">Our site putting in contact the Freelancer and Company.</h2><br><br>
+    <h5>Our goal is to attract companies to post their projects and find the Freelances that suit them. We select the
+      real fake ads. Freelance will have a wide range of projects.</h5>
   </div>
-</div>
-<div class="container-fluid bloc2">
-
 </div>
 <div class="container-fluid bloc3">
-  <div class="container text-center" style="color: white;">
-    <h1 style="color: black ;" class="pt-2">join our platform</h1>
+  <div class="container text-center pt-2" style="color: white;">
+    <h1 style="font-weight:bold ;font-size: 35px;color: black" class="pt-1">JOIN OUR PLATFORM </h1>
     <img src="../../assets/img/ligne1.png" class="img-fluid">
   </div>
-  <div class="container">
+  <div class="container pt-5">
     <div class="row image_bok">
       <div class="col-md-4">
-        <div class="card block-card">
+        <div class="block-card">
           <img class="card-img-top block-image" src="../../assets/img/icon-societes.png" alt="Card image"
             class="img-fluid">
           <div class="card-body">
-            <h4 class="card-title">Companies</h4>
-            <p class="card-text">{{nbCompany}} companies</p>
+            <h4 class="card-title" style="font-weight:bold ;font-size: 20px;color:rgb(189, 31, 31)">Companies</h4>
+            <P>Post your projects and find the Freelances.</P>
+            <p class="card-text"><a
+                style="color:rgb(189, 31, 31);font-size: 20px;font-weight:bold">{{nbCompany}}</a>companies</p>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card block-card">
+      <div class="col-md-4 pt-4">
+        <div class="block-card">
           <img class="card-img-top block-image" src="../../assets/img/freelancer.png" alt="Card image"
             class="img-fluid">
           <div class="card-body">
-            <h4 class="card-title">Freelancer</h4>
-            <p class="card-text">{{nbFreelancer}} freelancers</p>
+            <h4 class="card-title" style="font-weight:bold ;font-size: 20px;color:rgb(189, 31, 31)">Freelancer</h4>
+            <P>Apply to offers to increase your chances of success.</P>
+            <p class="card-text"><a
+                style="color:rgb(189, 31, 31);font-size: 20px;font-weight:bold">{{nbFreelancer}}</a>freelancers</p>
           </div>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card block-card">
+        <div class="block-card">
           <img class="card-img-top block-image" src="../../assets/img/project_icon.png" alt="Card image"
             class="img-fluid">
           <div class="card-body">
-            <h4 class="card-title">Project</h4>
-            <p class="card-text">{{nbProject}} projects</p>
+            <h4 class="card-title" style="font-weight:bold ;font-size: 20px;color:rgb(189, 31, 31)">Project</h4>
+            <P> Guarantees the quality and speed of your project</P>
+            <p class="card-text"><a style="color:rgb(189, 31, 31);font-size: 20px;font-weight:bold">{{nbProject}}</a>
+              projects</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="container-fluid bloc4">
+<div class="container-fluid bloc2 text-center">
+  <h2 class="pt-2" style="color:#2196f3">What are the benefits of freelancing for your business?</h2>
+  <div class="container pt-5">
+    <p>
+      Applying for freelance has several advantages for a company. The first is flexibility: an independent will often
+      be available over relatively long time slots, In fact, a freelancer will be totally dedicated to the mission that
+      is requested. This brings us to the second advantage, namely speed. Since the work is one shot, the delivery of
+      the requested work is fast. Applying to freelance also allows you to benefit from expertise and skills in a
+      specific area, and thus ensure quality work.
+    </p>
+    <p>This can allow you to take a
+      step back from your work and bring a new look that is not negligible to boost creativity and innovation in your
+      business.</p>
+
+
+
+    <!-- <h3>It's you the boss!</h3> -->
+    <button class="btn btn-primary pt-2" routerLink="/landing-page/sign-up-company">SingUp Company</button>
+  </div>
+</div>
+<div class="container-fluid bloc4 pt-3">
   <div class="row">
     <div class="col-md-4" *ngFor="let company of allCompany">
       <img class="logo" src="http://localhost:3000/users/image/{{company.logo}}">
       <div class="overlay">
-          <div class="text">{{company.nameCompany}}</div>
+        <div class="text">{{company.nameCompany}}</div>
       </div>
     </div>
   </div>
 </div>
-<div class="container-fluid bloc5">
+<div class="container-fluid bloc2 text-center">
+  <h2 class="pt-5" class="pt-2" style="color:#2196f3">We've got what you need!</h2>
+  <div class="container pt-3">
+    <p>
+      The word "freedom" is the guiding thread of a freelancer, he chooses the way he works. Being freelance means
+      organizing his time in favor of his private life, so you can enjoy your loved ones with complete peace of mind.
 
+      also choose the place of work
+      Moreover, he can even choose his clientele and thus have the freedom to work with the people he wishes so he can
+      increase his network while choosing him.
+    </p>
+
+    <h3>It's you the boss!</h3>
+    <button class="btn btn-primary pt-2" routerLink="/landing-page/sign-up-freelancer">SingUp Freelancer</button>
+  </div>
+</div>
+<div class="container-fluid bloc5 pt-3">
+  <div class="container text-center ">
+    <h1 style="font-weight:bold ; font-size: 35px;color: black">CONTACT US</h1>
+    <img src="../../assets/img/ligne1.png" class="img-fluid">
+  </div>
+  <div class="container text-center">
+    <h3><i class="fas fa-map-marker-alt" style="color:rgb(189, 31, 31);font-size: 30px;"></i>&nbsp;St. la bourse,
+      building El Wafa, Bloc A 2nd floor, Lac 2, Tunis, Tunisia</h3>
+    <h3><i class="fas fa-phone" style="color:rgb(189, 31, 31);font-size: 30px;"></i>&nbsp;71 190 418</h3>
+    <h3><i class="fas fa-at" style="color:rgb(189, 31, 31);font-size: 30px;"></i>&nbsp;contact@FivePoints.tn</h3>
+  </div>
+  <div class="container text-center pt-5" style="color:rgb(189, 31, 31);font-size: 40px;">
+    <i class="fab fa-facebook-square"></i>&nbsp;
+    <i class="fab fa-facebook-messenger"></i>&nbsp;
+    <i class="fab fa-twitter"></i>&nbsp;
+    <i class="fab fa-instagram"></i>&nbsp;
+  </div>
 </div>
 <div class="container-fluid bloc6">
-  <b style="margin-top: 50%;" class="pt-3">Copyright © 2019</b>
+  <b style="margin-top: 50%;" class="pt-3">Copyright © 2019</b><br>
+  <b>Five Points</b>
 </div>

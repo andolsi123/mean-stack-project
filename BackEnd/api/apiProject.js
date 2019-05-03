@@ -147,9 +147,7 @@ router.post('/addRemoveLike/:projectId/:freelancerId', async function(req, res) 
     }
     var likes = project.like;
     if (project.freelancers_likes.length == 0) {
-      project.like += 1;
-      project.save(function(error) {if (error) {console.log(error);}});
-      Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {freelancers_likes: req.params.freelancerId}}, function(errrrr, dlt) {
+      Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {freelancers_likes: req.params.freelancerId}, like: 1}, function(errrrr, dlt) {
         if (errrrr) {
           console.log(errrrr);
         }
