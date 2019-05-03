@@ -97,6 +97,15 @@ router.post('/addChangeRating/:freelancerId', function(req, res) {
     }
     res.send(rating.rating);
   })
-})
+});
+
+router.get('/allfreelancers', async function(req, res) {
+  await Freelancer.find().exec(function(err, freelancer) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(freelancer);
+  });
+});
 
 module.exports = router;

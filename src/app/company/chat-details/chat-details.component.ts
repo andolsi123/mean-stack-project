@@ -32,7 +32,7 @@ export class ChatDetailsComponent implements OnInit {
   }
 
   addChat() {
-    this.appService.postAddChat({chat: this.message, sender: this.sender}, this.param).subscribe();
+    this.appService.postAddChat({message: this.message, sender: this.sender}, this.param).subscribe();
   }
 
   getChat() {

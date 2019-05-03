@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-4" *ngFor="let project of allProjects">
       <div class="card mb-4 shadow-sm">
@@ -11,10 +11,75 @@
             {{project.description_project}}</p>
           <p class="text-muted">
             {{project.duration}}DAYS</p>
-          <!-- <button type="button" class="btn btn-primary" style="margin-left: 70% !important;"
-            routerLink="/freelancer/{{project._id}}">details</button> -->
+           <button type="button" class="btn btn-primary" style="margin-left: 70% !important;"
+            routerLink="/freelancer/{{project._id}}">details</button>
         </div>
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="container-fluid bloc1">
+  <div class="container text-center" style="color: white;">
+    <h1 class="pt-5">Our site putting in contact the Freelancer and Company.</h1>
+  </div>
+</div>
+<div class="container-fluid bloc2">
+
+</div>
+<div class="container-fluid bloc3">
+  <div class="container text-center" style="color: white;">
+    <h1 style="color: black ;" class="pt-2">join our platform</h1>
+    <img src="../../assets/img/ligne1.png" class="img-fluid">
+  </div>
+  <div class="container">
+    <div class="row image_bok">
+      <div class="col-md-4">
+        <div class="card block-card">
+          <img class="card-img-top block-image" src="../../assets/img/icon-societes.png" alt="Card image"
+            class="img-fluid">
+          <div class="card-body">
+            <h4 class="card-title">Companies</h4>
+            <p class="card-text">{{nbCompany}} companies</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card block-card">
+          <img class="card-img-top block-image" src="../../assets/img/freelancer.png" alt="Card image"
+            class="img-fluid">
+          <div class="card-body">
+            <h4 class="card-title">Freelancer</h4>
+            <p class="card-text">{{nbFreelancer}} freelancers</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card block-card">
+          <img class="card-img-top block-image" src="../../assets/img/project_icon.png" alt="Card image"
+            class="img-fluid">
+          <div class="card-body">
+            <h4 class="card-title">Project</h4>
+            <p class="card-text">{{nbProject}} projects</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid bloc4">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let company of allCompany">
+      <img class="logo" src="http://localhost:3000/users/image/{{company.logo}}">
+      <div class="overlay">
+          <div class="text">{{company.nameCompany}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid bloc5">
+
+</div>
+<div class="container-fluid bloc6">
+  <b style="margin-top: 50%;" class="pt-3">Copyright © 2019</b>
 </div>

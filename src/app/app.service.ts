@@ -79,6 +79,14 @@ export class AppService {
     return this.http.post('http://localhost:3000/users/login', body);
   }
 
+  getAllCompanies() {
+    return this.http.get(`http://localhost:3000/companies/allCompanies`);
+  }
+
+  getAllFreelancers() {
+    return this.http.get(`http://localhost:3000/freelancers/allfreelancers`);
+  }
+
   getOneCompany(id) {
     const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get(`http://localhost:3000/companies/getCompany/${id}`, { headers: header });

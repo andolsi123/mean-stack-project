@@ -117,4 +117,15 @@ router.post('/removeNotifications/:companyId', function (req, res) {
   })
 })
 
+
+router.get('/allCompanies', async function(req, res) {
+  await Company.find().exec(function(err, company) {
+    if (err) {
+      res.send(err);
+    }
+    res.send(company);
+  });
+});
+
+
 module.exports = router;
