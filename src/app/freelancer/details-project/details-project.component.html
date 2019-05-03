@@ -30,30 +30,52 @@
       </div>
     </div>
     <div class="vl">
-    <div class="col-sm-6" style="margin-left: 30%;">
-      <a style="font-weight:bold ;text-align: center; font-size: 30px;color: #1cb3e5">Company</a><br>
-      <a style="font-weight:bold ; font-size: 20px;"> Logo :</a>
-      <i><img src="http://localhost:3000/users/image/{{project.company.logo}}" width="100" alt="Cinque Terre"></i>
-      <div>
-        <a style="font-weight:bold ; font-size: 20px;"> Name Company : </a> {{project.company.nameCompany}}
-      </div>
-      <div>
-        <a style="font-weight:bold ; font-size: 20px;"> Found year : </a>{{project.company.foundyear}}
-      </div>
-      <div>
-        <a style="font-weight:bold ; font-size: 20px;"> Phone Number : </a>{{project.company.phoneNumber}}
-      </div>
-      <div>
-        <a style="font-weight:bold ; font-size: 20px;"> address : </a>{{project.company.address}}
-      </div>
-      <div>
-        <a style="font-weight:bold ; font-size: 20px;"> web Site : </a>{{project.company.webSite}}
-      </div>
-      <div>
-        <a style="font-weight:bold ; font-size: 20px;"> facebook : </a>{{project.company.facebook}}
+      <div class="col-sm-12" style="margin-left: 30%;">
+        <a style="font-weight:bold ;text-align: center; font-size: 30px;color: #1cb3e5">Company</a><br>
+        <a style="font-weight:bold ; font-size: 20px;"> Logo :</a>
+        <i><img src="http://localhost:3000/users/image/{{project.company.logo}}" width="100" alt="Cinque Terre"></i>
+        <div>
+          <a style="font-weight:bold ; font-size: 20px;"> Name Company : </a> {{project.company.nameCompany}}
+        </div>
+        <div>
+          <a style="font-weight:bold ; font-size: 20px;"> Found year : </a>{{project.company.foundyear}}
+        </div>
+        <div>
+          <a style="font-weight:bold ; font-size: 20px;"> Phone Number : </a>{{project.company.phoneNumber}}
+        </div>
+        <div>
+          <a style="font-weight:bold ; font-size: 20px;"> address : </a>{{project.company.address}}
+        </div>
+        <div>
+          <a style="font-weight:bold ; font-size: 20px;"> web Site : </a>{{project.company.webSite}}
+        </div>
+        <div>
+          <a style="font-weight:bold ; font-size: 20px;"> facebook : </a>{{project.company.facebook}}
+        </div>
       </div>
     </div>
-  </div>
     <!-- </div> -->
+  </div><br><br><br>
+  <div style="margin-top: 5%;">
+    <a class="comment"> Commentaire : </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <textarea style="width: 80%" [(ngModel)]="commentaire"></textarea>
+    <div style="margin-left: 90%;">
+      <!-- <button type="button" (click)="addComment()">+</button>&nbsp;&nbsp;&nbsp; -->
+      <span class="btn btn-primary" (click)="addComment()"><i class="fas fa-comment"
+        style="color:white;font-size: 20px;"></i></span>
+      <!-- <button type="button" (click)="CancelComment()">*</button> -->
+      <span class="btn btn-primary" (click)="CancelComment()"><i class="fas fa-comment-slash"
+        style="color:white;font-size: 18px;"></i></span>
+    </div>
+  </div><br><br>
+  <div *ngFor="let comment of comments">
+    <img src="http://localhost:3000/users/image/{{comment.photo_commenter}}" class="rounded-circle z-depth-0"
+      alt="avatar image" height="50">&nbsp;&nbsp;
+    <a style="font-weight:bold ; font-size: 20px;">{{comment.commenter}} : </a>&nbsp;&nbsp;{{comment.comment}}
+    <span *ngIf="comment.id_commenter == id_freelancer">
+      <a class="btn btn-primary" (click)="delComment(comment._id)" style="margin-left: 10%"> <i class="fas fa-trash-alt"
+          style="color:white;font-size: 20px;"></i></a>
+      <!-- <button type="button" (click)="editComment()">edi</button> -->
+    </span><br><br>
   </div>
 </div>

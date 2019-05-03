@@ -18,16 +18,24 @@
         <div class="col-md-4" *ngFor="let project of allProjects">
           <div class="card mb-4 shadow-sm">
             <div class="card-body">
-              <i><img src="http://localhost:3000/users/image/{{project.company.logo}}" style="margin-left:33%;" width="100"
-                  alt="Cinque Terre"></i>
+              <i><img src="http://localhost:3000/users/image/{{project.company.logo}}" style="margin-left:33%;"
+                  width="100" alt="Cinque Terre"></i>
+
               <h6 style="font-weight:bold ; font-size: 20px;color: #1cb3e5;text-align: center">
                 {{project.titre_project}}</h6>
               <p class="card-text">
                 {{project.description_project}}</p>
               <p class="text-muted">
                 {{project.duration}}DAYS</p>
+
               <button type="button" class="btn btn-primary" style="margin-left: 70% !important;"
-              routerLink="/freelancer/{{project._id}}">details</button>
+                routerLink="/freelancer/{{project._id}}">details</button>
+
+              <span  class="btn btn-primary" (click)="likeProjet(project._id)">
+                <i class="fas fa-heart" style="color:white;font-size: 20px;"></i>
+                <!-- <i *ngIf="project.freelancers_likes == id_freelancer" class="fas fa-heart" style="color:red;font-size: 20px;"></i> -->
+              </span>
+
             </div>
           </div>
         </div>

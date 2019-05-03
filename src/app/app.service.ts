@@ -28,6 +28,22 @@ export class AppService {
     return throwError('Something bad happened; please try again later.');
   }
 
+ postAddChat(body, id) {
+  return this.http.post(`http://localhost:3000/chat/addMsg/${id}`, body);
+ }
+
+ getChatByCompany(id) {
+   return this.http.get(`http://localhost:3000/chat/getChatCompany/${id}`);
+ }
+
+ getChatByFreelancer(id) {
+  return this.http.get(`http://localhost:3000/chat/getChatFreelancer/${id}`);
+ }
+
+ getChatById(id) {
+   return this.http.get(`http://localhost:3000/chat/getChatById/${id}`);
+ }
+
   postAddProject(body: any): Observable<any> {
     return this.http.post(`http://localhost:3000/projects/addProject`, body).pipe(catchError(this.handleError));
   }
@@ -41,11 +57,15 @@ export class AppService {
   }
 
   getAllProjectsCompany(id: any) {
-    return this.http.get(`http://localhost:3000/projects/allProjectsCompany/${id}`, {});
+    return this.http.get(`http://localhost:3000/projects/allProjectsCompany/${id}`);
+  }
+  getAllProjectsAppliedFree(id: any) {
+    return this.http.get(`http://localhost:3000/projects/AllProjectsApplied/${id}`);
   }
 
-  postAppliedFreelancers(projectId, freelancerId) {
-    return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}`, {});
+  postAppliedFreelancers(projectId, freelancerId, companyId, body) {
+    // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name}
+    return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}/${companyId}`, body);
   }
 
   postAffectedProject(freelancerId, projectId) {
@@ -78,19 +98,19 @@ export class AppService {
   }
 
   getOneCompany(id) {
-    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get(`http://localhost:3000/companies/getCompany/${id}`, { headers: header });
   }
 
   UpdateCompanyProfile(id, body) {
-    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body, { headers: header });
   }
 
 
 
   getOneFreelancer(id) {
-    let header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get(`http://localhost:3000/freelancers/getFreelancer/${id}`, { headers: header });
   }
 
@@ -99,6 +119,21 @@ export class AppService {
     return this.http.post(`http://localhost:3000/companies/updateFreelancerProfil/${id}`, body, { headers: header });
   }
 
+  postDeleteComment(idP: any, idC: any) {
+    return this.http.post(`http://localhost:3000/projects/deleteComment/${idP}/${idC}`, {});
+  }
+
+  postAddComment(id, body) {
+    return this.http.post(`http://localhost:3000/projects/addComment/${id}`, body);
+  }
+
+  notificationRemove(companyId) {
+    return this.http.post(`http://localhost:3000/projects/removeNotifications/${companyId}`, {});
+  }
+
+  postLikeProject(idP , idF) {
+    return this.http.post(`http://localhost:3000/projects/addRemoveLike/${idP}/${idF}`, {});
+  }
 
   setToken(token: string): void {
     localStorage.setItem('token', token);
@@ -106,7 +141,7 @@ export class AppService {
 
   getDecodedToken() {
     if (localStorage.getItem('token')) {
-      let decoded = jwt_decode(localStorage.getItem('token'));
+      const decoded = jwt_decode(localStorage.getItem('token'));
       return decoded;
     } else {
       return null;

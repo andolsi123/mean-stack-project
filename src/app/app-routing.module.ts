@@ -20,12 +20,20 @@ import { ProfilComponent } from './company/profil/profil.component';
 import { AuthguardGuard } from './authguard.guard';
 import { EditProjectComponent } from './company/edit-project/edit-project.component';
 import { HomeComponent } from './landing-page/home/home.component';
+import { ChatComponent } from './company/chat/chat.component';
+import { ChatDetailsComponent } from './company/chat-details/chat-details.component';
+import { ChatsComponent } from './freelancer/chats/chats.component';
+import { DetailsChatComponent } from './freelancer/details-chat/details-chat.component';
 
 const routes: Routes = [
   {
     path: 'company',
-    component: CompanyComponent,canActivate: [AuthguardGuard],
+    component: CompanyComponent, canActivate: [AuthguardGuard],
     children: [
+      {
+        path: '',
+        component: DashboardComponent
+      },
       {
         path: 'dashboard',
         component: DashboardComponent
@@ -41,21 +49,30 @@ const routes: Routes = [
        {
        path: 'detail-project/:id',
        component: DetailProjectComponent
-     },
-     {
+      },
+      {
        path: 'edit-project',
        component: EditeProfilComponent
-     },
-        {path: 'edite-profil',
-        component: EditeProfilComponent
-        },
-        {
-          path: 'profil',
-          component: ProfilComponent
-        },
+      },
+      {
+       path: 'edite-profil',
+       component: EditeProfilComponent
+      },
+      {
+        path: 'profil',
+        component: ProfilComponent
+      },
       {
         path: 'edit-project/:id',
         component: EditProjectComponent
+      },
+      {
+        path: 'chatting',
+        component: ChatComponent
+      },
+      {
+        path: 'chatting/:id',
+        component: ChatDetailsComponent
       }
     ]
   },
@@ -91,7 +108,7 @@ const routes: Routes = [
   } ,
   {
     path: 'freelancer',
-    component: FreelancerComponent,canActivate: [AuthguardGuard],
+    component: FreelancerComponent, canActivate: [AuthguardGuard],
     children: [
       {
         path: 'dashboard-free',
@@ -112,6 +129,14 @@ const routes: Routes = [
         {
           path: ':id',
           component: DetailsProjectComponent
+        },
+        {
+          path: 'chats',
+          component: ChatsComponent
+        },
+        {
+          path: 'chats/:id',
+          component: DetailsChatComponent
         }
     ]
   }
