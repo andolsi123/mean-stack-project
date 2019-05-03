@@ -28,11 +28,14 @@ export class EditProjectComponent implements OnInit {
   constructor(private http: AppService, private route: ActivatedRoute) {
     this.id = this.route.snapshot.params.id;
     this.http.getOneProject(this.route.snapshot.params.id).subscribe((data: any) => {
+      // tslint:disable-next-line: prefer-const
+      for (let skill of data.skills) {
+        this.skills.push(skill.skill);
+      }
       this.addProject = new FormGroup({
         projectName: new FormControl(data.titre_project, Validators.required),
         minOffer: new FormControl(data.min_offer, Validators.required),
         maxOffer: new FormControl(data.max_offer, Validators.required),
-        skillsArray: new FormControl('', Validators.required),
         duration: new FormControl(data.duration, Validators.required),
         description: new FormControl(data.description_project, Validators.required)
       });
@@ -70,7 +73,8 @@ export class EditProjectComponent implements OnInit {
       statut: 'not started',
       duration: this.addProject.get('duration').value
     };
-    this.http.postUpdateProject(this.id, data).subscribe(data => {
+    // tslint:disable-next-line: no-shadowed-variable
+    this.http.postUpdateProject(this.id, data).subscribe((data: any) => {
       console.log(data);
     });
   }

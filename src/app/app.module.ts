@@ -24,6 +24,8 @@ import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sig
 import { FilterProjectsPipe } from './filter-projects.pipe';
 import { MatChipsModule} from '@angular/material/chips';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import { EditeProfilComponent } from './company/edite-profil/edite-profil.component';
 import { FreelancerComponent } from './freelancer/freelancer.component';
 import { DashboardFreeComponent } from './freelancer/dashboard-free/dashboard-free.component';
@@ -41,9 +43,7 @@ import { ChatDetailsComponent } from './company/chat-details/chat-details.compon
 import { ChatsComponent } from './freelancer/chats/chats.component';
 import { DetailsChatComponent } from './freelancer/details-chat/details-chat.component';
 
-
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
-
 
 @NgModule({
   declarations: [
@@ -77,7 +77,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ChatComponent,
     ChatDetailsComponent,
     ChatsComponent,
-    DetailsChatComponent
+    DetailsChatComponent,
+    MatSnackBarModule
   ],
   imports: [
     BrowserModule,

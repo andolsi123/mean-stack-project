@@ -81,20 +81,20 @@ router.get('/getCompany/:id', passport.authenticate('bearer', { session: false }
   })
 })
 
-router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('bearer', { session: false }), function (req, res) {
+router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('bearer', {session: false}), function (req, res) {
   var id = req.params.id
   req.body.logo = req.file.filename;
-  Company.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, company) {
+  Company.findByIdAndUpdate({"_id": id}, {$set: req.body}).exec(function (err, company) {
     if (err) {
       res.send(err)
     }
     else {
-      User.findOneAndUpdate({ "company": company._id }, { $set: req.body }).exec(function (err, user) {
+      User.findOneAndUpdate({"company": company._id }, {$set: req.body}).exec(function (err, user) {
         if (err) {
           res.send(err);
         }
         User.findById(user._id).exec(function (err, user2) {
-          const token = jwt.sign({ data: user2 },
+          const token = jwt.sign({data: user2},
             JWT_SIGN_SECRET, {
             expiresIn: '1h'
             });

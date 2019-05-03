@@ -9,6 +9,7 @@ import * as jwt_decode from 'jwt-decode';
 export class AppService {
 
   connectedUser: any;
+
   constructor(private http: HttpClient) {
     this.connectedUser = this.getDecodedToken();
   }
@@ -46,18 +47,17 @@ export class AppService {
   }
 
   postAppliedFreelancers(projectId, freelancerId, companyId, body) {
-    // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name}
+    // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name};
     return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}/${companyId}`, body);
   }
 
   postAffectedProject(freelancerId, projectId) {
-    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`, {});
+    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`, null);
   }
 
   postAcceptedFreelancer(projectId, freelancerId) {
-    return this.http.post(`http://localhost:3000/projects/acceptedFreelancer/${projectId}/${freelancerId}`, {});
+    return this.http.post(`http://localhost:3000/projects/acceptedFreelancer/${projectId}/${freelancerId}`, null);
   }
-
 
   postDeleteProject(id: any) {
     return this.http.post(`http://localhost:3000/projects/DeleteProject/${id}`, null);
@@ -103,7 +103,7 @@ export class AppService {
   }
 
   postDeleteComment(idP: any, idC: any) {
-    return this.http.post(`http://localhost:3000/projects/deleteComment/${idP}/${idC}`, {});
+    return this.http.post(`http://localhost:3000/projects/deleteComment/${idP}/${idC}`, null);
   }
 
   postAddComment(id, body) {
@@ -111,11 +111,11 @@ export class AppService {
   }
 
   notificationRemove(companyId) {
-    return this.http.post(`http://localhost:3000/projects/removeNotifications/${companyId}`, {});
+    return this.http.post(`http://localhost:3000/projects/removeNotifications/${companyId}`, null);
   }
 
   postLikeProject(idP , idF) {
-    return this.http.post(`http://localhost:3000/projects/addRemoveLike/${idP}/${idF}`, {});
+    return this.http.post(`http://localhost:3000/projects/addRemoveLike/${idP}/${idF}`, null);
   }
 
   setToken(token: string): void {
