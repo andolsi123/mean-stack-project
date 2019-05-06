@@ -1,4 +1,4 @@
-<div class="card">
+<!-- <div class="card">
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
@@ -53,4 +53,56 @@
       <div class="col-sm-6"> {{skill.skill}}</div>
     </div>
   </div>
+</div> -->
+
+
+<div class='healthy-snacks' style="margin-top: 10%">
+    <article>
+      <header>
+        <h3><span>{{projects.titre_project}}</span></h3>
+      </header>
+      <div class='excerpt'>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">Description</a>:{{projects.description_project}}<br>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">Statut</a>:{{projects.statut}}<br>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">Max_offer</a>:{{projects.max_offer}}<br>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">Max_offer</a>:{{projects.min_offer}}<br>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">Duration</a>:{{projects.durations}}<br>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">skill</a> :
+        <div *ngFor="let skill of projects.skills">
+             <div>{{skill.skill}}</div>
+        </div>
+      </div>
+    </article>
+<div class="card">
+  <table class="table">
+    <tr>
+      <td>Title:</td>
+      <td>{{projects.titre_project}}</td>
+    </tr>
+    <tr><td>Description:</td>
+      <td>{{projects.description_project}}</td>
+    </tr>
+     <tr> <td>Duration:</td>
+      <td>{{projects.durations}}</td>
+    </tr>
+    <tr>  <td>statut:</td>
+      <td>{{projects.statut}}</td>
+    </tr>
+    <tr>  <td>Max_offer:</td>
+      <td>{{projects.max_offer}}</td>
+    </tr>
+  <tr>  <td>Min_offer:</td>
+    <td>{{projects.min_offer}}</td>
+  </tr>
+  <tr>  <td>Min_offer:</td>
+    <td>{{projects.min_offer}}</td>
+  </tr>
+  <tr>  <td *ngFor="let skill of projects.skills" >skills:</td>
+    <td>{{skill.skill}}</td>
+  </tr>
+
+</table>
 </div>
+
+
+

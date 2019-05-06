@@ -94,8 +94,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MatChipsModule,
     MatIconModule,
     CKEditorModule,
-    SocketIoModule.forRoot(config),
-    MatSnackBarModule
+    MatSnackBarModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

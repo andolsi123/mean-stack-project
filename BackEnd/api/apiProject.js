@@ -82,7 +82,7 @@ router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async fun
 })
 
 router.post('/acceptedFreelancer/:projectId/:freelancerId', async function(req, res) {
-  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: {accepted_freelancer: req.params.freelancerId}}, function(err, project) {
+  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: { accepted_freelancer: req.params.freelancerId, statut:'started'} }, function(err, project) {
     if (err) {
       res.send(err);
     }
@@ -135,6 +135,16 @@ router.get('/allProjects', async function(req, res) {
   })
 })
 
+router.get('/AllProjectsApplied/:id', async function(req, res){
+  var id = req.params.id;
+  await Project.find({company:id}).populate('applied_freelancers').exec(function(err, projects){
+    if(err){
+      res.send(err);
+    }
+    res.send(projects);
+  })
+})
+
 router.get('/oneProject/:projectId', async function(req, res) {
   await Project.findById({_id: req.params.projectId}).populate('company').populate('accepted_freelancer').populate('applied_freelancers').exec(function(err, project) {
     if (err) {
@@ -160,7 +170,7 @@ router.post('/addRemoveLike/:projectId/:freelancerId', async function(req, res) 
     }
     var likes = project.like;
     if (project.freelancers_likes.length == 0) {
-      Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {freelancers_likes: req.params.freelancerId}, like: 0}, function(errrrr, dlt) {
+      Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {freelancers_likes: req.params.freelancerId}, like: 1}, function(errrrr, dlt) {
         if (errrrr) {
           console.log(errrrr);
         }
