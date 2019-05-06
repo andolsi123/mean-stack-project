@@ -2,16 +2,44 @@
   <section class="jumbotron text-center" style="background-image: url(./../../assets/img/code555.jpg);background-repeat: no-repeat;
     background-size: 100%;">
     <div class="container">
-      <h1 class="jumbotron-heading">Album example</h1>
-      <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc.
-        Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-      <p>
-        <a href="#" class="btn btn-primary my-2">Main call to action</a>
-        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-      </p>
+      <h1 class="jumbotron-heading" style="color:#2196f3">Freelancer</h1>
+      <div class="lead text-muted">
+      <p>  I have made the choice of independence to be as free as possible in the way of managing my business. 
+        Acceptingor refusing a particular project, managing my time and limiting my daily travel were stronger motivations than
+        the financial guarantee and the safety nets offered as part of a permanent contract.
+      </p> 
+    </div>
     </div>
   </section>
-  <div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let project of projects">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <div class="thumb" id="one">
+              <img class="lib-img-show" src="http://localhost:3000/users/image/{{project.project.company.logo}}">
+            </div>
+            <h3 style="text-align: center;color: #1cb3e5;font-weight:bold ; font-size: 20px;">{{project.project.titre_project}}</h3>
+            <hr />
+            <p class="desc">
+              <a style="font-weight:bold ; font-size: 15px ; color: black">Description</a> : {{project.project.description_project}}<br>
+              <a style="font-weight:bold ; font-size: 15px ; color: black">Max_offer</a> : {{project.max_offer}}<br>
+              <a style="font-weight:bold ; font-size: 15px ; color: black">Min_offer</a> : {{project.min_offer}}<br>
+              <a style="font-weight:bold ; font-size: 15px ; color: black">Duration</a> : {{project.project.duration}}DAYS
+            </p>
+            <hr />
+            <div style="text-align: center;">
+              <button type="button" class="btn btn-primary" routerLink="/freelancer/{{project._id}}">details</button>
+              <span  class="btn btn-primary" (click)="chat()">
+                <i class="fas fa-headset" style="color:white;font-size: 20px;"></i>
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="album py-5 bg-light">
     <div class="container">
       <div class="row">
         <div class="col-md-4" *ngFor="let project of projects">
@@ -24,8 +52,8 @@
               <p class="card-text">
                 {{project.project.description_project}}</p>
               <p class="text-muted">{{project.project.duration}}DAYS</p>
-              <!-- <button type="button" class="btn btn-primary" style="margin-left: 70% !important;"
-                routerLink="/freelancer/{{project._id}}">details</button> -->
+              <button type="button" class="btn btn-primary" style="margin-left: 70% !important;"
+                routerLink="/freelancer/{{project._id}}">details</button> 
                 <span  class="btn btn-primary" (click)="chat()">
                     <i class="fas fa-headset" style="color:white;font-size: 20px;"></i>
                 </span>
@@ -34,5 +62,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </main>

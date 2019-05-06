@@ -1,4 +1,4 @@
-<div class="card">
+<!-- <div class="card">
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
@@ -53,4 +53,24 @@
       <div class="col-sm-6"> {{skill.skill}}</div>
     </div>
   </div>
+</div> -->
+
+
+<div class='healthy-snacks' style="margin-top: 10%">
+    <article>
+      <header>
+        <h3><span>{{projects.titre_project}}</span></h3>
+      </header>
+      <div class='excerpt'>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">Description</a>:{{projects.description_project}}<br>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">Statut</a>:{{projects.statut}}<br>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">Max_offer</a>:{{projects.max_offer}}<br>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">Max_offer</a>:{{projects.min_offer}}<br>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">Duration</a>:{{projects.durations}}<br>
+        <a style="font-weight:bold ; font-size: 15px ; color: black">skill</a> :
+        <div *ngFor="let skill of projects.skills">
+             <div>{{skill.skill}}</div>
+        </div>
+      </div>
+    </article>
 </div>

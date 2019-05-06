@@ -30,7 +30,9 @@ export class DetailsProjectComponent implements OnInit {
     this.http.getOneFreelancer(this.id_freelancer).subscribe(data3 => {
       this.freelancerConnected  = data3
     });
+    
     this.route.params.subscribe(params => {
+      console.log(params.id);
       this.http.getOneProject(params.id).subscribe(data => {
         this.project = data;
         console.log(this.project);
