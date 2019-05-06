@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './chat-details.component.html',
   styleUrls: ['./chat-details.component.css']
 })
+
 export class ChatDetailsComponent implements OnInit {
 
   messages: any;

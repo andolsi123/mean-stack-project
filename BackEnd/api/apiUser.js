@@ -18,7 +18,7 @@ router.post('/login', function (req, res) {
       res.send('wrong email')
     }
     if (bcrypt.compareSync(req.body.password, users.password)) {
-      let token = jwt.sign({data: users},JWT_SIGN_SECRET, {expiresIn: '1h'});
+      let token = jwt.sign({data: users}, JWT_SIGN_SECRET, {expiresIn: '1h'});
       res.send({
         success: true,
         message: 'Authentication successful!',

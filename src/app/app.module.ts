@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // tslint:disable-next-line:max-line-length
-import { MatInputModule, MatFormFieldModule, MatButtonModule, MatRippleModule, MatSelectModule, MatTooltipModule, MatIconModule } from '@angular/material';
+import { MatInputModule, MatSnackBarModule, MatFormFieldModule, MatButtonModule, MatRippleModule, MatSelectModule, MatTooltipModule, MatIconModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CompanyComponent } from './company/company.component';
 import { AddProjectComponent } from './company/add-project/add-project.component';
@@ -24,7 +24,6 @@ import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sig
 import { FilterProjectsPipe } from './filter-projects.pipe';
 import { MatChipsModule} from '@angular/material/chips';
 import { CKEditorModule } from 'ng2-ckeditor';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { EditeProfilComponent } from './company/edite-profil/edite-profil.component';
 import { FreelancerComponent } from './freelancer/freelancer.component';
@@ -77,8 +76,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ChatComponent,
     ChatDetailsComponent,
     ChatsComponent,
-    DetailsChatComponent,
-    MatSnackBarModule
+    DetailsChatComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +94,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MatChipsModule,
     MatIconModule,
     CKEditorModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

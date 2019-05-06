@@ -36,7 +36,7 @@ router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async fun
     var verif = false;
     for (let freelancer of project.applied_freelancers) {
       if (freelancer == req.params.freelancerId) {
-        verif = true;        
+        verif = true;
       }
     }
     if (verif == false) {
@@ -44,8 +44,8 @@ router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async fun
         from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
         to: req.body.companyEmail,
         subject: `A freelancer has submitted to one of your project`,
-        text: `You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information`,
-        html: `<b>You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information</b>`
+        text: `You have a new submission from ${req.body.freelancer} to your project "${project.titre_project}" check him out for more information`,
+        html: `<b>You have a new submission from ${req.body.freelancer} to your project "${project.titre_project}" check him out for more information</b>`
       };
       await transporter.sendMail(mail, function(error, response) {
         if (error) {
@@ -71,10 +71,10 @@ router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async fun
         if (err3) {
           res.send(err3);
         }
-        const io = req.app.get('io');
-        io.emit('newNotificationAdded');
         com2.notificationsNumber++;
         com2.save(function(error) {console.log(error);});
+        const io = req.app.get('io');
+        io.emit('newNotificationAdded');
       })
     }
     res.send(project);
@@ -160,9 +160,7 @@ router.post('/addRemoveLike/:projectId/:freelancerId', async function(req, res) 
     }
     var likes = project.like;
     if (project.freelancers_likes.length == 0) {
-      project.like += 1;
-      project.save(function(error) {if (error) {console.log(error);}});
-      Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {freelancers_likes: req.params.freelancerId}}, function(errrrr, dlt) {
+      Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {freelancers_likes: req.params.freelancerId}, like: 0}, function(errrrr, dlt) {
         if (errrrr) {
           console.log(errrrr);
         }

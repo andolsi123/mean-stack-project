@@ -55,7 +55,7 @@ router.post('/addfree', upload.single('Image_Profil'), function (req, res) {
         to: user.email,
         subject: "Your account has been created succefully !!",
         text: `Welcome ${free.first_name} ${free.last_name} to our WEB APP hope you enjoy your time here !!`,
-        html: `<b>Welcome <strong>${free.first_name} ${free.last_name}</strong> to our WEB APP hope you enjoy your time here !!</b>`
+        html: `<b>Welcome ${free.first_name} ${free.last_name} to our WEB APP hope you enjoy your time here !!</b>`
       }
       await transporter.sendMail(mail, function(error, response) {
         if (error) {

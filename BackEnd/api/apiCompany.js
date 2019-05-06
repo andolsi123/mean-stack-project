@@ -56,7 +56,7 @@ router.post('/addCompany', upload.single('logo'), function (req, res) {
         to: user.email,
         subject: "Your account has been created succefully !!",
         text: `Welcome ${company.nameCompany} to our WEB APP hope you enjoy your time here !!`,
-        html: `<b>Welcome <strong>${company.nameCompany}</strong> to our WEB APP hope you enjoy your time here !!</b>`
+        html: `<b>Welcome ${company.nameCompany} to our WEB APP hope you enjoy your time here !!</b>`
       }
       await transporter.sendMail(mail, function(error, response) {
         if (error) {
@@ -97,7 +97,7 @@ router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('
           const token = jwt.sign({data: user2},
             JWT_SIGN_SECRET, {
             expiresIn: '1h'
-            });
+          });
           res.send({
             Message: 'Update token ',
             access_token: token,
@@ -117,7 +117,6 @@ router.post('/removeNotifications/:companyId', function (req, res) {
   })
 })
 
-
 router.get('/allCompanies', async function(req, res) {
   await Company.find().exec(function(err, company) {
     if (err) {
@@ -126,6 +125,5 @@ router.get('/allCompanies', async function(req, res) {
     res.send(company);
   });
 });
-
 
 module.exports = router;

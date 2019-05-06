@@ -8,6 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+  // tslint:disable-next-line:variable-name
   id_CompanyConnect: any;
   projects: any;
   q: any;
