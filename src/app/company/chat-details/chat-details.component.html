@@ -1,23 +1,20 @@
-<app-chat>
-</app-chat>
-
-<div class="mesgs">
+<div class="mesgs" style="position:absolute;bottom:0">
     <div class="msg_history">
 <div *ngFor="let message of messages.chat">
       <div class="incoming_msg">
         <div class="incoming_msg_img"> <img src="" alt="sunil"> </div>
         <div class="received_msg">
           <div class="received_withd_msg">
-            <p>mesage</p>
-            <span class="time_date">date</span>
+            <p *ngIf="sender == message.sender"> {{message.message}}</p>
+            <span class="time_date">{{message.date}}</span>
           </div>
         </div>
       </div>
 
       <div class="outgoing_msg">
         <div class="sent_msg">
-          <p>message</p>
-          <span class="time_date">date</span>
+          <p *ngIf="sender !== message.sender">{{message.message}}</p>
+          <span class="time_date">{{message.date}}</span>
          </div>
       </div>
     </div>

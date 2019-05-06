@@ -67,8 +67,17 @@ export class AddProjectComponent implements OnInit {
       company: this.connected,
       duration: this.addProject.get('duration').value
     };
+    // tslint:disable-next-line:no-shadowed-variable
     this.http.postAddProject(data).subscribe(data => {
       console.log(data);
+    });
+    this.addProject = new FormGroup({
+      projectName: new FormControl('', Validators.required),
+      minOffer: new FormControl('', [Validators.required, Validators.min(1)]),
+      maxOffer: new FormControl('', [Validators.required, Validators.min(1)]),
+      skillsArray: new FormControl('', Validators.required),
+      duration: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required)
     });
   }
 }
