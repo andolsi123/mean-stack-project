@@ -45,6 +45,9 @@ export class AppService {
   getAllProjectsCompany(id: any) {
     return this.http.get(`http://localhost:3000/projects/allProjectsCompany/${id}`);
   }
+  getAllProjectsAppliedFree(id: any) {
+    return this.http.get(`http://localhost:3000/projects/AllProjectsApplied/${id}`);
+  }
 
   postAppliedFreelancers(projectId, freelancerId, companyId, body) {
     // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name};
@@ -97,9 +100,16 @@ export class AppService {
     return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body, { headers: header });
   }
 
+
+
   getOneFreelancer(id) {
     const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get(`http://localhost:3000/freelancers/getFreelancer/${id}`, { headers: header });
+  }
+
+  UpdateFreelancerProfile(id, body) {
+    let header = new HttpHeaders().append('Authorization',localStorage.getItem('token'));
+    return this.http.post(`http://localhost:3000/companies/updateFreelancerProfil/${id}`, body, { headers: header });
   }
 
   postDeleteComment(idP: any, idC: any) {

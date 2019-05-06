@@ -73,4 +73,36 @@
         </div>
       </div>
     </article>
+<div class="card">
+  <table class="table">
+    <tr>
+      <td>Title:</td>
+      <td>{{projects.titre_project}}</td>
+    </tr>
+    <tr><td>Description:</td>
+      <td>{{projects.description_project}}</td>
+    </tr>
+     <tr> <td>Duration:</td>
+      <td>{{projects.durations}}</td>
+    </tr>
+    <tr>  <td>statut:</td>
+      <td>{{projects.statut}}</td>
+    </tr>
+    <tr>  <td>Max_offer:</td>
+      <td>{{projects.max_offer}}</td>
+    </tr>
+  <tr>  <td>Min_offer:</td>
+    <td>{{projects.min_offer}}</td>
+  </tr>
+  <tr>  <td>Min_offer:</td>
+    <td>{{projects.min_offer}}</td>
+  </tr>
+  <tr>  <td *ngFor="let skill of projects.skills" >skills:</td>
+    <td>{{skill.skill}}</td>
+  </tr>
+
+</table>
 </div>
+
+
+

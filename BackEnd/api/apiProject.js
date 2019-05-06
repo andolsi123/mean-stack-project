@@ -82,7 +82,7 @@ router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async fun
 })
 
 router.post('/acceptedFreelancer/:projectId/:freelancerId', async function(req, res) {
-  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: {accepted_freelancer: req.params.freelancerId}}, function(err, project) {
+  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: { accepted_freelancer: req.params.freelancerId, statut:'started'} }, function(err, project) {
     if (err) {
       res.send(err);
     }
@@ -129,6 +129,16 @@ router.get('/allProjectsCompany/:id', async function(req, res){
 router.get('/allProjects', async function(req, res) {
   await Project.find().populate('company').populate('accepted_freelancer').populate('applied_freelancers').exec(function(err, projects) {
     if (err) {
+      res.send(err);
+    }
+    res.send(projects);
+  })
+})
+
+router.get('/AllProjectsApplied/:id', async function(req, res){
+  var id = req.params.id;
+  await Project.find({company:id}).populate('applied_freelancers').exec(function(err, projects){
+    if(err){
       res.send(err);
     }
     res.send(projects);
