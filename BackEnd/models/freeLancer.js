@@ -23,4 +23,4 @@ var FreeLancerSchema = new mongoose.Schema({
     }]
 })
 
-module.exports = mongoose.model('freelancer',FreeLancerSchema);
+module.exports = mongoose.model('freelancer', FreeLancerSchema);
