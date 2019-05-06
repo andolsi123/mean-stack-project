@@ -31,6 +31,7 @@ export class DashboardFreeComponent implements OnInit {
   likeProjet(id){
     this.http.postLikeProject(id,this.id_freelancer).subscribe(data3 => {
       console.log(data3);
+     this.ngOnInit();
     })
   }
 }

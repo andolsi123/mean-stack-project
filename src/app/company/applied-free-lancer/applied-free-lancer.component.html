@@ -1,6 +1,6 @@
 <div class="container" >
   <div class="row bloc" *ngFor="let p of projects " style="width: 100%;">
-    <div *ngIf=" p.statut != 'started' ">
+    <div *ngIf=" p.statut != 'started'">
      <div class="col-4">{{p.titre_project}}</div>
      <div class="col-8">
       <div class="row free" *ngFor="let applied_freelancer of p.applied_freelancers" >

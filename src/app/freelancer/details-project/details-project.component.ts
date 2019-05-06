@@ -32,16 +32,13 @@ export class DetailsProjectComponent implements OnInit {
     });
     
     this.route.params.subscribe(params => {
-      console.log(params.id);
+      
       this.http.getOneProject(params.id).subscribe(data => {
         this.project = data;
-        console.log(this.project);
         this.comments = this.project.comments;
-        console.log(this.comments);
 
 
         this.id_company = this.project.company._id;
-        //console.log(this.id_company)
         this.http.getOneCompany(this.id_company).subscribe(date2 => {
           this.company = date2;
         });
@@ -74,7 +71,6 @@ export class DetailsProjectComponent implements OnInit {
       }
       this.comments.push(COMMENT);
       this.http.postAddComment(this.project._id, this.comments).subscribe(data4 => {
-        console.log('comm',data4);
         this.ngOnInit();
 
       })
