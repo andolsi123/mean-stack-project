@@ -33,9 +33,16 @@ export class AppliedFreeLancerComponent implements OnInit {
   accept(idp, idf) {
     this.appService.postAcceptedFreelancer(idp, idf).subscribe((data: any) => {
       this.freelancer = data;
-      console.log(this.freelancer);
+      this.ngOnInit();
     });
-    
   }
 
+
+  cancel(idF, idP){
+    console.log(idF, idP);
+    this.appService.postRefusedFreelancer(idF, idP).subscribe((data: any) => {
+      this.freelancer = data;
+      this.ngOnInit();
+    });
+  }
 }

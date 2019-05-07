@@ -18,7 +18,9 @@ export class DetailProjectComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.appService.getOneProject(this.res).subscribe((data) => console.log(this.projects = data));
+    this.appService.getOneProject(this.res).subscribe((data) => console.log(this.projects = data)
+    
+    );
   }
 
 }

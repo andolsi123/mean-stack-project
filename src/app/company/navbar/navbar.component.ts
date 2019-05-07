@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit {
       this.id_company = this.appService.connectedUser.data.company;
       this.appService.getOneCompany(this.id_company).subscribe((comp: any) => {
       this.company = comp;
+      console.log(this.company)
       this.logo = this.company.logo;
       });
       const navbar: HTMLElement = this.element.nativeElement;

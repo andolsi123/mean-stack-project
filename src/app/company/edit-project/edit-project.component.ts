@@ -3,7 +3,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material';
 import {FormControl, Validators, FormGroup, NgForm } from '@angular/forms';
 import { AppService } from '../../app.service';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 export interface Skills {
   skill: string;
@@ -25,12 +25,12 @@ export class EditProjectComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   skills: Skills[] = [];
 
-  constructor(private http: AppService, private route: ActivatedRoute) {
+  constructor(private http: AppService, private route: ActivatedRoute,private router: Router) {
     this.id = this.route.snapshot.params.id;
     this.http.getOneProject(this.route.snapshot.params.id).subscribe((data: any) => {
       // tslint:disable-next-line: prefer-const
       for (let skill of data.skills) {
-        this.skills.push(skill.skill);
+        this.skills.push(skill);
       }
       this.addProject = new FormGroup({
         projectName: new FormControl(data.titre_project, Validators.required),
@@ -73,9 +73,11 @@ export class EditProjectComponent implements OnInit {
       statut: 'not started',
       duration: this.addProject.get('duration').value
     };
+    console.log(data)
     // tslint:disable-next-line: no-shadowed-variable
     this.http.postUpdateProject(this.id, data).subscribe((data: any) => {
       console.log(data);
+     this.router.navigate(['/company/dashboard']);
     });
   }
 

@@ -4,8 +4,8 @@
           <div class="col-md-10">
               <div class="card">
                   <div class="card-header card-header-info">
-                      <h4 class="card-title">Add a new project</h4>
-                      <p class="card-category">Complete your project details</p>
+                      <h4 class="card-title">Update a project</h4>
+                      <p class="card-category">Update your project details</p>
                   </div>
                   <div class="card-body">
                       <form [formGroup]="addProject" (ngSubmit)="onSubmit()">
@@ -31,9 +31,9 @@
                               <div class="col-md-12">
                                 <mat-form-field class="example-chip-list">
                                     <mat-chip-list #chipList>
-                                            <mat-chip *ngFor="let skil of skills" [selectable]="selectable"
-                                                                     [removable]="removable" (removed)="remove(skil)">
-                                                                      {{skil.skill}}
+                                            <mat-chip *ngFor="let skill of skills" [selectable]="selectable"
+                                                                     [removable]="removable" (removed)="remove(skill)">
+                                                                      {{skill.skill}}
                                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                                             </mat-chip>
                                          <input placeholder="Skills..."
@@ -62,7 +62,7 @@
                                   </ckeditor>
                               </div>
                           </div>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="!addProject.valid">Submit Project</button>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="!addProject.valid">Update Project</button>
                           <div class="clearfix"></div>
                       </form>
                   </div>
