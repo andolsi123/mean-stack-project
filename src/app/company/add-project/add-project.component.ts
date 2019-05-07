@@ -22,6 +22,7 @@ export class AddProjectComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   skills: Skills[] = [];
+  ckeditorContent;
 
   constructor(private http: AppService) {
     this.connected = this.http.connectedUser.data.company;

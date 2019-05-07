@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var ObjectID = mongoose.Types.ObjectId;
 var mailer = require("nodemailer");
+var Project = require('../models/project');
 
 var transporter = mailer.createTransport({
   service: 'gmail',
@@ -21,7 +22,7 @@ var transporter = mailer.createTransport({
   tls: {
     rejectUnauthorized: false
   }
-});
+})
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -80,13 +81,26 @@ router.post('/addProjectApplied/:freelancerId/:projectId', function(req, res) {
   })
 })
 
- router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: false }), async function (req, res) {
+router.post('/refusedFreelancer/:freelancerId/:projectId', async function(req, res) {
+  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$pull: {projects: {project: req.params.projectId}}}, function(err, freelancer) {
+    if (err) {
+      res.send(err);
+    }
+    Project.findByIdAndUpdate({_id: req.params.projectId}, {$pull: {applied_freelancers: req.params.freelancerId}}, function(err2, project) {
+      if (err2) {
+        res.send(err2);
+      }
+    })
+  })
+})
+
+router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: false }), async function (req, res) {
   var id = ObjectID(req.params.id);
   await Freelancer.findById(id).populate('projects.project').populate('projects.project.company').exec((err, freelancer) => {
     if (err) {
       res.send(err);
     }
-    res.send(freelancer);
+  res.send(freelancer);
   })
 })
 
@@ -97,7 +111,7 @@ router.post('/addChangeRating/:freelancerId', function(req, res) {
     }
     res.send(rating.rating);
   })
-});
+})
 
 router.get('/allfreelancers', async function(req, res) {
   await Freelancer.find().exec(function(err, freelancer) {
@@ -105,37 +119,34 @@ router.get('/allfreelancers', async function(req, res) {
       res.send(err);
     }
     res.send(freelancer);
-  });
-});
+  })
+})
 
-router.post('/updateFreelancerProfil/:id', upload.single('Image_Profil'),  function (req, res) {
-
-  var id = req.params.id
+router.post('/updateFreelancerProfil/:id', upload.single('Image_Profil'), function (req, res) {
+  var id = req.params.id;
   req.body.Image_Profil = req.file.filename;
-  Company.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, freelancer) {
-      if (err) {
-          res.send(err)
-
-      }
-      else {
-          User.findOneAndUpdate({ "freelancer": company._id }, { $set: req.body }).exec(function (err, user) {
-              if (err) {
-                  res.send(err);
-              }
-              User.findById(user._id).exec(function (err, user2) {
-                  const token = jwt.sign({ data: user2 },
-                      JWT_SIGN_SECRET, {
-                          expiresIn: '1h'
-                      });
-                  res.send({
-                      Message: 'Update token ',
-                      access_token: token,
-                  })
-
-              })
-          });
-      }
-  });
+  Company.findByIdAndUpdate({"_id": id}, { $set: req.body }).exec(function (err, freelancer) {
+    if (err) {
+      res.send(err)
+    }
+    else {
+      User.findOneAndUpdate({"freelancer": company._id}, {$set: req.body}).exec(function (err, user) {
+        if (err) {
+          res.send(err);
+        }
+        User.findById(user._id).exec(function (err, user2) {
+          const token = jwt.sign({ data: user2 },
+            JWT_SIGN_SECRET, {
+            expiresIn: '1h'
+          })
+          res.send({
+            Message: 'Update token ',
+            access_token: token
+          })
+        })
+      })
+    }
+  })
 })
 
 module.exports = router;

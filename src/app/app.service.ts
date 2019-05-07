@@ -62,6 +62,10 @@ export class AppService {
     return this.http.post(`http://localhost:3000/projects/acceptedFreelancer/${projectId}/${freelancerId}`, null);
   }
 
+  postRefusedFreelancer(freelancerId, projectId) {
+    return this.http.post(`http://localhost:3000/freelancers/refusedFreelancer/${freelancerId}/${projectId}`, null);
+  }
+
   postDeleteProject(id: any) {
     return this.http.post(`http://localhost:3000/projects/DeleteProject/${id}`, null);
    }

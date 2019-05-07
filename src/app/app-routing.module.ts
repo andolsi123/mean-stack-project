@@ -28,7 +28,8 @@ import { DetailsChatComponent } from './freelancer/details-chat/details-chat.com
 const routes: Routes = [
   {
     path: 'company',
-    component: CompanyComponent, canActivate: [AuthguardGuard],
+    component: CompanyComponent,
+    canActivate: [AuthguardGuard],
     children: [
       {
         path: '',
@@ -108,7 +109,8 @@ const routes: Routes = [
   } ,
   {
     path: 'freelancer',
-    component: FreelancerComponent, canActivate: [AuthguardGuard],
+    component: FreelancerComponent,
+    canActivate: [AuthguardGuard],
     children: [
         {
           path: 'dashboard-free',
