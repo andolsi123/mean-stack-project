@@ -54,8 +54,9 @@ export class AppService {
     return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}/${companyId}`, body);
   }
 
-  postAffectedProject(freelancerId, projectId) {
-    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`, null);
+  postAffectedProject(freelancerId, projectId, body) {
+    // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name};
+    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`, body);
   }
 
   postAcceptedFreelancer(projectId, freelancerId) {
@@ -104,15 +105,13 @@ export class AppService {
     return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body, { headers: header });
   }
 
-
-
   getOneFreelancer(id) {
     const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get(`http://localhost:3000/freelancers/getFreelancer/${id}`, { headers: header });
   }
 
   UpdateFreelancerProfile(id, body) {
-    let header = new HttpHeaders().append('Authorization',localStorage.getItem('token'));
+    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.post(`http://localhost:3000/companies/updateFreelancerProfil/${id}`, body, { headers: header });
   }
 

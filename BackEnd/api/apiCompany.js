@@ -35,13 +35,13 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-router.post('/addCompany', upload.single('logo'), function (req, res) {
+router.post('/addCompany', upload.single('logo'), async function (req, res) {
   motpass = req.body.password;
   var hash = bcrypt.hashSync(motpass, saltRounds);
   req.body.password = hash;
   req.body.logo = req.file.filename;
   var company = new Company(req.body);
-  company.save(function (err, company) {
+  await company.save(function (err, company) {
     if (err) {
       res.send(err);
     }
@@ -71,9 +71,9 @@ router.post('/addCompany', upload.single('logo'), function (req, res) {
   })
 })
 
-router.get('/getCompany/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+router.get('/getCompany/:id', passport.authenticate('bearer', { session: false }), async function (req, res) {
   var id = ObjectID(req.params.id);
-  Company.findById(id).exec((err, company) => {
+  await Company.findById(id).exec((err, company) => {
     if (err) {
       res.send(err);
     }
@@ -81,10 +81,10 @@ router.get('/getCompany/:id', passport.authenticate('bearer', { session: false }
   })
 })
 
-router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('bearer', {session: false}), function (req, res) {
+router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('bearer', {session: false}), async function (req, res) {
   var id = req.params.id
   req.body.logo = req.file.filename;
-  Company.findByIdAndUpdate({"_id": id}, {$set: req.body}).exec(function (err, company) {
+  await Company.findByIdAndUpdate({"_id": id}, {$set: req.body}).exec(function (err, company) {
     if (err) {
       res.send(err)
     }
@@ -108,8 +108,8 @@ router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('
   })
 })
 
-router.post('/removeNotifications/:companyId', function (req, res) {
-  Company.findByIdAndUpdate({_id: req.param.companyId}, {$set: {notificationsNumber: 0}}, function(err, notf) {
+router.post('/removeNotifications/:companyId', async function (req, res) {
+  await Company.findByIdAndUpdate({_id: req.param.companyId}, {$set: {notificationsNumber: 0}}, function(err, notf) {
     if (err) {
       res.send(err);
     }
@@ -123,7 +123,7 @@ router.get('/allCompanies', async function(req, res) {
       res.send(err);
     }
     res.send(company);
-  });
-});
+  })
+})
 
 module.exports = router;
