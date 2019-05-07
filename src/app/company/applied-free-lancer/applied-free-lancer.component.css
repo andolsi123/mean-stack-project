@@ -7,3 +7,38 @@
 .free{
   margin-bottom: 5px;
 }
+
+
+.panel
+        {
+          margin: 5%;
+          background:  #ffff;
+        }
+
+        th
+        {
+          background-color: #1cb3e5;
+        }
+        tr
+        {
+          transition: all 0.5s;
+        }
+        tr:hover
+        {
+          background-color: rgb(244, 246, 250);
+          transition: 0.5s;
+        }
+        .btn-warning
+        {
+          transition: all 0.8s;
+        }
+
+        .btn-warning:hover, .btn-warning:focus
+        {
+          transition: 0.8s;
+          background-color: #428bca;
+          border-color: #428bca;
+        }
+       
+
+        

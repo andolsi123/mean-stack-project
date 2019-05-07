@@ -29,11 +29,13 @@ export class AppliedFreeLancerComponent implements OnInit {
        console.log(this.projects);
     });
   }
+
   accept(idp, idf) {
     this.appService.postAcceptedFreelancer(idp, idf).subscribe((data: any) => {
       this.freelancer = data;
       console.log(this.freelancer);
     });
+    
   }
 
 }
