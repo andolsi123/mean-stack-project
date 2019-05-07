@@ -2,6 +2,7 @@ var router = require('express').Router();
 var Freelancer = require('../models/freeLancer');
 var User = require('../models/user');
 var Project = require('../models/project');
+var Company = require('../models/company');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const multer = require("multer");
@@ -36,13 +37,13 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-router.post('/addfree', upload.single('Image_Profil'), function (req, res) {
+router.post('/addfree', upload.single('Image_Profil'), async function (req, res) {
   motpass = req.body.password;
   var hash = bcrypt.hashSync(motpass, saltRounds);
   req.body.password = hash;
   req.body.Image_Profil = req.file.filename;
   var free = new Freelancer(req.body);
-  free.save(function (err, freelancer) {
+  await free.save(function (err, freelancer) {
     if (err) {
       res.send(err);
     }
@@ -72,17 +73,47 @@ router.post('/addfree', upload.single('Image_Profil'), function (req, res) {
   })
  })
 
-router.post('/addProjectApplied/:freelancerId/:projectId', function(req, res) {
+router.post('/addProjectApplied/:freelancerId/:projectId', async function(req, res) {
   var prjct = {project: req.params.projectId, statut: 'Pending'};
-  Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$push: {projects: prjct}}, function(err, freelancer) {
+  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$push: {projects: prjct}}, async function(err, freelancer) {
     if (err) {
       res.send(err);
     }
-    Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: req.params.freelancerId}}, function(error2, prjct) {
+    var mail = {
+      from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
+      to: req.body.companyEmail,
+      subject: `A freelancer has submitted to one of your project`,
+      text: `You have a new submission from ${req.body.freelancer} to your project "${project.titre_project}" check him out for more information`,
+      html: `<b>You have a new submission from ${req.body.freelancer} to your project "${project.titre_project}" check him out for more information</b>`
+    };
+    await transporter.sendMail(mail, function(error, response) {
+      if (error) {
+        console.log("email error: " + error);
+      } else {
+        console.log("Message sent: " + response.message);
+      }
+      transporter.close();
+    })
+    await Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: req.params.freelancerId}}, function(error2, prjct) {
       if (error2) {
         console.log(error2);
       }
-      res.send(freelancer);
+    })
+    await Company.findByIdAndUpdate({_id: req.params.companyId}, {$push: {notifications: req.body.notifications}}, function(err2, com) {
+      if (err2) {
+        res.send(err2);
+      }
+      const io = req.app.get('io');
+      io.emit('newNotificationAdded');
+    })
+    await Company.findById({_id: req.params.companyId}, function(err3, com2) {
+      if (err3) {
+        res.send(err3);
+      }
+      com2.notificationsNumber++;
+      com2.save(function(error) {console.log(error);});
+      const io = req.app.get('io');
+      io.emit('newNotificationAdded');
     })
   })
 })
@@ -92,7 +123,7 @@ router.post('/refusedFreelancer/:freelancerId/:projectId', async function(req, r
     if (err) {
       res.send(err);
     }
-    Project.findByIdAndUpdate({_id: req.params.projectId}, {$pull: {applied_freelancers: req.params.freelancerId}}, function(err2, project) {
+    await Project.findByIdAndUpdate({_id: req.params.projectId}, {$pull: {applied_freelancers: req.params.freelancerId}}, function(err2, project) {
       if (err2) {
         res.send(err2);
       }
@@ -110,8 +141,8 @@ router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: fals
   })
 })
 
-router.post('/addChangeRating/:freelancerId', function(req, res) {
-  Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$set: {rating: req.body}}, function(err, rating) {
+router.post('/addChangeRating/:freelancerId', async function(req, res) {
+  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$set: {rating: req.body}}, function(err, rating) {
     if (err) {
       res.send(err);
     }
@@ -128,33 +159,31 @@ router.get('/allfreelancers', async function(req, res) {
   })
 })
 
-router.post('/updateFreelancerProfil/:id', upload.single('Image_Profil'), function (req, res) {
+router.post('/updateFreelancerProfil/:id', upload.single('Image_Profil'), async function (req, res) {
   var id = req.params.id;
   req.body.Image_Profil = req.file.filename;
-  Company.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, freelancer) {
-      if (err) {
-          res.send(err)
-
-      }
-      else {
-          User.findOneAndUpdate({ "freelancer": company._id }, { $set: req.body }).exec(function (err, user) {
-              if (err) {
-                  res.send(err);
-              }
-              User.findById(user._id).exec(function (err, user2) {
-                  const token = jwt.sign({ data: user2 },
-                      JWT_SIGN_SECRET, {
-                          expiresIn: '1h'
-                      });
-                  res.send({
-                      Message: 'Update token ',
-                      access_token: token
-                  })
-
-              })
-          });
-      }
-  });
+  await Company.findByIdAndUpdate({"_id": id}, {$set: req.body}).exec(function (err, freelancer) {
+    if (err) {
+      res.send(err)
+    }
+    else {
+      User.findOneAndUpdate({"freelancer": company._id}, {$set: req.body}).exec(function (err, user) {
+        if (err) {
+          res.send(err);
+        }
+        User.findById(user._id).exec(function (err, user2) {
+          const token = jwt.sign({data: user2},
+            JWT_SIGN_SECRET, {
+            expiresIn: '1h'
+            })
+          res.send({
+            Message: 'Update token ',
+            access_token: token
+          })
+        })
+      })
+    }
+  })
 })
 
 module.exports = router;

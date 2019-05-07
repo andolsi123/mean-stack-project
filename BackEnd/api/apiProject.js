@@ -216,8 +216,8 @@ router.post('/deleteComment/:projectId/:commentId', async function(req, res) {
   })
 })
 
-router.post('/updateComment/:projectId/:commentId', function(req, res) {
-  Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: {comments: req.body}}, function(err, project) {
+router.post('/updateComment/:projectId/:commentId', async function(req, res) {
+  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: {comments: req.body}}, function(err, project) {
     if (err)  {
       res.send(err);
     }
