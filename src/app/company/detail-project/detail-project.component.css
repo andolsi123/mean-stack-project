@@ -33,8 +33,7 @@ body {
 
 .healthy-snacks {
   margin: 2em auto;
-  width: 90%;
-  max-width: 680px;
+  width: 85%;
   background: #fff;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -121,19 +120,7 @@ body {
 .healthy-snacks article .excerpt p {
   line-height: 24px;
 }
-/* .healthy-snacks article .excerpt a {
-  display: block;
-  margin-top: 1em;
-  color: #c00413;
-  text-decoration: none;
-} */
-.healthy-snacks article .excerpt a:hover {
-  color: #fb2f40;
-}
-.healthy-snacks article .excerpt a span:first-child {
-  padding-right: 1em;
-  vertical-align: middle;
-}
+
 @media only screen and (min-width: 680px) {
   .healthy-snacks article header {
     width: 40%;

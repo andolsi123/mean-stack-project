@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var Freelancer = require('../models/freeLancer');
 var User = require('../models/user');
+var Project = require('../models/project');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const multer = require("multer");
@@ -77,7 +78,12 @@ router.post('/addProjectApplied/:freelancerId/:projectId', function(req, res) {
     if (err) {
       res.send(err);
     }
-    res.send(freelancer);
+    Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: req.params.freelancerId}}, function(error2, prjct) {
+      if (error2) {
+        console.log(error2);
+      }
+      res.send(freelancer);
+    })
   })
 })
 
@@ -96,7 +102,7 @@ router.post('/refusedFreelancer/:freelancerId/:projectId', async function(req, r
 
 router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: false }), async function (req, res) {
   var id = ObjectID(req.params.id);
-  await Freelancer.findById(id).populate('projects.project').populate('projects.project.company').exec((err, freelancer) => {
+  await Freelancer.findById(id).populate({path:'projects.project', populate: { path: 'company', model: 'company'}}).exec((err, freelancer) => {
     if (err) {
       res.send(err);
     }
@@ -125,28 +131,30 @@ router.get('/allfreelancers', async function(req, res) {
 router.post('/updateFreelancerProfil/:id', upload.single('Image_Profil'), function (req, res) {
   var id = req.params.id;
   req.body.Image_Profil = req.file.filename;
-  Company.findByIdAndUpdate({"_id": id}, { $set: req.body }).exec(function (err, freelancer) {
-    if (err) {
-      res.send(err)
-    }
-    else {
-      User.findOneAndUpdate({"freelancer": company._id}, {$set: req.body}).exec(function (err, user) {
-        if (err) {
-          res.send(err);
-        }
-        User.findById(user._id).exec(function (err, user2) {
-          const token = jwt.sign({ data: user2 },
-            JWT_SIGN_SECRET, {
-            expiresIn: '1h'
-          })
-          res.send({
-            Message: 'Update token ',
-            access_token: token
-          })
-        })
-      })
-    }
-  })
+  Company.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, freelancer) {
+      if (err) {
+          res.send(err)
+
+      }
+      else {
+          User.findOneAndUpdate({ "freelancer": company._id }, { $set: req.body }).exec(function (err, user) {
+              if (err) {
+                  res.send(err);
+              }
+              User.findById(user._id).exec(function (err, user2) {
+                  const token = jwt.sign({ data: user2 },
+                      JWT_SIGN_SECRET, {
+                          expiresIn: '1h'
+                      });
+                  res.send({
+                      Message: 'Update token ',
+                      access_token: token
+                  })
+
+              })
+          });
+      }
+  });
 })
 
 module.exports = router;

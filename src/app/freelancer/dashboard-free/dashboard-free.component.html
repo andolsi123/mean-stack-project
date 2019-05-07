@@ -66,11 +66,7 @@
             <div style="text-align: center;">
               <button type="button" class="btn btn-primary" routerLink="/freelancer/{{project._id}}">details</button>
               <span class="btn btn-primary" (click)="likeProjet(project._id)" >
-                
-                <i class="fa fa-heart" style="color:white;font-size: 20px;">
-                </i>
-                <!-- *ngIf="project.freelancers_likes == id_freelancer"
-                    style="color:red;font-size: 20px" -->
+                <i  [ngClass]="project.freelancers_likes == id_freelancer ? 'red' : 'null'" class="fa fa-heart" style="color:white;font-size: 20px;"></i>
               </span>
             </div>
           </div>

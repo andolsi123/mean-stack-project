@@ -3,4 +3,6 @@
   body {
     background: #F2F2F2;
   }
-  
+  .red {
+    color:red !important;
+  }
