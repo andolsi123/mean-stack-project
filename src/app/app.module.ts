@@ -24,6 +24,7 @@ import { SignUpFreelancerComponent } from './landing-page/sign-up-freelancer/sig
 import { FilterProjectsPipe } from './filter-projects.pipe';
 import { MatChipsModule} from '@angular/material/chips';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { EditeProfilComponent } from './company/edite-profil/edite-profil.component';
 import { FreelancerComponent } from './freelancer/freelancer.component';
@@ -95,7 +96,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MatIconModule,
     CKEditorModule,
     MatSnackBarModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    PdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
