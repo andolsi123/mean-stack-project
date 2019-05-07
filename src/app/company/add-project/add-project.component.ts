@@ -73,12 +73,25 @@ export class AddProjectComponent implements OnInit {
       console.log(data);
     });
     this.addProject = new FormGroup({
-      projectName: new FormControl('', Validators.required),
-      minOffer: new FormControl('', [Validators.required, Validators.min(1)]),
-      maxOffer: new FormControl('', [Validators.required, Validators.min(1)]),
-      skillsArray: new FormControl('', Validators.required),
-      duration: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
+      projectName: new FormControl(''),
+      minOffer: new FormControl(''),
+      maxOffer: new FormControl(''),
+      skillsArray: new FormControl(''),
+      duration: new FormControl(''),
+      description: new FormControl('')
     });
+    this.skills = [];
+  } 
+
+  cancel() {
+    this.addProject = new FormGroup({
+      projectName: new FormControl(''),
+      minOffer: new FormControl(''),
+      maxOffer: new FormControl(''),
+      skillsArray: new FormControl(''),
+      duration: new FormControl(''),
+      description: new FormControl('')
+    });
+    this.skills = [];
   }
 }
