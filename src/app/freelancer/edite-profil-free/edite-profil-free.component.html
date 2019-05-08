@@ -54,8 +54,8 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="logo">Image Profil</label>
-              <input hidden #uploadImage type="file" name="logo" (change)="selectedFile($event);readURL($event);">
-              <img (click)="uploadImage.click()" src="http://localhost:3000/users/image/{{freelancer?.Image_Profil}}"
+              <input hidden #uploadImage type="file" name="image_Profil" (change)="selectedFile($event);readURL($event);">
+              <img (click)="uploadImage.click()" src="http://localhost:3000/users/image/{{freelancer?.image_Profil}}"
                 style="width: 90%;height: 400;">
             </div>
             <div class="form-group col-md-8">
@@ -64,7 +64,7 @@
             </div>
           </div>
           <div class="form-row">
-              <input hidden #uploadImage type="file" name="logo" (change)="selectedFile($event);readURL($event);">
+              <input hidden #uploadImage type="file" name="protfolio" (change)="selectedFileCV($event);readURL($event);">
               <button (click)="uploadImage.click()" style="width: 20%;height: 200;" class="btn-primary">Protfolio</button>
             </div>
 

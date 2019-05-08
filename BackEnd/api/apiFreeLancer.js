@@ -120,7 +120,7 @@ router.post('/addProjectApplied/:freelancerId/:projectId', async function(req, r
 })
 
 router.post('/refusedFreelancer/:freelancerId/:projectId', async function(req, res) {
-  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$pull: {projects: {project: req.params.projectId}}}, function(err, freelancer) {
+  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$pull: {projects: {project: req.params.projectId}}}, async function(err, freelancer) {
     if (err) {
       res.send(err);
     }
@@ -160,9 +160,9 @@ router.get('/allfreelancers', async function(req, res) {
   })
 })
 
-router.post('/updateFreelancerProfil/:id', upload.single('Image_Profil'), async function (req, res) {
+router.post('/updateFreelancerProfil/:id', upload.single('image_Profil'), passport.authenticate('bearer', {session: false}), async function (req, res) {
   var id = req.params.id;
-  req.body.Image_Profil = req.file.filename;
+  req.body.image_Profil = req.file.filename;
   Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, freelancer) {
       if (err) {
           res.send(err)

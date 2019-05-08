@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
+import { AnimationStyleMetadata } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +15,21 @@ export class AppService {
     this.connectedUser = this.getDecodedToken();
   }
 
- postAddChat(body, id) {
-  return this.http.post(`http://localhost:3000/chat/addMsg/${id}`, body);
- }
+  postAddChat(body, id) {
+    return this.http.post(`http://localhost:3000/chat/addMsg/${id}`, body);
+  }
 
- getChatByCompany(id) {
-   return this.http.get(`http://localhost:3000/chat/getChatCompany/${id}`);
- }
+  getChatByCompany(id) {
+    return this.http.get(`http://localhost:3000/chat/getChatCompany/${id}`);
+  }
 
- getChatByFreelancer(id) {
-  return this.http.get(`http://localhost:3000/chat/getChatFreelancer/${id}`);
- }
+  getChatByFreelancer(id) {
+    return this.http.get(`http://localhost:3000/chat/getChatFreelancer/${id}`);
+  }
 
- getChatById(id) {
-   return this.http.get(`http://localhost:3000/chat/getChatById/${id}`);
- }
+  getChatById(id) {
+    return this.http.get(`http://localhost:3000/chat/getChatById/${id}`);
+  }
 
   postAddProject(body: any) {
     return this.http.post(`http://localhost:3000/projects/addProject`, body);
@@ -69,7 +70,7 @@ export class AppService {
 
   postDeleteProject(id: any) {
     return this.http.post(`http://localhost:3000/projects/DeleteProject/${id}`, null);
-   }
+  }
 
   getOneProject(id: any) {
     return this.http.get(`http://localhost:3000/projects/oneProject/${id}`);
@@ -110,8 +111,8 @@ export class AppService {
     return this.http.get(`http://localhost:3000/freelancers/getFreelancer/${id}`, { headers: header });
   }
 
-  UpdateFreelancerProfile(id, body) {
-    const header = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
+  UpdateFreelancerProfile(id, body):any {
+    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.post(`http://localhost:3000/freelancers/updateFreelancerProfil/${id}`, body, { headers: header });
   }
 
@@ -127,7 +128,7 @@ export class AppService {
     return this.http.post(`http://localhost:3000/projects/removeNotifications/${companyId}`, null);
   }
 
-  postLikeProject(idP , idF) {
+  postLikeProject(idP, idF) {
     return this.http.post(`http://localhost:3000/projects/addRemoveLike/${idP}/${idF}`, null);
   }
 

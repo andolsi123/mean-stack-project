@@ -52,7 +52,7 @@ export class EditeProfilFreeComponent implements OnInit {
         twitter : new FormControl(this.freelancer.twitter),
         github : new FormControl(this.freelancer.github),
         skills : new FormControl(this.freelancer.skills),
-        logo : new FormControl (''),
+        image_Profil : new FormControl (''),
         portfolio : new FormControl(this.freelancer.portfolio),
       });
   });
@@ -60,7 +60,9 @@ export class EditeProfilFreeComponent implements OnInit {
   selectedFile(event) {
     this.selectedImage = event.target.files[0];
   }
-
+  selectedFileCV(event) {
+    this.selectedCV = event.target.files[0];
+  }
   readURL(event): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
@@ -70,28 +72,40 @@ export class EditeProfilFreeComponent implements OnInit {
     }
   }
    Editfreelancer() {
-        const dataForm = new FormData();
-        if (this.selectedImage) {
-          this.freelancer.logo = this.selectedImage.name;
-          dataForm.append('logo', this.selectedImage);
-        }
-        console.log('tt');
-        dataForm.append('firs_tname', this.editProfileFreelancer.value.firs_tname);
-        dataForm.append('last_name', this.editProfileFreelancer.value.last_name);
-        dataForm.append('languages', this.editProfileFreelancer.value.languages);
-        dataForm.append('phone_Number', this.editProfileFreelancer.value.phone_Number);
-        dataForm.append('email', this.editProfileFreelancer.value.email);
-        dataForm.append('password', this.editProfileFreelancer.value.password);
-        dataForm.append('facebook', this.editProfileFreelancer.value.facebook);
-        dataForm.append('twitter', this.editProfileFreelancer.value.twitter);
-        dataForm.append('github', this.editProfileFreelancer.value.github);
-        dataForm.append('skills', this.editProfileFreelancer.value.skills);
-        console.log(this.id_freelancer);
-        this.appService.UpdateFreelancerProfile(this.id_freelancer, dataForm).subscribe((data: any) => {
+        // const dataForm = new FormData();
+        // if (this.selectedImage) {
+        //   dataForm.append('image_Profil', this.selectedImage, this.selectedImage.name);
+        // }
+        // dataForm.append('first_name', this.editProfileFreelancer.value.first_name);
+        // dataForm.append('last_name', this.editProfileFreelancer.value.last_name);
+        // dataForm.append('languages', this.editProfileFreelancer.value.languages);
+        // dataForm.append('phone_Number', this.editProfileFreelancer.value.phone_Number);
+        // dataForm.append('email', this.editProfileFreelancer.value.email);
+        // dataForm.append('password', this.editProfileFreelancer.value.password);
+        // dataForm.append('facebook', this.editProfileFreelancer.value.facebook);
+        // dataForm.append('twitter', this.editProfileFreelancer.value.twitter);
+        // dataForm.append('github', this.editProfileFreelancer.value.github);
+        // dataForm.append('skills', this.editProfileFreelancer.value.skills);
+        const dataForm = {
+          //image_Profil: this.selectedImage.name,
+          first_name: this.editProfileFreelancer.value.first_name,
+          last_name: this.editProfileFreelancer.value.last_name,
+          // languages: [this.editProfileFreelancer.value.languages],
+          phone_Number: this.editProfileFreelancer.value.phone_Number,
+          email: this.editProfileFreelancer.value.email,
+          password: this.editProfileFreelancer.value.password,
+          facebook: this.editProfileFreelancer.value.facebook,
+          twitter:  this.editProfileFreelancer.value.twitter,
+           github:  this.editProfileFreelancer.value.github,
+           // skills: this.editProfileFreelancer.value.skills
+           portfolio : this.selectedCV.name,
+        };
         console.log(dataForm);
-        console.log('test');
+        this.appService.UpdateFreelancerProfile(this.id_freelancer, dataForm).subscribe((data) => {
+          console.log('rr');
         localStorage.setItem('token', data.access_token);
         this.appService.connectedUser = this.appService.getDecodedToken();
+
    });
  }
 }
