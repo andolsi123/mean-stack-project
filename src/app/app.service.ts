@@ -108,8 +108,8 @@ export class AppService {
   }
 
   UpdateFreelancerProfile(id, body) {
-    let header = new HttpHeaders().append('Authorization',localStorage.getItem('token'));
-    return this.http.post(`http://localhost:3000/companies/updateFreelancerProfil/${id}`, body, { headers: header });
+    const header = new HttpHeaders().append('Authorization', localStorage.getItem('token'));
+    return this.http.post(`http://localhost:3000/freelancers/updateFreelancerProfil/${id}`, body, { headers: header });
   }
 
   postDeleteComment(idP: any, idC: any) {

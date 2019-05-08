@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 5%;">
   <div class="row">
     <div class="col-sm-8">
-      <div class="card" style="padding: 20px;width: 100%;height: 800px">
+      <div class="card" style="padding: 20px;width: 100%;height: 850px">
         <div>
           <a style="font-weight:bold ; font-size: 30px;color: #1cb3e5">Freelancer</a>
           <b>Update YOUR ACCOUNT</b>
@@ -18,14 +18,14 @@
             </div>
           </div>
           <div class="form-row">
-          <div class="form-group col-md-6">
-              <label for="languages" class="col-form-label">Languages</label>
-              <input type="text" class="form-control" formControlName="languages">
-          </div>
-          <div class="form-group col-md-6">
+              <div class="form-group col-md-6">
+                  <label for="languages" class="col-form-label">Languages</label>
+                  <input type="text" class="form-control" formControlName="languages">
+              </div>
+             <div class="form-group col-md-6">
               <label for="phoneNumber" class="col-form-label">phone Number</label>
               <input type="text" class="form-control" formControlName="phone_Number">
-          </div>
+             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -52,23 +52,22 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="logo">Image Profil</label>
               <input hidden #uploadImage type="file" name="logo" (change)="selectedFile($event);readURL($event);">
-              <img (click)="uploadImage.click()" src="http://localhost:3000/users/image/{{freelancer.Image_Profil}}"
+              <img (click)="uploadImage.click()" src="http://localhost:3000/users/image/{{freelancer?.Image_Profil}}"
                 style="width: 90%;height: 400;">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-8">
               <label for="skills" class="col-form-label">Skills</label>
              <input type="text" class="form-control" formControlName="skills">
             </div>
           </div>
-          <div class="from-row">
-            <div>
-               <label for="portfolio" class="col-form-label">Portfolio</label>
-               <input type="file"  accept=".doc" class="form-control" formControlName="portfolio">
-          </div>
-          </div>
+          <div class="form-row">
+              <input hidden #uploadImage type="file" name="logo" (change)="selectedFile($event);readURL($event);">
+              <button (click)="uploadImage.click()" style="width: 20%;height: 200;" class="btn-primary">Protfolio</button>
+            </div>
+
           <button type="button" (click)="Editfreelancer()" style="margin-left:30%;width:19%"
             class="btn btn-primary">Save</button>
           <button type="button" [routerLink]="['/freelancer/dashboard']" style="width:19%" class="btn btn-primary"

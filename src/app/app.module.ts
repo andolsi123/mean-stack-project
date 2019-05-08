@@ -77,8 +77,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ChatComponent,
     ChatDetailsComponent,
     ChatsComponent,
-    DetailsChatComponent,
-    MatSnackBarModule
+    DetailsChatComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +95,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MatChipsModule,
     MatIconModule,
     CKEditorModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

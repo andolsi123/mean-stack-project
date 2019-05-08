@@ -23,7 +23,7 @@ export class DetailsProjectComponent implements OnInit {
 
   constructor(private http: AppService, private route: ActivatedRoute) {
     this.id_freelancer = this.http.connectedUser.data.freelancer;
-    
+
   }
 
   ngOnInit() {
@@ -51,6 +51,9 @@ export class DetailsProjectComponent implements OnInit {
   affectProject() {
     this.http.postAffectedProject(this.id_freelancer, this.project._id).subscribe(data3 => {
       console.log(data3);
+      this.http.getOneProject(this.project._id).subscribe(data => {
+        this.project = data;
+      });
     });
   }
 
@@ -60,7 +63,7 @@ export class DetailsProjectComponent implements OnInit {
   }
 
   addComment() {
-    
+
       this.frist_name = this.freelancerConnected.first_name;
       this.photoF = this.freelancerConnected.Image_Profil;
 

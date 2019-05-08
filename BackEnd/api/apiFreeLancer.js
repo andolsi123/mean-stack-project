@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var ObjectID = mongoose.Types.ObjectId;
 var mailer = require("nodemailer");
+const JWT_SIGN_SECRET = 'KJN4511qkqhxq5585x5s85f8f2x8ww8w55x8s52q5w2q2';
 
 var transporter = mailer.createTransport({
   service: 'gmail',
@@ -113,14 +114,15 @@ router.post('/updateFreelancerProfil/:id', upload.single('Image_Profil'),  funct
 
   var id = req.params.id
   req.body.Image_Profil = req.file.filename;
-  Company.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, freelancer) {
+  Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, freelancer) {
       if (err) {
           res.send(err)
 
       }
       else {
-          User.findOneAndUpdate({ "freelancer": company._id }, { $set: req.body }).exec(function (err, user) {
+          User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(function (err, user) {
               if (err) {
+                console.log(this.freelancer._id);
                   res.send(err);
               }
               User.findById(user._id).exec(function (err, user2) {
