@@ -54,12 +54,17 @@ export class AppService {
     return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}/${companyId}`, body);
   }
 
-  postAffectedProject(freelancerId, projectId) {
-    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`, null);
+  postAffectedProject(freelancerId, projectId, body) {
+    // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name};
+    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`, body);
   }
 
   postAcceptedFreelancer(projectId, freelancerId) {
     return this.http.post(`http://localhost:3000/projects/acceptedFreelancer/${projectId}/${freelancerId}`, null);
+  }
+
+  postRefusedFreelancer(freelancerId, projectId) {
+    return this.http.post(`http://localhost:3000/freelancers/refusedFreelancer/${freelancerId}/${projectId}`, null);
   }
 
   postDeleteProject(id: any) {
@@ -99,8 +104,6 @@ export class AppService {
     const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.post(`http://localhost:3000/companies/updateCompany/${id}`, body, { headers: header });
   }
-
-
 
   getOneFreelancer(id) {
     const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));

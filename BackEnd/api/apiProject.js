@@ -36,7 +36,7 @@ router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async fun
     var verif = false;
     for (let freelancer of project.applied_freelancers) {
       if (freelancer == req.params.freelancerId) {
-        verif = true;        
+        verif = true;
       }
     }
     if (verif == false) {
@@ -44,8 +44,8 @@ router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async fun
         from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
         to: req.body.companyEmail,
         subject: `A freelancer has submitted to one of your project`,
-        text: `You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information`,
-        html: `<b>You have a new submission from ${req.body.freelancer} to your project \"<strong>${project.titre_project}</strong>\" check him out for more information</b>`
+        text: `You have a new submission from ${req.body.freelancer} to your project "${project.titre_project}" check him out for more information`,
+        html: `<b>You have a new submission from ${req.body.freelancer} to your project "${project.titre_project}" check him out for more information</b>`
       };
       await transporter.sendMail(mail, function(error, response) {
         if (error) {
@@ -71,10 +71,10 @@ router.post('/appliedFreelancers/:projectId/:freelancerId/:companyId', async fun
         if (err3) {
           res.send(err3);
         }
-        const io = req.app.get('io');
-        io.emit('newNotificationAdded');
         com2.notificationsNumber++;
         com2.save(function(error) {console.log(error);});
+        const io = req.app.get('io');
+        io.emit('newNotificationAdded');
       })
     }
     res.send(project);
@@ -216,8 +216,8 @@ router.post('/deleteComment/:projectId/:commentId', async function(req, res) {
   })
 })
 
-router.post('/updateComment/:projectId/:commentId', function(req, res) {
-  Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: {comments: req.body}}, function(err, project) {
+router.post('/updateComment/:projectId/:commentId', async function(req, res) {
+  await Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: {comments: req.body}}, function(err, project) {
     if (err)  {
       res.send(err);
     }

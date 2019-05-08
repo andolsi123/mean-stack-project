@@ -35,13 +35,13 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-router.post('/addCompany', upload.single('logo'), function (req, res) {
+router.post('/addCompany', upload.single('logo'), async function (req, res) {
   motpass = req.body.password;
   var hash = bcrypt.hashSync(motpass, saltRounds);
   req.body.password = hash;
   req.body.logo = req.file.filename;
   var company = new Company(req.body);
-  company.save(function (err, company) {
+  await company.save(function (err, company) {
     if (err) {
       res.send(err);
     }
@@ -56,7 +56,7 @@ router.post('/addCompany', upload.single('logo'), function (req, res) {
         to: user.email,
         subject: "Your account has been created succefully !!",
         text: `Welcome ${company.nameCompany} to our WEB APP hope you enjoy your time here !!`,
-        html: `<b>Welcome <strong>${company.nameCompany}</strong> to our WEB APP hope you enjoy your time here !!</b>`
+        html: `<b>Welcome ${company.nameCompany} to our WEB APP hope you enjoy your time here !!</b>`
       }
       await transporter.sendMail(mail, function(error, response) {
         if (error) {
@@ -71,9 +71,9 @@ router.post('/addCompany', upload.single('logo'), function (req, res) {
   })
 })
 
-router.get('/getCompany/:id', passport.authenticate('bearer', { session: false }), function (req, res) {
+router.get('/getCompany/:id', passport.authenticate('bearer', { session: false }), async function (req, res) {
   var id = ObjectID(req.params.id);
-  Company.findById(id).exec((err, company) => {
+  await Company.findById(id).exec((err, company) => {
     if (err) {
       res.send(err);
     }
@@ -81,10 +81,10 @@ router.get('/getCompany/:id', passport.authenticate('bearer', { session: false }
   })
 })
 
-router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('bearer', {session: false}), function (req, res) {
+router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('bearer', {session: false}), async function (req, res) {
   var id = req.params.id
   req.body.logo = req.file.filename;
-  Company.findByIdAndUpdate({"_id": id}, {$set: req.body}).exec(function (err, company) {
+  await Company.findByIdAndUpdate({"_id": id}, {$set: req.body}).exec(function (err, company) {
     if (err) {
       res.send(err)
     }
@@ -97,7 +97,7 @@ router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('
           const token = jwt.sign({data: user2},
             JWT_SIGN_SECRET, {
             expiresIn: '1h'
-            });
+          });
           res.send({
             Message: 'Update token ',
             access_token: token,
@@ -108,8 +108,8 @@ router.post('/updateCompany/:id', upload.single('logo'), passport.authenticate('
   })
 })
 
-router.post('/removeNotifications/:companyId', function (req, res) {
-  Company.findByIdAndUpdate({_id: req.param.companyId}, {$set: {notificationsNumber: 0}}, function(err, notf) {
+router.post('/removeNotifications/:companyId', async function (req, res) {
+  await Company.findByIdAndUpdate({_id: req.param.companyId}, {$set: {notificationsNumber: 0}}, function(err, notf) {
     if (err) {
       res.send(err);
     }
@@ -117,15 +117,13 @@ router.post('/removeNotifications/:companyId', function (req, res) {
   })
 })
 
-
 router.get('/allCompanies', async function(req, res) {
   await Company.find().exec(function(err, company) {
     if (err) {
       res.send(err);
     }
     res.send(company);
-  });
-});
-
+  })
+})
 
 module.exports = router;

@@ -9,7 +9,7 @@ var FreeLancerSchema = new mongoose.Schema({
     facebook: String,
     githup: String,
     twitter: String,
-    skils: [{skil: String}],
+    skills: [{skill: String}],
     languages: [{language: String}],
     portfolio: String,
     Image_Profil: String,
@@ -23,4 +23,4 @@ var FreeLancerSchema = new mongoose.Schema({
     }]
 })
 
-module.exports = mongoose.model('freelancer',FreeLancerSchema);
+module.exports = mongoose.model('freelancer', FreeLancerSchema);

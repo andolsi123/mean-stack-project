@@ -1,5 +1,32 @@
-<div *ngFor="let chat of chats">
-   {{chat.chatterCompany}}
-   {{chat.chatterFreelancer}}
-   <button (click)="chatDetails(chat._id)">details</button>
-</div>
+<div class="container">
+  <h3 class=" text-center">Messaging</h3>
+  <div class="messaging">
+        <div class="inbox_msg">
+          <div class="inbox_people">
+            <div class="headind_srch">
+              <div class="recent_heading">
+                <h4>Recent</h4>
+              </div>
+              <div class="srch_bar">
+                <div class="stylish-input-group">
+                  <input type="text" class="search-bar"  placeholder="Search" >
+                  <span class="input-group-addon">
+                  <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                  </span> </div>
+              </div>
+            </div>
+
+            <div class="inbox_chat">
+
+              <div class="chat_list" *ngFor="let chat of chats">
+                <div class="chat_people">
+                  <div class="chat_img"> <img src=""> </div>
+                  <div class="chat_ib">
+                    <h5>freelancer chatter name <span class="chat_date">date of last chat</span></h5>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>

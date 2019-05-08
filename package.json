@@ -36,6 +36,7 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "ng2-ckeditor": "^1.2.2",
+    "ng2-pdf-viewer": "^5.2.4",
     "ngx-socket-io": "^2.1.1",
     "perfect-scrollbar": "^1.4.0",
     "popper.js": "^1.15.0",

@@ -1,21 +1,34 @@
 <div class="container">
   <div class="row">
     <div class="input-group no-border col-6 recherch">
-      <input type="search" value="" class="form-control" [(ngModel)]="q" placeholder="  Search...">
+      <p style="color : black;font-weight:bold ; font-size: 20px;">Search : </p>
+      <input style="margin-left: 10%" type="search" value="" class="form-control" [(ngModel)]="q">
     </div>
   </div>
-
-  <div class="row ">
-    <div *ngFor="let p of projects | filterProjects:q" class="card" style="width: 18rem;" >
-        <div class="card-body">
-            <h5 class="card-title">{{p.titre_project}}</h5>
-            <p class="card-text">{{p.statut}}</p>
-       <a class="btn btn-primary" (click)="detail(p._id)"><i class="fa fa-info-circle" style="color:white"></i></a>
-       <a class="btn btn-primary" (click)="update(p._id)"><i class="fas fa-pen" style="color:white"></i></a>
-       <a class="btn btn-primary" (click)="detlet(p._id)"><i class="fas fa-trash-alt" style="color:white"></i></a>
-    </div>
-  </div>
- </div>
 </div>
 
-
+<div class="container">
+  <div class="row">
+    <div class=" card col-md-4" *ngFor="let p of projects | filterProjects:q" style="width: 18rem;">
+      <div class="card-body">
+        <h3 style="text-align: center;color: #1cb3e5;font-weight:bold ; font-size: 20px;">
+          {{p.titre_project}}</h3>
+        <hr />
+        <p>
+          <a style="font-weight:bold ; font-size: 15px ; color: black">Description</a> :
+          {{p.description_project}}<br>
+          <a style="font-weight:bold ; font-size: 15px ; color: black">Max_offer</a> : {{p.max_offer}}<br>
+          <a style="font-weight:bold ; font-size: 15px ; color: black">Min_offer</a> : {{p.min_offer}}<br>
+          <a style="font-weight:bold ; font-size: 15px ; color: black">Duration</a> : {{p.duration}}DAYS<br>
+          <a style="font-weight:bold ; font-size: 15px ; color: black">Duration</a> : <a style="color:red;font-size: 15px">{{p.like}} <i class="fa fa-heart"></i></a>
+        </p>
+        <hr />
+        <div style="text-align: center;">
+          <a class="btn btn-primary" (click)="detail(p._id)"> <i class="fa fa-info-circle" style="color:white"></i></a>
+          <a class="btn btn-primary" (click)="update(p._id)"> <i class="fas fa-pen" style="color:white"></i></a>
+          <a class="btn btn-primary" (click)="detlet(p._id)"> <i class="fas fa-trash-alt" style="color:white"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

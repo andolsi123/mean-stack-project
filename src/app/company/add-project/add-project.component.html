@@ -56,12 +56,14 @@
                           <div class="row">
                               <div class="col-md-12">
                                     <ckeditor
+                                    [(ngModel)]="ckeditorContent"
                                     formControlName="description"
-                                    [config]="{uiColor: '#1abed2'}"
+                                    [config]="{uiColor:'#1abed2',enterMode:'CKEDITOR.ENTER_BR',htmlEncodeOutput:true,autoParagraph:false}"
                                     debounce="500">
                                   </ckeditor>
                               </div>
                           </div>
+                          <button mat-raised-button type="button" (click)="cancel()" class="btn btn-danger pull-right" >Cancel Project</button>
                           <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="!addProject.valid">Submit Project</button>
                           <div class="clearfix"></div>
                       </form>

@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './chat-details.component.html',
   styleUrls: ['./chat-details.component.css']
 })
+
 export class ChatDetailsComponent implements OnInit {
 
   messages: any;
@@ -38,6 +39,7 @@ export class ChatDetailsComponent implements OnInit {
   getChat() {
     this.appService.getChatById(this.param).subscribe(data => {
       this.messages = data;
+      console.log(this.messages);
     });
   }
 

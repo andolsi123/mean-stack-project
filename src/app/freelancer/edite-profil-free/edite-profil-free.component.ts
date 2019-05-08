@@ -10,7 +10,7 @@ import { FormGroup, FormControl, FormControlDirective } from '@angular/forms';
 })
 export class EditeProfilFreeComponent implements OnInit {
  freelancer: any;
-  id_freelancer: any;
+ id_freelancer: any;
  editProfileFreelancer: FormGroup;
  imageSrc: any;
  selectedImage: File;
@@ -74,10 +74,6 @@ export class EditeProfilFreeComponent implements OnInit {
         if (this.selectedImage) {
           this.freelancer.logo = this.selectedImage.name;
           dataForm.append('logo', this.selectedImage);
-        }
-        if (this.selectedCV) {
-          this.freelancer.protfolio = this.selectedCV.name;
-          dataForm.append('protfolio', this.selectedCV);
         }
         console.log('tt');
         dataForm.append('firs_tname', this.editProfileFreelancer.value.firs_tname);

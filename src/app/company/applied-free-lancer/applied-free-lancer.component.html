@@ -1,17 +1,56 @@
-<div class="container" >
+<!-- <div class="container">
   <div class="row bloc" *ngFor="let p of projects " style="width: 100%;">
-    <div *ngIf=" p.statut != 'started' ">
-     <div class="col-4">{{p.titre_project}}</div>
-     <div class="col-8">
-      <div class="row free" *ngFor="let applied_freelancer of p.applied_freelancers" >
-     <div class="col-6"> {{applied_freelancer.first_name}}</div>
-     <div class="col-6" > <a class="btn-primary btn" style="color: #ffff" (click)="accept(p._id, applied_freelancer._id)"><i class="fas fa-check"></i></a></div>
+    <div *ngIf=" p.statut != 'started'">
+      <div class="col-4">{{p.titre_project}}</div>
+      <div class="col-8">
+        <div class="row free" *ngFor="let applied_freelancer of p.applied_freelancers">
+          <div class="col-6"> {{applied_freelancer.first_name}}</div>
+          <div class="col-6"> <a class="btn-primary btn" style="color: #ffff"
+              (click)="accept(p._id, applied_freelancer._id)"><i class="fas fa-check"></i></a></div>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
+</div> -->
+
+<div class="container-fluid pt-3">
+  <div class="panel panel-success" *ngFor="let p of projects">
+    <div *ngIf="p.statut != 'started'">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-3">
+            <h2 class="text-center" style="padding-left: 30px ; font-weight:bold ; font-size: 20px ; color: black"> <span class="glyphicon glyphicon-list-alt">
+              </span> {{p.titre_project}} </h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-body table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="text-center"> Name </th>
+              <th class="text-center"> Mobile No. </th>
+              <th class="text-center"> E-Mail </th>
+              <th class="text-center"> Portfolio </th>
+              <th class="text-center"> ok </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="edit" *ngFor="let applied_freelancer of p.applied_freelancers">
+              <td class="text-center"> {{applied_freelancer.first_name}} </td>
+              <td class="text-center"> {{applied_freelancer.phone_Number}} </td>
+              <td class="text-center"> {{applied_freelancer.githup}} </td>
+              <td class="text-center"> {{applied_freelancer.portfolio}} </td>
+              <td class="text-center"> <a class="btn-primary btn" style="color: #ffff"
+                (click)="accept(p._id, applied_freelancer._id)"> <i class="fas fa-check"></i> </a>
+                <a class="btn-primary btn" style="color: #ffff"
+                (click)="cancel()"> x </a> </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
-
-
-
-
