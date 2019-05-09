@@ -8,16 +8,16 @@ import { AppService } from 'src/app/app.service';
 })
 export class ProjectListComponent implements OnInit {
 
-  id_freelancer : any;
-  projects : any ;
+  id_freelancer: any;
+  projects: any;
 
   constructor(private appService: AppService) { }
 
   ngOnInit() {
     this.id_freelancer = this.appService.connectedUser.data.freelancer;
     this.appService.getOneFreelancer(this.id_freelancer).subscribe((free: any) => {
-      this.projects = free.projects ;
+      this.projects = free.projects;
       console.log(this.projects);
-  });
-}
+    });
+  }
 }

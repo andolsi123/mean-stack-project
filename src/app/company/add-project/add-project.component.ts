@@ -22,7 +22,7 @@ export class AddProjectComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   skills: Skills[] = [];
-  ckeditorContent: string = '<p>sds</p>';
+  ckeditorContent: string = '<p></p>';
 
 
   constructor(private http: AppService) {

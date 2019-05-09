@@ -51,21 +51,21 @@ router.post('/addCompany', upload.single('logo'), async function (req, res) {
       if (err2) {
         res.send(err2);
       }
-      var mail = {
-        from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
-        to: user.email,
-        subject: "Your account has been created succefully !!",
-        text: `Welcome ${company.nameCompany} to our WEB APP hope you enjoy your time here !!`,
-        html: `<b>Welcome ${company.nameCompany} to our WEB APP hope you enjoy your time here !!</b>`
-      }
-      await transporter.sendMail(mail, function(error, response) {
-        if (error) {
-          console.log("email error: " + error);
-        } else {
-          console.log("Message sent: " + response.message);
-        }
-        transporter.close();
-      })
+      // var mail = {
+      //   from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
+      //   to: user.email,
+      //   subject: "Your account has been created succefully !!",
+      //   text: `Welcome ${company.nameCompany} to our WEB APP hope you enjoy your time here !!`,
+      //   html: `<b>Welcome ${company.nameCompany} to our WEB APP hope you enjoy your time here !!</b>`
+      // }
+      // await transporter.sendMail(mail, function(error, response) {
+      //   if (error) {
+      //     console.log("email error: " + error);
+      //   } else {
+      //     console.log("Message sent: " + response.message);
+      //   }
+      //   transporter.close();
+      // })
       res.send(user);
     })
   })

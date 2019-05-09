@@ -42,74 +42,87 @@
 
 <div class="container login-container">
   <div class="row">
-      <div class="col-md-6 login-form-1">
-          <h3>Login for Form 1</h3>
-          <form>
-              <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Your Email *" value="" />
-              </div>
-              <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Your Password *" value="" />
-              </div>
-              <div class="form-group">
-                  <input type="submit" class="btnSubmit" value="Login" />
-              </div>
-              <div class="form-group">
-                  <a href="#" class="ForgetPwd">Forget Password?</a>
-              </div>
-          </form>
-      </div>
-      <div class="col-md-6 login-form-2">
-          <h3>Login for Form 2</h3>
-          <form>
-              <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Your Email *" value="" />
-              </div>
-              <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Your Password *" value="" />
-              </div>
-              <div class="form-group">
-                  <input type="submit" class="btnSubmit" value="Login" />
-              </div>
-              <div class="form-group">
+    <div class="col-md-6 login-form-1">
+      <h3>Details Project</h3>
+      <form>
+        <a style="font-weight:bold ; font-size: 20px;"> Titre project :</a> {{project.titre_project}}<br>
+        <a style="font-weight:bold ; font-size: 20px;"> Description Project : </a> {{project.description_project}}<br>
+        <a style="font-weight:bold ; font-size: 20px;"> Statut : </a> {{project.statut}}
+        <div *ngFor="let ski of project.skills">
+          <a style="font-weight:bold ; font-size: 20px;"> skills :</a> {{ski.skill}}
+        </div>
+        <a style="font-weight:bold ; font-size: 20px;"> Duration :</a> {{project.duration}}<br>
+        <a style="font-weight:bold ; font-size: 20px;"> Max : </a> {{project.max_offer}}<br>
+        <a style="font-weight:bold ; font-size: 20px;"> Min :</a> {{project.min_offer}}<br>
 
-                  <a href="#" class="ForgetPwd" value="Login">Forget Password?</a>
-              </div>
-          </form>
-      </div>
+        <!-- <div class="form-group">
+          <input type="submit" (click)=affectProject() class="btnSubmit"  />
+         
+        </div> -->
+
+        <div class="col pt-5">
+          <button (click)="affectProject()"  class="btnSubmit">
+            Apply</button>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-md-6 login-form-2">
+      <h3>Details Company</h3>
+      <i style="margin-left: 35% !important"><img src="http://localhost:3000/users/image/{{project.company.logo}}"
+          width="100" alt="Cinque Terre"></i><br>
+      <form>
+        <a style="font-weight:bold ; font-size: 20px;"> Name Company : </a> {{project.company.nameCompany}}<br>
+        <a style="font-weight:bold ; font-size: 20px;"> Found year : </a>{{project.company.foundyear}}<br>
+        <a style="font-weight:bold ; font-size: 20px;"> Phone Number : </a>{{project.company.phoneNumber}}<br>
+        <a style="font-weight:bold ; font-size: 20px;"> address : </a>{{project.company.address}}<br>
+        <a style="font-weight:bold ; font-size: 20px;"> web Site : </a>{{project.company.webSite}}<br>
+        <a style="font-weight:bold ; font-size: 20px;"> facebook : </a>{{project.company.facebook}}
+      </form>
+    </div>
   </div>
 </div>
 
-<div class="container" style="height: 200px"></div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-2">
-      <p class="comment"> Comment & question: </p>
-    </div>
-    <div class="col-sm-6">
-      <textarea style="width: 100%;" [(ngModel)]="commentaire"></textarea>
-    </div>
-    <div class="col-sm-2">
-      <span class="btn btn-primary" (click)="addComment()"><i class="fas fa-comment"
-          style="color:white;font-size: 20px;"></i></span>
-      <span class="btn btn-primary" (click)="CancelComment()"><i class="fas fa-comment-slash"
-          style="color:white;font-size: 18px;"></i></span>
-    </div>
-  </div>
-  <div class="row" style="height: 100px"></div>
-  <div class="row">
-    <div class="col-sm-12">
-      <div *ngFor="let comment of comments">
-        <img src="http://localhost:3000/users/image/{{comment.photo_commenter}}" class="rounded-circle z-depth-0"
-          alt="avatar image" height="50">&nbsp;&nbsp;
-        <a style="font-weight:bold ; font-size: 20px;">{{comment.commenter}} : </a>&nbsp;&nbsp;{{comment.comment}}
-        <span *ngIf="comment.id_commenter == id_freelancer">
-          <a class="btn btn-primary" (click)="delComment(comment._id)" style="margin-left: 10%"> <i
-              class="fas fa-trash-alt" style="color:white;font-size: 20px;"></i></a>
-          <!-- <button type="button" (click)="editComment()">edi</button> -->
-        </span>
+<div class="container" style="height: 100px"></div>
+
+
+<div class="container com">
+  <p class="comment"> Comment & question: </p>
+  <div class="comments">
+    <div class="comment-wrap">
+        <div class="photo">
+            <img class="avatar" src="http://localhost:3000/users/image/{{freelancerConnected.Image_Profil}}">
+        </div>
+      <div class="comment-block">
+        
+          <textarea name="" id="" cols="30" rows="3" placeholder="Add comment..."  [(ngModel)]="commentaire"></textarea>
+        
+        <div class="bottom-comment">
+            <ul class="comment-actions">
+              <li class="complain" (click)="addComment()">ADD</li>
+              <li class="reply" (click)="CancelComment()">Cancel</li>
+            </ul>
+          </div>
       </div>
     </div>
+    <div class="comment-wrap" *ngFor="let comment of comments">
+      <div class="photo">
+        <img class="avatar" src="http://localhost:3000/users/image/{{comment.photo_commenter}}">
+      </div>
+    <div class="comment-block">
+      <p class="comment-text">{{comment.comment}}</p>
+      <!-- <span class="btn btn-primary" (click)="likeProjet(project._id)" >
+          <i  [ngClass]="project.freelancers_likes == id_freelancer ? 'red' : 'null'" class="fa fa-heart" style="color:white;font-size: 20px;"></i>
+      </span> -->
+      <div class="bottom-comment">
+        <div class="comment-date">{{comment.date_comment}}</div>
+        <ul class="comment-actions" *ngIf="comment.id_commenter == id_freelancer">
+          <li class="complain" (click)="delComment(comment._id)">Delet</li>
+          <li class="reply" (click)="UpdateComment(comment._id)">Edit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
   </div>
 </div>

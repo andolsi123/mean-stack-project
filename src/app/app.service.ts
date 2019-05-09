@@ -54,9 +54,9 @@ export class AppService {
     return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}/${companyId}`, body);
   }
 
-  postAffectedProject(freelancerId, projectId, body) {
+  postAffectedProject(freelancerId, projectId) {
     // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name};
-    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`, body);
+    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`,{});
   }
 
   postAcceptedFreelancer(projectId, freelancerId) {
@@ -84,6 +84,7 @@ export class AppService {
   }
 
   login(body) {
+    console.log(body)
     return this.http.post('http://localhost:3000/users/login', body);
   }
 
@@ -112,11 +113,15 @@ export class AppService {
 
   UpdateFreelancerProfile(id, body) {
     const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.post(`http://localhost:3000/companies/updateFreelancerProfil/${id}`, body, { headers: header });
+    return this.http.post(`http://localhost:3000/freelancers/updateFreelancerProfil/${id}`, body, { headers: header });
   }
 
   postDeleteComment(idP: any, idC: any) {
     return this.http.post(`http://localhost:3000/projects/deleteComment/${idP}/${idC}`, null);
+  }
+
+  postUpdateComment(idP: any, idC: any){
+    return this.http.post(`http://localhost:3000/projects/updateComment/${idP}/${idC}`, null);
   }
 
   postAddComment(id, body) {

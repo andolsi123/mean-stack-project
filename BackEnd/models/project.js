@@ -13,7 +13,13 @@ var projectSchema = new mongoose.Schema({
   duration: Number,
   like: {type: Number, default: 0},
   freelancers_likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'freelancer'}],
-  comments : [{comment: String, commenter: String, photo_commenter:String, id_commenter:String}]
+  comments : [{
+    comment: String, 
+    commenter: String, 
+    photo_commenter:String, 
+    id_commenter:String,
+    date_comment: {type: Date, default: Date.now()}
+  }]
 })
 
 module.exports = mongoose.model('projects', projectSchema);
