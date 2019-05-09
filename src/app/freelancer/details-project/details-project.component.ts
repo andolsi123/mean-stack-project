@@ -59,6 +59,9 @@ export class DetailsProjectComponent implements OnInit {
     //   };
     this.http.postAffectedProject(this.id_freelancer, this.project._id,).subscribe(data3 => {
       console.log(data3);
+      this.http.getOneProject(this.project._id).subscribe(data => {
+        this.project = data;
+      });
     });
   }
 

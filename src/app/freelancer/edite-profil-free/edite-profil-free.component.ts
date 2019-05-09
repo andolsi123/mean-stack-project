@@ -1,46 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material';
-
-export interface Skills {
-  skill: string;
-}
-
-export interface Languages {
-  language: string;
-}
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-edite-profil-free',
   templateUrl: './edite-profil-free.component.html',
   styleUrls: ['./edite-profil-free.component.css']
 })
-
 export class EditeProfilFreeComponent implements OnInit {
  freelancer: any;
- // tslint:disable-next-line:variable-name
  id_freelancer: any;
  editProfileFreelancer: FormGroup;
- languages : Languages[] = [];
- skills: Skills[] = [];
- visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  fileSrc : any;
-  imageSrc: any;
-  selectedCV: File;
-  selectedImage: File;
-  
+ imageSrc: any;
+ selectedImage: File;
+ selectedCV: File;
+
 
   constructor(private appService: AppService, private router: Router, private route: ActivatedRoute ) {
     this.id_freelancer = this.appService.connectedUser.data.freelancer;
+
     this.editProfileFreelancer = new FormGroup({
-     first_name : new  FormControl(''),
-     last_name : new FormControl(''),
-     languages : new FormControl(''),
+      first_name : new  FormControl(''),
+      last_name : new FormControl(''),
+      languages : new FormControl (''),
       phone_Number: new FormControl(''),
       email : new FormControl(''),
       password : new FormControl(''),
@@ -48,13 +31,16 @@ export class EditeProfilFreeComponent implements OnInit {
       twitter : new FormControl(''),
       github : new FormControl(''),
       skills : new FormControl(''),
+      logo : new FormControl(''),
+      portfolio : new FormControl(''),
     });
-  }
+    }
 
   ngOnInit() {
     this.id_freelancer = this.appService.connectedUser.data.freelancer;
     this.appService.getOneFreelancer(this.id_freelancer).subscribe((free: any) => {
       this.freelancer = free;
+      console.log(this.freelancer);
       this.editProfileFreelancer = new FormGroup({
         first_name : new FormControl (this.freelancer.first_name),
         last_name : new FormControl(this.freelancer.last_name),
@@ -66,111 +52,60 @@ export class EditeProfilFreeComponent implements OnInit {
         twitter : new FormControl(this.freelancer.twitter),
         github : new FormControl(this.freelancer.github),
         skills : new FormControl(this.freelancer.skills),
+        image_Profil : new FormControl (''),
+        portfolio : new FormControl(this.freelancer.portfolio),
       });
-    });
+  });
   }
-
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-    if ((value || '').trim()) {
-      this.skills.push({skill: value.trim()});
-    }
-    if (input) {
-      input.value = '';
-    }
+  selectedFile(event) {
+    this.selectedImage = event.target.files[0];
   }
-
-  remove(skill: Skills): void {
-    const index = this.skills.indexOf(skill);
-
-    if (index >= 0) {
-      this.skills.splice(index, 1);
-    }
+  selectedFileCV(event) {
+    this.selectedCV = event.target.files[0];
   }
-
-  addlang(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-    if ((value || '').trim()) {
-      this.languages.push({language: value.trim()});
-    }
-    if (input) {
-      input.value = '';
-    }
-  }
-
-  removelang(language: Languages): void {
-    const index = this.languages.indexOf(language);
-
-    if (index >= 0) {
-      this.languages.splice(index, 1);
-    }
-  }
-
- selectedFile(event) {
-    // console.log(event.target.files[0])
-    this.selectedCV = event.target.files[0]
-  }
-
-  readURLFile(event): void {
+  readURL(event): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-
-      const reader = new FileReader();
-      reader.onload = e => this.fileSrc = reader.result;
-
-      reader.readAsDataURL(file);
-    }
-  }
-
-  selectedImg(event) {
-    // console.log(event.target.files[0])
-    this.selectedImage = event.target.files[0]
-  }
-
-  readURLImg(event): void {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-
       const reader = new FileReader();
       reader.onload = e => this.imageSrc = reader.result;
-
       reader.readAsDataURL(file);
     }
   }
-
    Editfreelancer() {
-    const dataForm = new FormData();
+        // const dataForm = new FormData();
+        // if (this.selectedImage) {
+        //   dataForm.append('image_Profil', this.selectedImage, this.selectedImage.name);
+        // }
+        // dataForm.append('first_name', this.editProfileFreelancer.value.first_name);
+        // dataForm.append('last_name', this.editProfileFreelancer.value.last_name);
+        // dataForm.append('languages', this.editProfileFreelancer.value.languages);
+        // dataForm.append('phone_Number', this.editProfileFreelancer.value.phone_Number);
+        // dataForm.append('email', this.editProfileFreelancer.value.email);
+        // dataForm.append('password', this.editProfileFreelancer.value.password);
+        // dataForm.append('facebook', this.editProfileFreelancer.value.facebook);
+        // dataForm.append('twitter', this.editProfileFreelancer.value.twitter);
+        // dataForm.append('github', this.editProfileFreelancer.value.github);
+        // dataForm.append('skills', this.editProfileFreelancer.value.skills);
+        const dataForm = {
+          //image_Profil: this.selectedImage.name,
+          first_name: this.editProfileFreelancer.value.first_name,
+          last_name: this.editProfileFreelancer.value.last_name,
+          languages: [this.editProfileFreelancer.value.languages],
+          phone_Number: this.editProfileFreelancer.value.phone_Number,
+          email: this.editProfileFreelancer.value.email,
+          password: this.editProfileFreelancer.value.password,
+          facebook: this.editProfileFreelancer.value.facebook,
+          twitter:  this.editProfileFreelancer.value.twitter,
+           github:  this.editProfileFreelancer.value.github,
+            skills: this.editProfileFreelancer.value.skills,
+           portfolio : this.selectedCV.name,
+        };
+        console.log(dataForm);
+        this.appService.UpdateFreelancerProfile(this.id_freelancer, dataForm).subscribe((data) => {
+          console.log('rr');
+        // localStorage.setItem('token', data.access_token);
+        this.appService.connectedUser = this.appService.getDecodedToken();
 
-    if (this.selectedImage) {
-      this.freelancer.Image_Profil = this.selectedImage.name;
-      dataForm.append('Image_Profil', this.selectedImage);
-    }
-
-    if (this.selectedCV) {
-      this.freelancer.Image_Profil = this.selectedCV.name;
-      dataForm.append('portfolio', this.selectedCV);
-    }
-
-
-    dataForm.append('firt_name', this.editProfileFreelancer.value.firs_tname);
-    dataForm.append('last_name', this.editProfileFreelancer.value.last_name);
-    dataForm.append('languages', this.editProfileFreelancer.value.languages);
-    dataForm.append('phone_Number', this.editProfileFreelancer.value.phone_Number);
-    dataForm.append('email', this.editProfileFreelancer.value.email);
-    dataForm.append('password', this.editProfileFreelancer.value.password);
-    dataForm.append('facebook', this.editProfileFreelancer.value.facebook);
-    dataForm.append('twitter', this.editProfileFreelancer.value.twitter);
-    dataForm.append('github', this.editProfileFreelancer.value.github);
-    dataForm.append('skills', this.editProfileFreelancer.value.skills);
-
-
-
-    this.appService.UpdateFreelancerProfile(this.id_freelancer, dataForm).subscribe((data: any) => {
-    localStorage.setItem('token', data.access_token);
-    this.appService.connectedUser = this.appService.getDecodedToken();
-    });
-  }
-
+   });
+ }
 }

@@ -21,7 +21,7 @@
       <li class="nav-item avatar">
         <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
-          <i><img src="http://localhost:3000/users/image/{{freelancer.Image_Profil}}" class="rounded-circle z-depth-0"
+          <i><img src="http://localhost:3000/users/image/{{freelancer?.Image_Profil}}" class="rounded-circle z-depth-0"
             alt="avatar image" height="50"></i>
             <p>
               <span class="d-lg-none d-md-block">Some Actions</span>
@@ -52,21 +52,21 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-       <h4 class="card-title"><strong>First Name:</strong>{{ first_name }} <strong>  First Name: </strong>{{first_name}}</h4>
-        <p class="card-text"><strong>Phone Number : </strong>{{ phone_Number }}</p>
-        <p class="card-text"><strong>Birthdate : </strong>{{ birthdate }}</p>
-        <p class="card-text"><strong>RateWork : </strong>{{ rateWork }}</p>
-        <p class="card-text"><strong>Facebook : </strong>{{ facebook }}</p>
-        <p class="card-text"><strong>Githup : </strong>{{ githup }}</p>
-        <p class="card-text"><strong>Twitter : </strong>{{ twitter }}</p>
-        <p class="card-text"><strong>Portfolio : </strong>{{ portfolio }}</p>
-        <p *ngFor="let skils of freelancer.skil"> <strong>Skills: </strong>{{skil}}</p>
-        <p *ngFor="let languages of freelancer.language"><strong>Longuages:</strong>{{language}}</p>
+      <div class="modal-body profil" >
+       <h4 class="card-title">{{ first_name }} {{first_name}}</h4>
+        <p class="card-text">{{ phone_Number }}</p>
+        <p class="card-text">{{ birthdate }}</p>
+        <p class="card-text">{{ rateWork }}</p>
+        <p class="card-text">{{ facebook }}</p>
+        <p class="card-text">{{ github }}</p>
+        <p class="card-text">{{ twitter }}</p>
+        <p class="card-text">{{ portfolio }}</p>
+        <p *ngFor="let skills of freelancer?.skills">{{skills}}</p>
+        <p *ngFor="let languages of freelancer?.language">{{language}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" [routerLink]="['/freelancer/edite-profil-free']">Update</button>
+        <!--<button type="button" class="btn btn-primary" [routerLink]="['/freelancer/edite-profil-free']">Update</button>-->
       </div>
     </div>
   </div>

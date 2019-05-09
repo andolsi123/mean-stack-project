@@ -11,6 +11,7 @@ var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var ObjectID = mongoose.Types.ObjectId;
 var mailer = require("nodemailer");
+const JWT_SIGN_SECRET = 'KJN4511qkqhxq5585x5s85f8f2x8ww8w55x8s52q5w2q2';
 var Project = require('../models/project');
 
 var transporter = mailer.createTransport({
@@ -167,32 +168,34 @@ router.get('/allfreelancers', async function(req, res) {
   })
 })
 
-
-router.post('/updateFreelancerProfil/:id', upload.single('Image_Profil'), upload.single('portfolio'), async function (req, res) {
+router.post('/updateFreelancerProfil/:id', passport.authenticate('bearer', {session: false}), upload.single('image_Profil'), async function (req, res) {
   var id = req.params.id;
-  req.body.Image_Profil = req.file.filename;
-  await Company.findByIdAndUpdate({"_id": id}, {$set: req.body}).exec(function (err, freelancer) {
-    if (err) {
-      res.send(err)
-    }
-    else {
-      User.findOneAndUpdate({"freelancer": freelancer._id}, {$set: req.body}).exec(function (err, user) {
-        if (err) {
-          res.send(err);
-        }
-        User.findById(user._id).exec(function (err, user2) {
-          const token = jwt.sign({data: user2},
-            JWT_SIGN_SECRET, {
-            expiresIn: '1h'
-            })
-          res.send({
-            Message: 'Update token ',
-            access_token: token
-          })
-        })
-      })
-    }
-  })
+  // req.body.image_Profil = req.file.filename;
+  Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, freelancer) {
+      if (err) {
+          res.send(err)
+
+      }
+      else {
+          User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(function (err, user) {
+              if (err) {
+                console.log(this.freelancer._id);
+                  res.send(err);
+              }
+              User.findById(user._id).exec(function (err, user2) {
+                  const token = jwt.sign({ data: user2 },
+                      JWT_SIGN_SECRET, {
+                          expiresIn: '1h'
+                      });
+                  res.send({
+                      Message: 'Update token ',
+                      access_token: token,
+                  })
+
+              })
+          });
+      }
+  });
 })
 
 module.exports = router;
