@@ -160,9 +160,9 @@ router.get('/allfreelancers', async function(req, res) {
   })
 })
 
-router.post('/updateFreelancerProfil/:id', upload.single('image_Profil'), passport.authenticate('bearer', {session: false}), async function (req, res) {
+router.post('/updateFreelancerProfil/:id', passport.authenticate('bearer', {session: false}), upload.single('image_Profil'), async function (req, res) {
   var id = req.params.id;
-  req.body.image_Profil = req.file.filename;
+  // req.body.image_Profil = req.file.filename;
   Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, freelancer) {
       if (err) {
           res.send(err)

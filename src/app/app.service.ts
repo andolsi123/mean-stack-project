@@ -111,7 +111,7 @@ export class AppService {
     return this.http.get(`http://localhost:3000/freelancers/getFreelancer/${id}`, { headers: header });
   }
 
-  UpdateFreelancerProfile(id, body):any {
+  UpdateFreelancerProfile(id, body): any {
     const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.post(`http://localhost:3000/freelancers/updateFreelancerProfil/${id}`, body, { headers: header });
   }

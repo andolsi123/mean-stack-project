@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, FormControlDirective } from '@angular/forms';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-edite-profil-free',
@@ -23,7 +23,7 @@ export class EditeProfilFreeComponent implements OnInit {
     this.editProfileFreelancer = new FormGroup({
       first_name : new  FormControl(''),
       last_name : new FormControl(''),
-      languages : new FormControl(''),
+      languages : new FormControl (''),
       phone_Number: new FormControl(''),
       email : new FormControl(''),
       password : new FormControl(''),
@@ -90,14 +90,14 @@ export class EditeProfilFreeComponent implements OnInit {
           //image_Profil: this.selectedImage.name,
           first_name: this.editProfileFreelancer.value.first_name,
           last_name: this.editProfileFreelancer.value.last_name,
-          // languages: [this.editProfileFreelancer.value.languages],
+          languages: [this.editProfileFreelancer.value.languages],
           phone_Number: this.editProfileFreelancer.value.phone_Number,
           email: this.editProfileFreelancer.value.email,
           password: this.editProfileFreelancer.value.password,
           facebook: this.editProfileFreelancer.value.facebook,
           twitter:  this.editProfileFreelancer.value.twitter,
            github:  this.editProfileFreelancer.value.github,
-           // skills: this.editProfileFreelancer.value.skills
+            skills: this.editProfileFreelancer.value.skills,
            portfolio : this.selectedCV.name,
         };
         console.log(dataForm);
