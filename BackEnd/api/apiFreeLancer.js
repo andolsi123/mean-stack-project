@@ -54,21 +54,21 @@ router.post('/addfree', upload.single('Image_Profil'), async function (req, res)
       if (err) {
         res.send(err);
       }
-      // var mail = {
-      //   from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
-      //   to: user.email,
-      //   subject: "Your account has been created succefully !!",
-      //   text: `Welcome ${free.first_name} ${free.last_name} to our WEB APP hope you enjoy your time here !!`,
-      //   html: `<b>Welcome ${free.first_name} ${free.last_name} to our WEB APP hope you enjoy your time here !!</b>`
-      // }
-      // await transporter.sendMail(mail, function(error, response) {
-      //   if (error) {
-      //     console.log("email error: " + error);
-      //   } else {
-      //     console.log("Message sent: " + response.message);
-      //   }
-      //   transporter.close();
-      // })
+      var mail = {
+        from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
+        to: user.email,
+        subject: "Your account has been created succefully !!",
+        text: `Welcome ${free.first_name} ${free.last_name} to our WEB APP hope you enjoy your time here !!`,
+        html: `<b>Welcome ${free.first_name} ${free.last_name} to our WEB APP hope you enjoy your time here !!</b>`
+      }
+      await transporter.sendMail(mail, function(error, response) {
+        if (error) {
+          console.log("email error: " + error);
+        } else {
+          console.log("Message sent: " + response.message);
+        }
+        transporter.close();
+      })
       res.send(user);
     })
   })
@@ -168,34 +168,115 @@ router.get('/allfreelancers', async function(req, res) {
   })
 })
 
-router.post('/updateFreelancerProfil/:id', passport.authenticate('bearer', {session: false}), upload.single('image_Profil'), async function (req, res) {
+router.post('/updateFreelancerProfil/:id', passport.authenticate('bearer', {session: false}), upload.single('Image_Profil'), async function (req, res) {
   var id = req.params.id;
-  // req.body.image_Profil = req.file.filename;
-  Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec(function (err, freelancer) {
+  req.body.Image_Profil = req.file.filename;
+ await Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec( async function (err, freelancer) {
       if (err) {
           res.send(err)
 
       }
       else {
-          User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(function (err, user) {
-              if (err) {
+         await User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(async function (err2, user) {
+              if (err2) {
                 console.log(this.freelancer._id);
-                  res.send(err);
+                  res.send(err2);
               }
-              User.findById(user._id).exec(function (err, user2) {
-                  const token = jwt.sign({ data: user2 },
-                      JWT_SIGN_SECRET, {
-                          expiresIn: '1h'
-                      });
-                  res.send({
-                      Message: 'Update token ',
-                      access_token: token,
-                  })
+              else {
+              await User.findById(user._id).exec(async function (err3, user2) {
+                if(err3) {
+                  res.send(err3)
+                }
+                else {
+                 const token = jwt.sign({ data: user2 },
+                   JWT_SIGN_SECRET, {
+                       expiresIn: '1h'
+                   });
+                  
+               res.send({ access_token: token})
+                }
+                  
+ 
+               })
+              }
 
-              })
           });
       }
   });
 })
+
+router.post('/updateFreelancerLists/:id', passport.authenticate('bearer', {session: false}), async function (req, res) {
+  var id = req.params.id;
+ await Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec( async function (err, freelancer) {
+      if (err) {
+          res.send(err)
+      }
+      else {
+         await User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(async function (err2, user) {
+              if (err2) {
+                console.log(this.freelancer._id);
+                  res.send(err2);
+              }
+              else {
+              await User.findById(user._id).exec(async function (err3, user2) {
+                if(err3) {
+                  res.send(err3)
+                }
+                else {
+                 const token = jwt.sign({ data: user2 },
+                   JWT_SIGN_SECRET, {
+                       expiresIn: '1h'
+                   });
+                  
+               res.send({ access_token: token})
+                }
+                  
+ 
+               })
+              }
+
+          });
+      }
+  });
+})
+
+router.post('/updateFreelancerCv/:id', passport.authenticate('bearer', {session: false}), upload.single('portfolio'), async function (req, res) {
+  var id = req.params.id;
+  req.body.portfolio = req.file.filename;
+ await Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec( async function (err, freelancer) {
+      if (err) {
+          res.send(err)
+
+      }
+      else {
+         await User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(async function (err2, user) {
+              if (err2) {
+                console.log(this.freelancer._id);
+                  res.send(err2);
+              }
+              else {
+              await User.findById(user._id).exec(async function (err3, user2) {
+                if(err3) {
+                  res.send(err3)
+                }
+                else {
+                 const token = jwt.sign({ data: user2 },
+                   JWT_SIGN_SECRET, {
+                       expiresIn: '1h'
+                   });
+                  
+               res.send({ access_token: token})
+                }
+                  
+ 
+               })
+              }
+
+          });
+      }
+  });
+})
+
+
 
 module.exports = router;

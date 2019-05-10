@@ -54,7 +54,10 @@ export class SignUpFreelancerComponent implements OnInit {
     dataForm.append('password', this.freelancerForm.value.password);
     dataForm.append('Image_Profil', this.selectedImage, this.selectedImage.name);
     dataForm.append('role', 'freelancer');
+
+    
     this.appService.postFree(dataForm).subscribe((data: any) => {
+      console.log(data);
       this.openSnackBar('Account created succefully', `DONE &#10003`);
     });
   }

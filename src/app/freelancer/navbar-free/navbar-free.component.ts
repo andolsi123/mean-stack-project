@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./navbar-free.component.css']
 })
 export class NavbarFreeComponent implements OnInit {
-  // 
+  
   // first_name: any;
   // last_name: any;
   // phone_Number: any;
@@ -35,10 +35,11 @@ export class NavbarFreeComponent implements OnInit {
     console.log(this.id_freelancer);
     this.appService.getOneFreelancer(this.id_freelancer).subscribe((free: any) => {
       this.freelancer = free;
+      console.log(this.freelancer)
     });
   }
 
-//  profil() {
+ profil() {
 // this.first_name = this.freelancer.first_name;
 // this.last_name = this.freelancer.last_name;
 // this.phone_Number = this.freelancer.phone_Number;
@@ -46,10 +47,10 @@ export class NavbarFreeComponent implements OnInit {
 // this.rateWork = this.freelancer.rateWork;
 // this.facebook = this.freelancer.facebook;
 // this.twitter = this.freelancer.twitter;
-// //this.skil = this.freelancer.skil;
-// //this.language = this.language;
+//this.skil = this.freelancer.skil;
+//this.language = this.language;
 
-//  }
+ }
 
 
   LogOut(){

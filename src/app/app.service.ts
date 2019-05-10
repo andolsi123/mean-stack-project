@@ -112,9 +112,19 @@ export class AppService {
     return this.http.get(`http://localhost:3000/freelancers/getFreelancer/${id}`, { headers: header });
   }
 
-  UpdateFreelancerProfile(id, body): any {
+  UpdateFreelancerProfile(id, body) {
     const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.post(`http://localhost:3000/freelancers/updateFreelancerProfil/${id}`, body, { headers: header });
+    return this.http.post(`http://localhost:3000/freelancers/updateFreelancerProfil/${id}`, body,  { headers: header });
+  }
+
+  UpdateFreelancerCv(id, body) {
+    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.post(`http://localhost:3000/freelancers/updateFreelancerCv/${id}`, body,  { headers: header });
+  }
+
+  UpdateFreelancerLists(id, body) {
+    const header = new HttpHeaders().append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.post(`http://localhost:3000/freelancers/updateFreelancerLists/${id}`, body,  { headers: header });
   }
 
   postDeleteComment(idP: any, idC: any) {
