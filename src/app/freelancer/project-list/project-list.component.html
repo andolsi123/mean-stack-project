@@ -13,19 +13,19 @@
   </section>
   <div class="container">
     <div class="row">
-      <div class="col-md-4" *ngFor="let project of projects">
-        <div class="card mb-4 shadow-sm"  *ngIf="project.accepted_freelancer._id == id_freelancer">
+      <div class="col-md-4" *ngFor="let project of accepted">
+        <div class="card mb-4 shadow-sm">
           <div class="card-body">
             <div class="thumb" id="one">
-              <img class="lib-img-show" src="http://localhost:3000/users/image/{{project.project.company.logo}}">
+              <img class="lib-img-show" src="http://localhost:3000/users/image/{{project.company.logo}}">
             </div>
-            <h3 style="text-align: center;color: #1cb3e5;font-weight:bold ; font-size: 20px;">{{project.project.titre_project}}</h3>
+            <h3 style="text-align: center;color: #1cb3e5;font-weight:bold ; font-size: 20px;">{{project.titre_project}}</h3>
             <hr />
             <p class="desc">
-              <a style="font-weight:bold ; font-size: 15px ; color: black">Description</a> : {{project.project.description_project}}<br>
-              <a style="font-weight:bold ; font-size: 15px ; color: black">Max_offer</a> : {{project.project.max_offer}}<br>
-              <a style="font-weight:bold ; font-size: 15px ; color: black">Min_offer</a> : {{project.project.min_offer}}<br>
-              <a style="font-weight:bold ; font-size: 15px ; color: black">Duration</a> : {{project.project.duration}}DAYS
+              <a style="font-weight:bold ; font-size: 15px ; color: black">Description</a> : {{project.description_project}}<br>
+              <a style="font-weight:bold ; font-size: 15px ; color: black">Max_offer</a> : {{project.max_offer}}<br>
+              <a style="font-weight:bold ; font-size: 15px ; color: black">Min_offer</a> : {{project.min_offer}}<br>
+              <a style="font-weight:bold ; font-size: 15px ; color: black">Duration</a> : {{project.duration}}DAYS
             </p>
             <hr />
             <div style="text-align: center;">

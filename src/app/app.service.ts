@@ -46,6 +46,7 @@ export class AppService {
   getAllProjectsCompany(id: any) {
     return this.http.get(`http://localhost:3000/projects/allProjectsCompany/${id}`);
   }
+  
   getAllProjectsAppliedFree(id: any) {
     return this.http.get(`http://localhost:3000/projects/AllProjectsApplied/${id}`);
   }
@@ -55,9 +56,9 @@ export class AppService {
     return this.http.post(`http://localhost:3000/projects/appliedFreelancers/${projectId}/${freelancerId}/${companyId}`, body);
   }
 
-  postAffectedProject(freelancerId, projectId) {
+  postAffectedProject(freelancerId, projectId, body) {
     // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name};
-    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`,{});
+    return this.http.post(`http://localhost:3000/freelancers/addProjectApplied/${freelancerId}/${projectId}`, body);
   }
 
   postAcceptedFreelancer(projectId, freelancerId) {

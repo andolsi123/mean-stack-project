@@ -75,19 +75,18 @@ router.post('/addfree', upload.single('Image_Profil'), async function (req, res)
  })
 
 router.post('/addProjectApplied/:freelancerId/:projectId', async function(req, res) {
-  var prjct = {project: req.params.projectId, statut: 'Pending'};
-  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$push: {projects: prjct}}, async function(err, freelancer) {
+  // var prjct = {project: req.params.projectId, statut: 'Pending'};
+  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$set: {projects: req.body.projects}}, async function(err, freelancer) {
     if (err) {
       res.send(err);
     }
-    await Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: req.params.freelancerId}}, function(error2, prjct) {
+    await Project.findByIdAndUpdate({_id: req.params.projectId}, {$set: {applied_freelancers: req.body.applied_freelancers}}, function(error2, prjct) {
            if (error2) {
              console.log(error2);
             }
-            console.log(prjct);
            });
   })
-});
+})
   //     var mail = {
 //       from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
 //       to: req.body.companyEmail,
@@ -128,7 +127,7 @@ router.post('/addProjectApplied/:freelancerId/:projectId', async function(req, r
 // })
 
 router.post('/refusedFreelancer/:freelancerId/:projectId', async function(req, res) {
-  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$pull: {projects: {project: req.params.projectId}}}, async function(err, freelancer) {
+  await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$pull: {projects: req.params.projectId}}, async function(err, freelancer) {
     if (err) {
       res.send(err);
     }
@@ -142,7 +141,7 @@ router.post('/refusedFreelancer/:freelancerId/:projectId', async function(req, r
 
 router.get('/getFreelancer/:id', passport.authenticate('bearer', { session: false }),async function (req, res) {
   var id = ObjectID(req.params.id);
-  await Freelancer.findById(id).populate({path:'projects.project', populate: { path: 'company', model: 'company'}}).exec((err, freelancer) => {
+  await Freelancer.findById(id).populate({path:'projects', populate: { path: 'company', model: 'company'}}).exec((err, freelancer) => {
     if (err) {
       res.send(err);
     }

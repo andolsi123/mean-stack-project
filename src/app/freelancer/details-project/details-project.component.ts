@@ -23,30 +23,35 @@ export class DetailsProjectComponent implements OnInit {
   comments: any;
   photoF: any;
   freelancerConnected: any;
-
+  apply = {
+    applied_freelancers: [],
+    projects: []
+  };
   constructor(private http: AppService, private route: ActivatedRoute) {
     this.id_freelancer = this.http.connectedUser.data.freelancer;
   }
 
   ngOnInit() {
-    this.http.getOneFreelancer(this.id_freelancer).subscribe(data3 => {
+    this.http.getOneFreelancer(this.id_freelancer).subscribe((data3: any) => {
       this.freelancerConnected  = data3;
-      console.log(this.freelancerConnected);
+      this.apply.projects = data3.projects;
     });
 
     this.route.params.subscribe(params => {
 
-      this.http.getOneProject(params.id).subscribe(data => {
+      this.http.getOneProject(params.id).subscribe((data: any) => {
         this.project = data;
         this.comments = this.project.comments;
-
-
+        for (let project of data.applied_freelancers) {
+          this.apply.applied_freelancers.push(project._id);
+        }
         this.id_company = this.project.company._id;
         this.http.getOneCompany(this.id_company).subscribe(date2 => {
           this.company = date2;
         });
       });
     });
+    console.log(this.apply);
   }
 
 
@@ -57,12 +62,13 @@ export class DetailsProjectComponent implements OnInit {
     //   freelancer: this.freelancerConnected.name,
     //   notifications: `ok`
     //   };
-    this.http.postAffectedProject(this.id_freelancer, this.project._id,).subscribe(data3 => {
+    this.apply.projects.push(this.project._id);
+    this.apply.applied_freelancers.push(this.id_freelancer);
+    this.http.postAffectedProject(this.id_freelancer, this.project._id, this.apply).subscribe(data3 => {
       console.log(data3);
-      this.http.getOneProject(this.project._id).subscribe(data => {
-        this.project = data;
-      });
     });
+    console.log(this.apply)
+
   }
 
 
