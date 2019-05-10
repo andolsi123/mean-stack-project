@@ -10,6 +10,7 @@ var auth = require('../auth/auth').authenticate;
 
 router.post('/login', function (req, res) {
   var email = req.body.email;
+  console.log(email)
   User.findOne({ email: email }).exec((err, users) => {
     if (err) {
       res.send(err);
@@ -31,7 +32,7 @@ router.post('/login', function (req, res) {
 })
 
 router.get('/image/:name', async (req, res) => {
-  await res.sendFile('C:\\Users\\DELL\\Desktop\\Nouveau dossier (2)\\mean-stack-project\\BackEnd\\uploads\\' + req.params.name);
+  await res.sendFile('C:\\Users\\user16\\Desktop\\mean-stack-project-master\\BackEnd\\uploads\\'+ req.params.name);
 })
 
 module.exports = router;

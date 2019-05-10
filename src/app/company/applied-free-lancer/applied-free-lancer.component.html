@@ -31,7 +31,7 @@
             <tr>
               <th class="text-center"> Name </th>
               <th class="text-center"> Mobile No. </th>
-              <th class="text-center"> E-Mail </th>
+              <th class="text-center"> Githup </th>
               <th class="text-center"> Portfolio </th>
               <th class="text-center"> ok </th>
             </tr>
@@ -46,7 +46,7 @@
               <td class="text-center"> <a class="btn-primary btn" style="color: #ffff"
                 (click)="accept(p._id, applied_freelancer._id)"> <i class="fas fa-check"></i> </a>
                 <a class="btn-primary btn" style="color: #ffff"
-                (click)="cancel()"> x </a> </td>
+                (click)="cancel(applied_freelancer._id,p._id)"> x </a> </td>
             </tr>
           </tbody>
         </table>

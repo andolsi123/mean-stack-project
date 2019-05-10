@@ -31,6 +31,7 @@ export class DetailsProjectComponent implements OnInit {
   ngOnInit() {
     this.http.getOneFreelancer(this.id_freelancer).subscribe(data3 => {
       this.freelancerConnected  = data3;
+      console.log(this.freelancerConnected);
     });
 
     this.route.params.subscribe(params => {
@@ -50,13 +51,13 @@ export class DetailsProjectComponent implements OnInit {
 
 
   affectProject() {
-    // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name};
-    const body = {
-      companyEmail: '',
-      freelancer: '',
-      notifications: ``
-      };
-    this.http.postAffectedProject(this.id_freelancer, this.project._id, body).subscribe(data3 => {
+    // // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name};
+    // const body = {
+    //   companyEmail: this.company.email,
+    //   freelancer: this.freelancerConnected.name,
+    //   notifications: `ok`
+    //   };
+    this.http.postAffectedProject(this.id_freelancer, this.project._id,).subscribe(data3 => {
       console.log(data3);
       this.http.getOneProject(this.project._id).subscribe(data => {
         this.project = data;
@@ -78,15 +79,24 @@ export class DetailsProjectComponent implements OnInit {
         photo_commenter: this.photoF,
         id_commenter: this.id_freelancer
       };
+      console.log(this.comments)
       this.comments.push(COMMENT);
       this.http.postAddComment(this.project._id, this.comments).subscribe(data4 => {
         this.ngOnInit();
       });
+      this.commentaire = '';
   }
 
   delComment(idCemment: any) {
     this.http.postDeleteComment(this.project._id, idCemment).subscribe(data5 => {
       this.comments = data5;
+      this.ngOnInit();
+    });
+  }
+
+  UpdateComment(idCemment: any){
+    this.http.postUpdateComment(this.project._id, idCemment).subscribe(data6 => {
+      this.comments = data6;
       this.ngOnInit();
     });
   }

@@ -22,7 +22,8 @@ export class AddProjectComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   skills: Skills[] = [];
-  ckeditorContent;
+  ckeditorContent: string = '<p></p>';
+
 
   constructor(private http: AppService) {
     this.connected = this.http.connectedUser.data.company;
@@ -32,7 +33,7 @@ export class AddProjectComponent implements OnInit {
       maxOffer: new FormControl('', [Validators.required, Validators.min(1)]),
       skillsArray: new FormControl('', Validators.required),
       duration: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
+      description: new FormControl('')
     });
   }
 
@@ -80,7 +81,8 @@ export class AddProjectComponent implements OnInit {
       duration: new FormControl(''),
       description: new FormControl('')
     });
-    this.skills = [];
+    this.skills.length = 0;
+    this.ckeditorContent = `<p>...</p>`;
   } 
 
   cancel() {
@@ -90,8 +92,9 @@ export class AddProjectComponent implements OnInit {
       maxOffer: new FormControl(''),
       skillsArray: new FormControl(''),
       duration: new FormControl(''),
-      description: new FormControl('')
+      description: new FormControl('...')
     });
-    this.skills = [];
+    this.skills.length = 0;
+    this.ckeditorContent = '<p>...</p>';
   }
 }

@@ -14,7 +14,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4" *ngFor="let project of projects">
-        <div class="card mb-4 shadow-sm" *ngIf="project.project.statut == 'started'">
+        <div class="card mb-4 shadow-sm"  *ngIf="project.accepted_freelancer._id == id_freelancer">
           <div class="card-body">
             <div class="thumb" id="one">
               <img class="lib-img-show" src="http://localhost:3000/users/image/{{project.project.company.logo}}">
