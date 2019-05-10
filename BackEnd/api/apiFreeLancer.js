@@ -173,12 +173,10 @@ router.post('/updateFreelancerProfil/:id', passport.authenticate('bearer', {sess
  await Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec( async function (err, freelancer) {
       if (err) {
           res.send(err)
-
       }
       else {
          await User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(async function (err2, user) {
               if (err2) {
-                console.log(this.freelancer._id);
                   res.send(err2);
               }
               else {
@@ -190,18 +188,14 @@ router.post('/updateFreelancerProfil/:id', passport.authenticate('bearer', {sess
                  const token = jwt.sign({ data: user2 },
                    JWT_SIGN_SECRET, {
                        expiresIn: '1h'
-                   });
-                  
+                   })
                res.send({ access_token: token})
                 }
-                  
- 
                })
               }
-
-          });
+          })
       }
-  });
+  })
 })
 
 router.post('/updateFreelancerLists/:id', passport.authenticate('bearer', {session: false}), async function (req, res) {
@@ -213,7 +207,6 @@ router.post('/updateFreelancerLists/:id', passport.authenticate('bearer', {sessi
       else {
          await User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(async function (err2, user) {
               if (err2) {
-                console.log(this.freelancer._id);
                   res.send(err2);
               }
               else {
@@ -225,18 +218,14 @@ router.post('/updateFreelancerLists/:id', passport.authenticate('bearer', {sessi
                  const token = jwt.sign({ data: user2 },
                    JWT_SIGN_SECRET, {
                        expiresIn: '1h'
-                   });
-                  
+                   })
                res.send({ access_token: token})
                 }
-                  
- 
                })
               }
-
-          });
+          })
       }
-  });
+  })
 })
 
 router.post('/updateFreelancerCv/:id', passport.authenticate('bearer', {session: false}), upload.single('portfolio'), async function (req, res) {
@@ -244,14 +233,12 @@ router.post('/updateFreelancerCv/:id', passport.authenticate('bearer', {session:
   req.body.portfolio = req.file.filename;
  await Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec( async function (err, freelancer) {
       if (err) {
-          res.send(err)
-
+        res.send(err)
       }
       else {
          await User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(async function (err2, user) {
               if (err2) {
-                console.log(this.freelancer._id);
-                  res.send(err2);
+                res.send(err2);
               }
               else {
               await User.findById(user._id).exec(async function (err3, user2) {
@@ -262,18 +249,14 @@ router.post('/updateFreelancerCv/:id', passport.authenticate('bearer', {session:
                  const token = jwt.sign({ data: user2 },
                    JWT_SIGN_SECRET, {
                        expiresIn: '1h'
-                   });
-                  
+                   })
                res.send({ access_token: token})
                 }
-                  
- 
                })
               }
-
-          });
+          })
       }
-  });
+  })
 })
 
 

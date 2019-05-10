@@ -32,7 +32,7 @@ router.post('/login', function (req, res) {
 })
 
 router.get('/image/:name', async (req, res) => {
-  res.sendFile('C:\\Users\\user16\\Desktop\\mean-stack-project-master\\BackEnd\\uploads\\'+ req.params.name);
+  await res.sendFile('C:\\Users\\user16\\Desktop\\mean-stack-project-master\\BackEnd\\uploads\\'+ req.params.name);
 })
 
 module.exports = router;
