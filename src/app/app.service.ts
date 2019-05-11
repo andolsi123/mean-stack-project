@@ -132,8 +132,8 @@ export class AppService {
     return this.http.post(`http://localhost:3000/projects/deleteComment/${idP}/${idC}`, null);
   }
 
-  postUpdateComment(idP: any, idC: any){
-    return this.http.post(`http://localhost:3000/projects/updateComment/${idP}/${idC}`, null);
+  postUpdateComment(idP: any, idC: any,body){
+    return this.http.post(`http://localhost:3000/projects/updateComment/${idP}/${idC}`, body);
   }
 
   postAddComment(id, body) {

@@ -101,7 +101,16 @@ export class DetailsProjectComponent implements OnInit {
   }
 
   UpdateComment(idCemment: any){
-    this.http.postUpdateComment(this.project._id, idCemment).subscribe(data6 => {
+
+    const COMMENT = {
+      comment: this.commentaire,
+      commenter: this.frist_name,
+      photo_commenter: this.photoF,
+      id_commenter: this.id_freelancer
+    };
+    
+    this.comments.push(COMMENT);
+    this.http.postUpdateComment(this.project._id, idCemment,this.comments).subscribe(data6 => {
       this.comments = data6;
       this.ngOnInit();
     });

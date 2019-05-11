@@ -7,7 +7,7 @@ var FreeLancerSchema = new mongoose.Schema({
     birthdate: String,
     rateWork: String,
     facebook: String,
-    githup: String,
+    github: String,
     twitter: String,
     skills: [{skill: String}],
     languages: [{language: String}],

@@ -17,9 +17,9 @@
             <tr>
               <th class="text-center"> Name </th>
               <th class="text-center"> Mobile No. </th>
-              <th class="text-center"> Githup </th>
+              <th class="text-center"> Github </th>
               <th class="text-center"> Portfolio </th>
-              <th class="text-center"> ok </th>
+              <th class="text-center"> ok/not </th>
             </tr>
           </thead>
 
@@ -27,7 +27,7 @@
             <tr class="edit" *ngFor="let applied_freelancer of p.applied_freelancers">
               <td class="text-center"> {{applied_freelancer.first_name}} </td>
               <td class="text-center"> {{applied_freelancer.phone_Number}} </td>
-              <td class="text-center"> {{applied_freelancer.githup}} </td>
+              <td class="text-center"> {{applied_freelancer.github}} </td>
               <td class="text-center"><a target="_blanc" href="http://localhost:3000/users/image/{{applied_freelancer.portfolio}}">RESUME</a>
 
                 </td>

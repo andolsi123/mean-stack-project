@@ -55,6 +55,15 @@ export class EditeProfilFreeComponent implements OnInit {
     this.id_freelancer = this.appService.connectedUser.data.freelancer;
     this.appService.getOneFreelancer(this.id_freelancer).subscribe((free: any) => {
       this.freelancer = free;
+
+      for (let skill of free.skills) {
+        this.skills.push(skill);
+      }
+
+      for (let lang of free.languages) {
+        this.languages.push(lang);
+      }
+
       this.editProfileFreelancer = new FormGroup({
         first_name : new FormControl (this.freelancer.first_name),
         last_name : new FormControl(this.freelancer.last_name),
@@ -170,6 +179,7 @@ export class EditeProfilFreeComponent implements OnInit {
       });
       localStorage.setItem('token', data.access_token);
       this.appService.connectedUser = this.appService.getDecodedToken();
+    
     });
   }
 

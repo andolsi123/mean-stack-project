@@ -17,7 +17,7 @@
         <div class="card mb-4 shadow-sm">
           <div class="card-body">
             <div class="thumb" id="one">
-              <img class="lib-img-show" src="http://localhost:3000/users/image/{{project.company.logo}}">
+              <img class="lib-img-show" style="width: 100%"  src="http://localhost:3000/users/image/{{project.company.logo}}">
             </div>
             <h3 style="text-align: center;color: #1cb3e5;font-weight:bold ; font-size: 20px;">{{project.titre_project}}</h3>
             <hr />
@@ -30,9 +30,9 @@
             <hr />
             <div style="text-align: center;">
               <button type="button" class="btn btn-primary" routerLink="/freelancer/{{project._id}}">details</button>
-              <span  class="btn btn-primary">
+              <!-- <span  class="btn btn-primary">
                 <i class="fas fa-headset" style="color:white;font-size: 20px;"></i>
-            </span>
+            </span> -->
             </div>
           </div>
         </div>
