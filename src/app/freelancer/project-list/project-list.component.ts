@@ -9,15 +9,18 @@ import { AppService } from 'src/app/app.service';
 export class ProjectListComponent implements OnInit {
 
   id_freelancer: any;
-  projects: any;
+  accepted = [];
 
   constructor(private appService: AppService) { }
 
   ngOnInit() {
     this.id_freelancer = this.appService.connectedUser.data.freelancer;
-    this.appService.getOneFreelancer(this.id_freelancer).subscribe((free: any) => {
-      this.projects = free.projects;
-      console.log(this.projects);
+    this.appService.getAllProjects().subscribe((projects: any) => {
+      for (let project of projects) {
+        if (project.accepted_freelancer._id == this.id_freelancer) {
+          this.accepted.push(project);
+        }
+      }
     });
   }
 }

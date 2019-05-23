@@ -32,10 +32,8 @@ export class NavbarFreeComponent implements OnInit {
 
   ngOnInit() {
     this.id_freelancer = this.appService.connectedUser.data.freelancer;
-    console.log(this.id_freelancer);
     this.appService.getOneFreelancer(this.id_freelancer).subscribe((free: any) => {
       this.freelancer = free;
-      console.log(this.freelancer)
     });
   }
 

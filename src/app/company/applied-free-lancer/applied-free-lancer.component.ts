@@ -12,7 +12,6 @@ export class AppliedFreeLancerComponent implements OnInit {
     projects: any;
     freelancer: any;
 
-
   constructor(private appService: AppService) {
     this.projects = [];
     this.id_CompanyConnect = this.appService.connectedUser.data.company;
@@ -39,7 +38,8 @@ export class AppliedFreeLancerComponent implements OnInit {
   cancel(idF, idP){
     this.appService.postRefusedFreelancer(idF, idP).subscribe((data: any) => {
       this.freelancer = data;
-      this.ngOnInit();
     });
+    this.ngOnInit();
   }
+
 }

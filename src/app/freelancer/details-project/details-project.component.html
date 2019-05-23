@@ -1,45 +1,4 @@
 <h1 style="text-align: center;color: #1cb3e5;font-weight:bold ; font-size: 40px;">Details</h1>
-<!-- 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4" style="margin-left: 20%">
-      <h3 style="text-align: center">Project</h3>
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <img src="../../assets/img/project-management-6.jpg" style="width:300px;height:300px;">
-          </div>
-          <div class="flip-card-back">
-            <h1>{{project.titre_project}}</h1>
-            <p>{{project.description_project}}</p>
-            <p>{{project.duration}} DAY</p>
-            <p>{{project.max_offer}}</p>
-            <p>{{project.min_offer}}</p>
-            <button (click)=affectProject()>Apply</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <h3 style="text-align: center">Company</h3>
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <img src="http://localhost:3000/users/image/{{project.company.logo}}" style="width:300px;height:300px;">
-          </div>
-          <div class="flip-card-back">
-            <h1>{{project.company.nameCompany}}</h1>
-            <p>{{project.company.phoneNumber}}</p>
-            <p>{{project.company.address}}</p>
-            <p>{{project.company.webSite}}</p>
-            <p>{{project.company.facebook}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="container login-container">
   <div class="row">
     <div class="col-md-6 login-form-1">
@@ -54,14 +13,9 @@
         <a style="font-weight:bold ; font-size: 20px;"> Duration :</a> {{project.duration}}<br>
         <a style="font-weight:bold ; font-size: 20px;"> Max : </a> {{project.max_offer}}<br>
         <a style="font-weight:bold ; font-size: 20px;"> Min :</a> {{project.min_offer}}<br>
-
-        <!-- <div class="form-group">
-          <input type="submit" (click)=affectProject() class="btnSubmit"  />
-         
-        </div> -->
-
-        <div class="col pt-5">
-          <button (click)="affectProject()"  class="btnSubmit">
+        <!-- *ngIf (project.accepted_freelancer != id_freelancer) || statut != "started"-->
+        <div class="col pt-5" *ngIf="project.statut != 'started'">
+          <button (click)="affectProject()" class="btnSubmit">
             Apply</button>
         </div>
 
@@ -87,42 +41,46 @@
 <div class="container" style="height: 100px"></div>
 
 
-<div class="container com">
+<div class="container com" style="padding: 5%;">
   <p class="comment"> Comment & question: </p>
   <div class="comments">
     <div class="comment-wrap">
-        <div class="photo">
-            <img class="avatar" src="http://localhost:3000/users/image/{{freelancerConnected.Image_Profil}}">
-        </div>
+      <div class="photo">
+        <img class="avatar" src="http://localhost:3000/users/image/{{freelancerConnected.Image_Profil}}">
+      </div>
       <div class="comment-block">
-        
-          <textarea name="" id="" cols="30" rows="3" placeholder="Add comment..."  [(ngModel)]="commentaire"></textarea>
-        
+
+        <textarea name="" id="" cols="30" rows="3" placeholder="Add comment..." [(ngModel)]="commentaire"></textarea>
+
         <div class="bottom-comment">
-            <ul class="comment-actions">
-              <li class="complain" (click)="addComment()">ADD</li>
-              <li class="reply" (click)="CancelComment()">Cancel</li>
-            </ul>
-          </div>
+          <ul class="comment-actions">
+            <li class="complain" (click)="addComment()">ADD</li>
+            <li class="reply" (click)="CancelComment()">Cancel</li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="comment-wrap" *ngFor="let comment of comments">
       <div class="photo">
         <img class="avatar" src="http://localhost:3000/users/image/{{comment.photo_commenter}}">
       </div>
-    <div class="comment-block">
-      <p class="comment-text">{{comment.comment}}</p>
-      <!-- <span class="btn btn-primary" (click)="likeProjet(project._id)" >
+      <div class="comment-block">
+        <p class="comment-text">{{comment.comment}}</p>
+        <!-- <span class="btn btn-primary" (click)="likeProjet(project._id)" >
           <i  [ngClass]="project.freelancers_likes == id_freelancer ? 'red' : 'null'" class="fa fa-heart" style="color:white;font-size: 20px;"></i>
-      </span> -->
-      <div class="bottom-comment">
-        <div class="comment-date">{{comment.date_comment}}</div>
-        <ul class="comment-actions" *ngIf="comment.id_commenter == id_freelancer">
-          <li class="complain" (click)="delComment(comment._id)">Delet</li>
-          <li class="reply" (click)="UpdateComment(comment._id)">Edit</li>
-        </ul>
+      </span> 
+    
+    -->
+        <div class="bottom-comment">
+          <div class="comment-date">{{comment.date_comment}}</div>
+          <div *ngIf = "comment.id_commenter == id_freelancer">
+            <ul class="comment-actions" >
+              <li class="complain" (click)="delComment(comment._id)">Delet</li>
+              <li class="reply" (click)="UpdateComment(comment._id)">Edit</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </div>

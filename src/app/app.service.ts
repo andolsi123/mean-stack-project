@@ -45,6 +45,7 @@ export class AppService {
   getAllProjectsCompany(id: any) {
     return this.http.get(`http://localhost:3000/projects/allProjectsCompany/${id}`);
   }
+
   getAllProjectsAppliedFree(id: any) {
     return this.http.get(`http://localhost:3000/projects/AllProjectsApplied/${id}`);
   }

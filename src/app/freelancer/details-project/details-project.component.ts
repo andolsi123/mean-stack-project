@@ -23,37 +23,40 @@ export class DetailsProjectComponent implements OnInit {
   comments: any;
   photoF: any;
   freelancerConnected: any;
-
+  apply = {
+    applied_freelancers: [],
+    projects: []
+  };
   constructor(private http: AppService, private route: ActivatedRoute) {
     this.id_freelancer = this.http.connectedUser.data.freelancer;
   }
 
   ngOnInit() {
-    this.http.getOneFreelancer(this.id_freelancer).subscribe(data3 => {
+    this.http.getOneFreelancer(this.id_freelancer).subscribe((data3: any) => {
       this.freelancerConnected  = data3;
     });
     this.route.params.subscribe(params => {
-      this.http.getOneProject(params.id).subscribe(data => {
+
+      this.http.getOneProject(params.id).subscribe((data: any) => {
         this.project = data;
         this.comments = this.project.comments;
+        for (let project of data.applied_freelancers) {
+          this.apply.applied_freelancers.push(project._id);
+        }
         this.id_company = this.project.company._id;
         this.http.getOneCompany(this.id_company).subscribe(date2 => {
           this.company = date2;
         });
       });
     });
+    console.log(this.apply);
   }
 
 
   affectProject() {
-    // // body = {companyEmail: company email, freelancer: freelancer name, notifications: notification with freelancer name};
-    // const body = {
-    //   companyEmail: this.company.email,
-    //   freelancer: this.freelancerConnected.name,
-    //   notifications: `ok`
-    //   };
+    this.apply.projects.push(this.project._id);
+    this.apply.applied_freelancers.push(this.id_freelancer);
     this.http.postAffectedProject(this.id_freelancer, this.project._id).subscribe(data3 => {
-     console.log(data3);
     });
   }
 
@@ -85,7 +88,16 @@ export class DetailsProjectComponent implements OnInit {
   }
 
   UpdateComment(idCemment: any) {
-    this.http.postUpdateComment(this.project._id, idCemment).subscribe(data6 => {
+
+    const COMMENT = {
+      comment: this.commentaire,
+      commenter: this.frist_name,
+      photo_commenter: this.photoF,
+      id_commenter: this.id_freelancer
+    };
+
+    this.comments.push(COMMENT);
+    this.http.postUpdateComment(idCemment, this.comments).subscribe(data6 => {
       this.comments = data6;
       this.ngOnInit();
     });

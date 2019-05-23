@@ -27,7 +27,7 @@
           </p>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter" data-whatever="@mdo"
+          <a class="dropdown-item" data-toggle="modal" data-target="#profil" data-whatever="@mdo"
            (click)="profil()">Profile</a>
         <a class="dropdown-item" [routerLink]="['/freelancer/edite-profil-free']">Edite Profile</a>
           <a class="dropdown-item" (click)="LogOut()">Log Out</a>
@@ -39,7 +39,7 @@
 <!--/.Navbar -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -56,6 +56,30 @@
         <p class="card-text">{{ freelancer.facebook }}</p>
         <p class="card-text">{{ freelancer.github }}</p>
         <p class="card-text">{{ freelancer.twitter }}</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="modal fade" id="profil"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="card" style="width:400px;margin-left: 9%;border: none;">
+        <div class="modal-body text-center">
+          <i><img src="http://localhost:3000/users/image/{{freelancer?.Image_Profil}}"  width="100"
+            alt="Cinque Terre" ></i>
+          <div class="card-body">
+            <h2 class="card-title">{{ freelancer.first_name }}</h2>
+            <p class="card-text"><strong>Phone Number : </strong>{{ freelancer.phone_Number }}</p>
+            <p class="card-text"><strong>Facebook : </strong>{{ freelancer.facebook }}</p>
+            <p class="card-text"><strong>Github : </strong>{{ freelancer.github }}</p>
+            <p class="card-text"><strong>Twitter : </strong>{{ freelancer.twitter }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
