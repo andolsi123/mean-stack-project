@@ -11,17 +11,14 @@ import { Socket } from 'ngx-socket-io';
 })
 export class NavbarComponent implements OnInit {
     location: Location;
-    // tslint:disable-next-line:variable-name
     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
     logo: any;
-    // tslint:disable-next-line:variable-name
     id_company: any;
     company: any;
     notificationNumber = 0;
     notifications;
-    // tslint:disable-next-line:max-line-length
     constructor(private socket: Socket, location: Location, private element: ElementRef, private router: Router, private route: ActivatedRoute, public appService: AppService) {
       this.location = location;
       this.sidebarVisible = false;
@@ -39,7 +36,6 @@ export class NavbarComponent implements OnInit {
       this.id_company = this.appService.connectedUser.data.company;
       this.appService.getOneCompany(this.id_company).subscribe((comp: any) => {
       this.company = comp;
-      console.log(this.company)
       this.logo = this.company.logo;
       });
       const navbar: HTMLElement = this.element.nativeElement;
@@ -103,7 +99,7 @@ export class NavbarComponent implements OnInit {
             setTimeout(() => {
                 $layer.classList.add('visible');
             }, 100);
-            $layer.onclick = function() { // asign a function
+            $layer.onclick = function() {
               body.classList.remove('nav-open');
               this.mobile_menu_visible = 0;
               $layer.classList.remove('visible');

@@ -69,7 +69,6 @@ export class AddProjectComponent implements OnInit {
       company: this.connected,
       duration: this.addProject.get('duration').value
     };
-    // tslint:disable-next-line:no-shadowed-variable
     this.http.postAddProject(data).subscribe(data => {
       console.log(data);
     });
@@ -83,7 +82,7 @@ export class AddProjectComponent implements OnInit {
     });
     this.skills.length = 0;
     this.ckeditorContent = `<p>...</p>`;
-  } 
+  }
 
   cancel() {
     this.addProject = new FormGroup({

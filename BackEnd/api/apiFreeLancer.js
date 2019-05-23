@@ -20,7 +20,7 @@ var transporter = mailer.createTransport({
   secure: false,
   auth: {
     user: "andolsiayoub@gmail.com",
-    pass: "wxcv1234"
+    pass: "******"
   },
   tls: {
     rejectUnauthorized: false
@@ -81,51 +81,13 @@ router.post('/addProjectApplied/:freelancerId/:projectId', async function(req, r
       res.send(err);
     }
     await Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: req.params.freelancerId}}, function(error2, prjct) {
-           if (error2) {
-             console.log(error2);
-            }
-            console.log(prjct);
-           });
+      if (error2) {
+        console.log(error2);
+      }
+      console.log(prjct);
+    })
   })
-});
-  //     var mail = {
-//       from: "ADMIN AYOUB <andolsiayoub@gmail.com>",
-//       to: req.body.companyEmail,
-//       subject: `A freelancer has submitted to one of your project`,
-//       text: `You have a new submission from ${req.body.freelancer} to your project "${project.titre_project}" check him out for more information`,
-//       html: `<b>You have a new submission from ${req.body.freelancer} to your project "${project.titre_project}" check him out for more information</b>`
-//     };
-//     await transporter.sendMail(mail, function(error, response) {
-//       if (error) {
-//         console.log("email error: " + error);
-//       } else {
-//         console.log("Message sent: " + response.message);
-//       }
-//       transporter.close();
-//     })
-//     await Project.findByIdAndUpdate({_id: req.params.projectId}, {$push: {applied_freelancers: req.params.freelancerId}}, function(error2, prjct) {
-//       if (error2) {
-//         console.log(error2);
-//       }
-//     })
-//     await Company.findByIdAndUpdate({_id: req.params.companyId}, {$push: {notifications: req.body.notifications}}, function(err2, com) {
-//       if (err2) {
-//         res.send(err2);
-//       }
-//       const io = req.app.get('io');
-//       io.emit('newNotificationAdded');
-//     })
-//     await Company.findById({_id: req.params.companyId}, function(err3, com2) {
-//       if (err3) {
-//         res.send(err3);
-//       }
-//       com2.notificationsNumber++;
-//       com2.save(function(error) {console.log(error);});
-//       const io = req.app.get('io');
-//       io.emit('newNotificationAdded');
-//     })
-//   })
-// })
+})
 
 router.post('/refusedFreelancer/:freelancerId/:projectId', async function(req, res) {
   await Freelancer.findByIdAndUpdate({_id: req.params.freelancerId}, {$pull: {projects: {project: req.params.projectId}}}, async function(err, freelancer) {
@@ -232,34 +194,32 @@ router.post('/updateFreelancerLists/:id', passport.authenticate('bearer', {sessi
 router.post('/updateFreelancerCv/:id', passport.authenticate('bearer', {session: false}), upload.single('portfolio'), async function (req, res) {
   var id = req.params.id;
   req.body.portfolio = req.file.filename;
- await Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec( async function (err, freelancer) {
-      if (err) {
-        res.send(err)
+  await Freelancer.findByIdAndUpdate({ "_id": id }, { $set: req.body }).exec( async function (err, freelancer) {
+    if (err) {
+      res.send(err)
+    }
+    else {
+      await User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(async function (err2, user) {
+        if (err2) {
+          res.send(err2);
+        }
+        else {
+          await User.findById(user._id).exec(async function (err3, user2) {
+            if(err3) {
+              res.send(err3)
+            }
+          else {
+            const token = jwt.sign({ data: user2 },
+              JWT_SIGN_SECRET, {
+              expiresIn: '1h'
+            })
+            res.send({ access_token: token})
+          }
+        })
       }
-      else {
-         await User.findOneAndUpdate({ "freelancer": freelancer._id }, { $set: req.body }).exec(async function (err2, user) {
-              if (err2) {
-                res.send(err2);
-              }
-              else {
-              await User.findById(user._id).exec(async function (err3, user2) {
-                if(err3) {
-                  res.send(err3)
-                }
-                else {
-                 const token = jwt.sign({ data: user2 },
-                   JWT_SIGN_SECRET, {
-                       expiresIn: '1h'
-                   })
-               res.send({ access_token: token})
-                }
-               })
-              }
-          })
-      }
+      })
+    }
   })
 })
-
-
 
 module.exports = router;

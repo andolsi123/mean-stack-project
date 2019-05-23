@@ -39,7 +39,6 @@ export class ChatDetailsComponent implements OnInit {
   getChat() {
     this.appService.getChatById(this.param).subscribe(data => {
       this.messages = data;
-      console.log(this.messages);
     });
   }
 

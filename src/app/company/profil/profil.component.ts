@@ -29,8 +29,6 @@ export class ProfilComponent implements OnInit {
     this.id_company = this.appService.connectedUser.data.company;
     this.appService.getOneCompany(this.id_company).subscribe((comp: any) => {
       this.company = comp;
-      console.log(this.company);
-
       this.nameCompany = this.company.nameCompany;
       this.foundyear = this.company.foundyear;
       this.address = this.company.address;

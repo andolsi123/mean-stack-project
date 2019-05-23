@@ -23,17 +23,12 @@ export class HomeComponent implements OnInit {
     this.http.getAllProjects().subscribe(data => {
       this.allProjects = data;
       this.nbProject = this.allProjects.length;
-      console.log(this.allProjects);
-
       this.http.getAllFreelancers().subscribe(data1 => {
         this.allFree = data1;
         this.nbFreelancer = this.allFree.length;
-        console.log(this.allFree);
-
         this.http.getAllCompanies().subscribe(data2 => {
           this.allCompany = data2;
           this.nbCompany = this.allCompany.length;
-          console.log(this.allCompany);
         });
       });
     });

@@ -55,17 +55,14 @@ export class EditeProfilComponent implements OnInit {
   }
 
   selectedFile(event) {
-    // console.log(event.target.files[0])
     this.selectedImage = event.target.files[0]
   }
 
   readURL(event): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-
       const reader = new FileReader();
       reader.onload = e => this.imageSrc = reader.result;
-
       reader.readAsDataURL(file);
     }
   }
@@ -84,7 +81,6 @@ export class EditeProfilComponent implements OnInit {
     dataForm.append('facebook', this.editProfileCompany.value.facebook);
     dataForm.append('webSite', this.editProfileCompany.value.webSite);
     dataForm.append('email', this.editProfileCompany.value.email);
-   // dataForm.append('logo', this.selectedImage, this.selectedImage.name);
 
     this.appService.UpdateCompanyProfile(this.id_company, dataForm).subscribe((data1: any) => {
       localStorage.setItem('token', data1.access_token);

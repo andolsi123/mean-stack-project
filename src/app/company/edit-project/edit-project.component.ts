@@ -73,10 +73,7 @@ export class EditProjectComponent implements OnInit {
       statut: 'not started',
       duration: this.addProject.get('duration').value
     };
-    console.log(data)
-    // tslint:disable-next-line: no-shadowed-variable
     this.http.postUpdateProject(this.id, data).subscribe((data: any) => {
-      console.log(data);
      this.router.navigate(['/company/dashboard']);
     });
   }

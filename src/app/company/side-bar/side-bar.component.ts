@@ -17,11 +17,10 @@ export class SideBarComponent implements OnInit {
   name : string ;
   id_company : any;
   company :any
-  
+
   constructor(private route: ActivatedRoute, private router: Router,public appService: AppService) { }
 
-  ngOnInit() { 
-    //get name company connected
+  ngOnInit() {
     this.id_company = this.appService.connectedUser.data.company;
     this.appService.getOneCompany(this.id_company).subscribe((comp: any) => {
       this.company = comp;

@@ -10,7 +10,6 @@ var auth = require('../auth/auth').authenticate;
 
 router.post('/login', function (req, res) {
   var email = req.body.email;
-  console.log(email)
   User.findOne({ email: email }).exec((err, users) => {
     if (err) {
       res.send(err);

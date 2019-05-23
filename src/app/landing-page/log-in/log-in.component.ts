@@ -12,22 +12,19 @@ import { FormGroup, FormControl , Validators } from '@angular/forms';
 export class LogInComponent implements OnInit {
   loginForm: FormGroup;
   constructor(public appService: AppService,private router: Router) {
-  
+
   this.loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
   });
 
 }
-  ngOnInit() {
-    
-  }
+  ngOnInit() { }
 
-  login(){
+  login() {
     this.appService.login(this.loginForm.value).subscribe((data3: any) => {
-      
       localStorage.setItem('token', data3.access_token);
-      this.appService.connectedUser = this.appService.getDecodedToken();   
+      this.appService.connectedUser = this.appService.getDecodedToken();
       if(this.appService.connectedUser.data.role == 'freelancer'){
         this.router.navigate(['freelancer']);
       }

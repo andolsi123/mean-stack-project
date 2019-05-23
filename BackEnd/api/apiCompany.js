@@ -17,7 +17,7 @@ var transporter = mailer.createTransport({
   secure: false,
   auth: {
     user: "andolsiayoub@gmail.com",
-    pass: "wxcv1234"
+    pass: "******"
   },
   tls: {
     rejectUnauthorized: false
